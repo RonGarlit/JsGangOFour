@@ -1,0 +1,452 @@
+=====================================================
+EVERY DAY COMMAND NPM SCRIPTS
+=====================================================
+Manual linting:  npm run lint
+Watched linting: npm run lint:watch  (runs on every save)
+
+Also main start does a lot of parallel actions
+npm start (See main buildScripts folder)
+=====================================================
+GETTING STARTED REQUIREMENTS:
+=====================================================
+1. Install Git
+2. Install Node 4 or greater (5 or greater recommended for optimum performance)
+3. Run ‘npm install’ in the root folder of each project.
+=====================================================
+*** Adding my more complete git notes file
+*** to documentation folder
+=====================================================
+1. Stage all the files you changed
+git add .
+
+2. Commit your changes locally
+git commit -m “added new feature”
+
+3. Push your work to Github
+git push
+
+4. Get the status of working folder at any time.
+   modified should be commited the pushed.
+git status
+
+5.  From in working dir. pull down commited
+git pull
+
+10. git documentation online
+https://git-scm.com/doc
+=====================================================
+VISUAL STUDIO CODE EXTENSIONS TO ADD
+=====================================================
+EditorConfig for VS Code
+Sublime Babel
+
+VSCODE Extensions Commands:
+code --list-extensions
+code --install-extension {extension id}
+code --uninstall-extension {extension id}
+code --disable-extensions
+=====================================================
+My GitHub and Gist:
+https://github.com/RonGarlit
+=====================================================
+GitHub Friendly's:
+=====================================================
+Cory House examples:
+https://github.com/coryhouse
+https://github.com/coryhouse/javascript-development-environment
+https://www.bitnative.com/
+
+Cory's Base NPM Package JSON file.
+https://gist.github.com/coryhouse/29bd1029b623beb4c7f79b748dcba844
+
+Others to follow on GitHub and Gist:
+https://github.com/viatsko/awesome-vscode
+
+https://gist.github.com/nickytonline/3d5ffeab871a6662d7a3f89bb0bed0f8
+=====================================================
+NODE SECURITY PROJECT - NSP
+=====================================================
+Instal globally:  npm install -g nsp
+
+Manual check:  nsp check
+=====================================================
+Create build script srcServer.js
+=====================================================
+WEB SERVER: Express in Node
+=====================================================
+Base file before switching to ES6 import statements
+Configue express in srcServer.js buildscript
+
+var express = require('express');
+var path = require('path');
+var open = require('open');
+
+const port = 3000;
+const app = express();
+
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname, '../src/index.html'));
+});
+
+app.listen(port, function(err) {
+  if (err) {
+    console.log(err);
+  } else {
+    open('http://localhost:' + port);
+  }
+});
+
+CMD LINE: node buildScripts/srcServer.js
+npm script:  "start": "node buildScripts/srcServer.js"
+=====================================================
+Also you can use local tunnel to show external in browser.
+Setup:
+1.  npminstall localtunnel-g
+2.  Start your app
+3.  lt--port 3000
+=====================================================
+NPM STUFF
+=====================================================
+Setup web server in the srcServer.js file
+
+node buildScripts/srcServer.js
+*****************************************************
+Documentation for NPM Scripts:
+https://docs.npmjs.com/misc/scripts
+
+npm-run-all --parallel
+is used to run multiple tasks together in start npm script.
+https://www.npmjs.com/package/npm-run-all
+https://github.com/mysticatea/npm-run-all
+https://github.com/mysticatea/npm-run-all/blob/master/docs/npm-run-all.md
+
+=====================================================
+To Run Main START Script:
+Full output
+npm start
+
+Silent output
+npm start -s
+
+*** Decided to use NPM Script to avoid extra layers of abstraction you get with Grunt and Gulp.
+=====================================================
+FINAL VERSON OF MY NPM SCRIPTS
+=====================================================
+Defer to these NPM Automation Scripts:
+  "scripts": {
+    "prestart": "babel-node buildScripts/startMessage.js",
+    "start": "npm-run-all --parallel security-check open:src lint:watch test:watch start-mockapi",
+    "open:src": "babel-node buildScripts/srcServer.js",
+    "lint": "esw webpack.config.* src buildScripts --color",
+    "lint:watch": "npm run lint -- --watch",
+    "security-check": "nsp check",
+    "localtunnel": "lt --port 3000",
+    "share": "npm-run-all --parallel open:src localtunnel",
+    "test": "mocha --reporter progress buildScripts/testSetup.js \"src/**/*.test.js\"",
+    "test:watch": "npm run test -- --watch",
+    "generate-mock-data": "babel-node buildScripts/generateMockData",
+    "prestart-mockapi": "npm run generate-mock-data",
+    "start-mockapi": "json-server --watch src/api/db.json --port 3001",
+    "clean-dist": "rimraf ./dist && mkdir dist",
+    "prebuild": "npm-run-all clean-dist test lint",
+    "build": "babel-node buildScripts/build.js",
+    "postbuild": "babel-node buildScripts/distServer.js",
+    "deploy": "surge ./dist"
+  },
+
+Read about NPM versus Gulp at: https://medium.freecodecamp.org/why-i-left-gulp-and-grunt-for-npm-scripts-3d6853dd22b8
+
+=====================================================
+USING CHALK:
+Terminal string styling done right!!
+=====================================================
+https://www.npmjs.com/package/chalk
+https://github.com/chalk/chalk
+
+=====================================================
+TRANSPILING/TRANSPILERS
+=====================================================
+Babel is a compiler for writing next generation JavaScript.
+https://babeljs.io/
+https://github.com/babel/babel
+
+=====================================================
+BUNDLING
+=====================================================
+Choice is to use WebPack:  https://webpack.js.org/
+https://webpack.github.io/
+=====================================================
+LINTING
+=====================================================
+https://eslint.org/
+https://eslint.org/docs/user-guide/getting-started
+https://github.com/eslint/eslint
+
+A list of awesome ESLint plugins, configs, etc
+https://github.com/dustinspecker/awesome-eslint
+https://github.com/dustinspecker/
+
+eslintwatch npm package
+https://www.npmjs.com/package/eslint-watch
+
+To disable linting at line level
+// eslint-disable-line no-console
+To disable linting in file
+/* eslint-disable no-console */
+
+=====================================================
+TESTING
+=====================================================
+KEEP TEST FILES ALONGSIDE SOURCE FILES
+NOT CENTRALIZED METHOD.  CLEAN TEST IN
+BUILD SCRIPT IN WebPack. COLOCATION TESTING.
+=====================================================
+Unit Testing Toolset
+Framework: mocha
+https://mochajs.org/
+
+Assertion Library: chai
+http://www.chaijs.com/
+
+Helper Library: jsdom
+HTML and browser tests
+https://github.com/jsdom/jsdom
+https://www.npmjs.com/package/node-jsdom
+
+Helper Library: cheerio
+JQuery selector like for server tests
+https://cheerio.js.org/
+https://github.com/cheeriojs/cheerio
+
+*** Might need to look at this at somw point
+Headless browser: phantomjs
+http://phantomjs.org/
+http://phantomjs.org/documentation/
+https://scotch.io/tutorials/what-is-phantomjs-and-how-is-it-used
+Also JSDOM can cover this.
+
+=====================================================
+CONTINOUS INTERGRATION
+=====================================================
+Linux Based: travis ci
+https://travis-ci.org/
+https://travis-ci.com/
+https://github.com/marketplace/travis-ci/plan/MDIyOk1hcmtldHBsYWNlTGlzdGluZ1BsYW43MA==#pricing-and-setup
+
+Windows Based:  appveyor ci
+https://www.appveyor.com/
+https://www.appveyor.com/docs/build-environment/
+https://github.com/marketplace/appveyor
+
+=====================================================
+HTTP CALLS
+=====================================================
+(Browser Only) --------------------------------------
+FETCH ****** Future proof when it is done.
+Newest is FETCH still being built out, get the latest
+info here: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
+https://github.com/github/fetch
+https://developers.google.com/web/updates/2015/03/introduction-to-fetch
+https://github.github.io/fetch/
+
+=====================================================
+(Node Specific) -------------------------------------
+HTTP
+https://nodejs.org/api/http.html
+https://www.w3schools.com/nodejs/nodejs_http.asp
+https://davidwalsh.name/nodejs-http-request
+
+REQUEST ****** Best if your node only
+https://www.npmjs.com/package/request
+http://stackabuse.com/the-node-js-request-module/
+
+XMLHTTPREQUEST
+https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
+https://www.w3schools.com/xml/xml_http.asp
+
+=====================================================
+ISOMORPHIC-FETCH  (Node & Browser) -----------------
+https://www.npmjs.com/package/isomorphic-fetch
+https://github.com/matthew-andrews/isomorphic-fetch
+
+AXIOS ****** Nice if you must be in both Node & Browser
+https://www.npmjs.com/package/axios
+http://codeheaven.io/how-to-use-axios-as-your-http-client/
+
+
+SUPERAGENT
+https://github.com/visionmedia/superagent
+https://visionmedia.github.io/superagent/
+https://www.npmjs.com/package/superagent
+
+*****************************************************
+**** PLAN TO CENTRALIZE API CALLS *******************
+*****************************************************
+Configure all calls
+Handle preloaderlogic
+Handle errors
+Single seam for mocking
+
+=====================================================
+MOCKING API CALLS
+=====================================================
+
+NOCK:
+https://www.npmjs.com/package/nock
+
+USE PLAIN STATIC JSON
+See exanple JSON array in db.json file in API folder under src,
+
+-OR- CREATE WEBSERVER USING:
+
+API_MOCK
+https://www.npmjs.com/package/api-mock
+
+JSON SERVER
+https://www.npmjs.com/package/json-server
+https://github.com/typicode/json-server
+
+
+JSON SCHEMA FAKER
+https://www.npmjs.com/package/json-schema-faker
+http://json-schema-faker.js.org/
+https://github.com/json-schema-faker/
+
+-OR- STAND UP REAL API SERVER
+
+=====================================================
+GENERAL PLAN TO MOCK HTTP
+=====================================================
+1) DECLARE SCHEMA USING:
+http://json-schema-faker.js.org/
+
+2) GENERATING RANDOM MOCK DATA: USING
+FAKERJS:  (CURRENT CHOICE)
+https://www.npmjs.com/package/faker
+
+-or-
+CHANCE JS:
+http://chancejs.com/
+https://www.npmjs.com/package/chance
+
+3) SERVE DATA VIA API ON: JSON SERVER
+https://www.npmjs.com/package/json-server
+https://github.com/typicode/json-server
+-----------------------------------------------------
+JSON SCHEMA STANDARD CHOICE:
+http://json-schema.org/
+
+
+
+=====================================================
+****** IMPORT PROJECT NOTES *************************
+=====================================================
+THIS IS LIKE A REFERENCE APP FOR A
+REFERENCE ARCHITECTURE.
+----------------------------------------------------
+Have and example/reference app.
+
+Key Project structure tips
+1) Put JS in a .js file --NO INLINE CODE EVER--
+
+2) Consider organizing by feature
+- Not the old MVC file based way.
+  /components
+  /data
+  /models
+  /views
+
+DO THIS:
+- Organize by Feature
+  /authors
+  /students
+  /courses
+  /Testing
+  /grades
+  ...
+
+3) Extract logic into “POJOs”
+- Keep logic in Plain Old JavaScript Objects
+- No framework Specific code in tos POJO's
+
+=====================================================
+PRODUCTION BUILD SETUP
+=====================================================
+setup webpack.config.prod.js
+
+SourceMap Settings:
+change
+  devtool: 'inline-source-map',
+to
+  devtool: 'source-map',
+
+Output Path Settings:
+change
+    path: path.resolve(__dirname, 'src'),
+to
+    path: path.resolve(__dirname, 'dist'),
+
+Minification Setup:
+change
+  plugins: [
+    // Create HTML file that includes reference to bundled JS.
+    new HtmlWebpackPlugin({
+      template: 'src/index.html',
+      inject: true
+    })
+  ],
+to
+    plugins: [
+    // Create HTML file that includes reference to bundled JS.
+    new HtmlWebpackPlugin({
+      template: 'src/index.html',
+      inject: true
+    })
+
+    // Eliminate duplicate packages when generating bundle
+    new webpack.optimize.DedupePlugin(),
+
+    // Minify JS
+    new webpack.optimize.UglifyJsPlugin()
+  ],
+
+=====================================================
+ERROR TRACKING SERVICES
+=====================================================
+
+https://trackjs.com/
+https://raygun.com/
+
+
+=====================================================
+HTML TEMPLATING
+=====================================================
+WEBPACK DEFAULTS TO EJS
+
+http://www.ejs.co/
+https://www.npmjs.com/package/ejs
+
+JADE
+THe OLD JADE that we hated has been deprecated (See pug)
+
+MUSTACHE
+https://www.npmjs.com/package/mustache
+
+=====================================================
+CLOUD DEPLOY OPTIONS
+=====================================================
+API:
+https://www.heroku.com/home
+
+STATIC FRONT END:
+http://surge.sh/
+
+=====================================================
+STARTER KIT SUGGSTIONS FROM CORY
+=====================================================
+
+REACT:
+www.andrewhfarmer.com/starter-project
+
+ANGUALRJS SEED:
+https://github.com/GIANARB/AWESOME-ANGULARJS

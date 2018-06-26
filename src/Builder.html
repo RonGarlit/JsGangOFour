@@ -1,0 +1,57 @@
+<!DOCTYPE>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>JsGangOFour-Builder Pattern</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="/main.css" />
+  <script src="scripts/scripts.js"></script>
+  <style>
+    /* this overrides the css in the main style sheet */
+
+    body {
+      background-color: lightslategray;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>My Second JavaScript Example</h2>
+
+  <h3>What Can JavaScript Do?</h3>
+
+  <p>JavaScript can change HTML attribute values.</p>
+
+  <p>In this case JavaScript changes the value of the src (source) attribute of an image.</p>
+
+  <button onclick="document.getElementById('myImage').src='images/pic_bulbon.gif'">Turn on the light</button>
+
+  <img id="myImage" src="images/pic_bulboff.gif" style="width:100px">
+
+  <button onclick="document.getElementById('myImage').src='images/pic_bulboff.gif'">Turn off the light</button>
+
+
+  <p id="demoFontSize">JavaScript can change the style of an HTML style element fontSize.</p>
+
+  <button type="button" onclick="document.getElementById('demoFontSize').style.fontSize='35px'">Click to make me BIGGER!</button>
+
+  <button type="button" onclick="document.getElementById('demoFontSize').style.fontSize='15px'">Click to make me smaller!</button>
+
+  <p id="demo">JavaScript can hide HTML elements.</p>
+
+  <button type="button" onclick="document.getElementById('demo').style.display='none'">Click Me!</button>
+
+  <button type="button" onclick="document.getElementById('demo').style.display='list-item'">Click Me!</button>
+
+
+  <p id="scriptdemo">Ron Was Here.</p>
+
+  <script>
+    document.getElementById("scriptdemo").innerHTML = "I changed wahat was here from a script tag.  :-)";
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,142 @@
+---------------------------------------------------
+---------------------------------------------------
+git config --global user.name "RonGarlit"
+git config --global user.email "rongarlit@live.com"
+git config --global color.ui auto
+
+LIST CONFIG INFORMATION
+git config -l
+git config --list
+git config -l --global
+
+---------------------------------------------------
+---------------------------------------------------
+git-log - Show commit logs
+https://git-scm.com/docs/git-log
+
+Examples:
+
+git log
+
+git log --oneline
+
+git log --oneline --graph
+
+git log origin/master
+
+also see git-shortlog - Summarize git log output
+https://git-scm.com/docs/git-shortlog
+---------------------------------------------------
+https://git-scm.com/docs/git-add
+
+-u option is used, all tracked files in the entire working tree are updated
+git add -u
+
+ -A option is used, all files in the entire working tree are updated
+git add -A
+
+---------------------------------------------------
+This can be confusing as all hell!!!
+Try to kep away from and be cleaner in adds
+
+git-reset - Reset current HEAD to the specified state
+https://git-scm.com/docs/git-reset
+
+
+Remove all changes back to head of local repository
+git reset --hard
+
+last change
+git reset --soft HEAD~1
+
+last change throwing everything else out
+git reset --hard HEAD~1
+
+---------------------------------------------------
+git-clean - Remove untracked files from the working tree
+https://git-scm.com/docs/git-clean
+
+-n  OR --dry-run
+Don’t actually remove anything, just show what would be done.
+git clean -n
+
+-f option actually removes
+git clean -n
+
+---------------------------------------------------
+gitignore - Specifies intentionally untracked files to ignore
+https://git-scm.com/docs/gitignore
+
+.gitignore is an editable file
+
+---------------------------------------------------
+Working Remotely
+---------------------------------------------------
+git-clone - Clone a repository into a new directory
+https://git-scm.com/docs/git-clone
+
+Example using my js-start-environment on github:
+git clone https://github.com/RonGarlit/js-start-environment.git
+---------------------------------------------------
+git-branch - List, create, or delete branches
+https://git-scm.com/docs/git-branch
+
+-r OR --remotes
+List or delete (if used with -d) the remote-tracking branches.
+
+git branch -r
+
+local branches
+git branch
+
+**********************************************
+git branch --set-upstream master origin/master
+**********************************************
+
+---------------------------------------------------
+git-remote - Manage set of tracked repositories
+https://git-scm.com/docs/git-remote
+
+get list
+git remote -v
+
+removes link to origin
+git remote rm origin
+
+---------------------------------------------------
+git-merge - Join two or more development histories together
+https://git-scm.com/docs/git-merge
+
+pull merge into local copy from origin/master
+git merge origin/master
+
+---------------------------------------------------
+git-pull - Fetch from and integrate with another repository or a local branch
+https://git-scm.com/docs/git-pull
+
+git pull
+
+git pull origin master  *** better to set upstream
+git branch --set-upstream master origin/master
+
+Though clone should set this automatically
+---------------------------------------------------
+git-tag - Create, list, delete or verify a tag object
+https://git-scm.com/docs/git-tag
+
+git tag <NAME>
+
+git tag -a v1.0_with message this brings up editor for message
+
+git tag -s v1.0_signed   this brings up editor and als needs passphrase at end.
+
+Also see git push --tags
+---------------------------------------------------
+git-push - Update remote refs along with associated objects
+https://git-scm.com/docs/git-push
+
+git push
+---------------------------------------------------
+---------------------------------------------------
+---------------------------------------------------
+Test 1

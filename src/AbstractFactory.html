@@ -1,0 +1,106 @@
+<!DOCTYPE>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>JsGangOFour-Abstract Factory Pattern</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="css/main.css" />
+  <script src="scripts/abstractfactory.js"></script>
+  <style>
+    /*         body {
+      background-color: lightcoral;
+    }
+    h1 {
+      color: white;
+      text-align: center;
+    }
+
+    p {
+      font-family: verdana;
+      font-size: 20px;
+    }
+
+    button{
+      color:black;
+      background-color: khaki;
+    } */
+  </style>
+</head>
+
+<body>
+  <h2 title="Abstract Factory">Abstract Factory</h2>
+
+  <p>Provide an interface for creating families of related or dependent objects without specifying their concrete classes. </p>
+
+  <p>An Abstract Factory creates objects that are related by a common theme. </p>
+
+  <p>In object-oriented programming a Factory is an object that creates other objects. An Abstract Factory has abstracted out
+    a theme which is shared by the newly created objects. </p>
+
+  <img src="images/javascript-abstract-factory.jpg" alt="Abstract Factory Diagram">
+
+  <button type="button" onclick="run();return false;">Run() in abstractfactory.js</button>
+  <!-- <a href="javascript:void(0);" onclick="run();return false;">Run() in abstractfactory.js</a> -->
+<!--   <script type="text/javascript">
+
+    function Employee(name) {
+        this.name = name;
+        this.say = function () {
+            log.add("I am employee " + name);
+        };
+    }
+
+    function EmployeeFactory() {
+        this.create = function (name) {
+            return new Employee(name);
+        };
+    }
+
+    function Vendor(name) {
+        this.name = name;
+        this.say = function () {
+            log.add("I am vendor " + name);
+        };
+    }
+
+    function VendorFactory() {
+        this.create = function (name) {
+            return new Vendor(name);
+        };
+    }
+
+    // log helper
+    var log = (function () {
+        var log = "";
+        return {
+            add: function (msg) { log += msg + "\n"; },
+            show: function () { alert(log); log = ""; }
+        }
+    })();
+
+    function run() {
+
+        var persons = [];
+
+        var employeeFactory = new EmployeeFactory();
+        var vendorFactory = new VendorFactory();
+
+        persons.push(employeeFactory.create("Joan DiSilva"));
+        persons.push(employeeFactory.create("Tim O'Neill"));
+
+        persons.push(vendorFactory.create("Gerald Watson"));
+        persons.push(vendorFactory.create("Nicole McNight"));
+
+        for (var i = 0, len = persons.length; i < len; i++) {
+            persons[i].say();
+        }
+
+        log.show();
+    }
+
+</script> -->
+</body>
+
+</html>

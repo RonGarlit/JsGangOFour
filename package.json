@@ -1,0 +1,40 @@
+{
+  "name": "JsGangOFour",
+  "version": "1.0.0",
+  "description": "JsGangOFour for JavaScript on Express",
+  "scripts": {
+    "prestart": "babel-node buildScripts/startMessage.js",
+    "start": "npm-run-all --parallel open:src lint",
+    "open:src": "babel-node buildScripts/srcServer.js",
+    "lint": "esw app.js src buildScripts --color",
+    "lint:watch": "esw --watch --color src buildscripts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RonGarlit/JsGangOFour"
+  },
+  "author": "Ron Garlit",
+  "license": "MIT",
+  "dependencies": {
+    "npm": "^6.1.0"
+  },
+  "devDependencies": {
+    "babel-cli": "6.16.0",
+    "babel-core": "6.17.0",
+    "babel-loader": "6.2.5",
+    "babel-preset-latest": "6.16.0",
+    "babel-register": "6.16.3",
+    "chalk": "1.1.3",
+    "cheerio": "0.22.0",
+    "compression": "1.6.2",
+    "cross-env": "3.1.3",
+    "css-loader": "0.25.0",
+    "eslint": "3.8.1",
+    "eslint-plugin-import": "2.0.1",
+    "eslint-watch": "2.1.14",
+    "express": "4.14.0",
+    "npm-run-all": "3.1.1",
+    "open": "0.0.5"
+  }
+}
