@@ -7,7 +7,9 @@
   <title>JsGangOFour-Abstract Factory Pattern</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" media="screen" href="css/main.css" />
+  <link href="css/prettify.css" rel="stylesheet" type="text/css" media="screen"/>
   <script src="scripts/abstractfactory.js"></script>
+  <script src="scripts/prettify.js"></script>
   <style>
     /*         body {
       background-color: lightcoral;
@@ -41,10 +43,7 @@
 
   <img src="images/javascript-abstract-factory.jpg" alt="Abstract Factory Diagram">
 
-  <button type="button" onclick="run();return false;">Run() in abstractfactory.js</button>
-  <!-- <a href="javascript:void(0);" onclick="run();return false;">Run() in abstractfactory.js</a> -->
-<!--   <script type="text/javascript">
-
+ <pre>
     function Employee(name) {
         this.name = name;
         this.say = function () {
@@ -53,7 +52,7 @@
     }
 
     function EmployeeFactory() {
-        this.create = function (name) {
+        this.create = function(name) {
             return new Employee(name);
         };
     }
@@ -66,7 +65,7 @@
     }
 
     function VendorFactory() {
-        this.create = function (name) {
+        this.create = function(name) {
             return new Vendor(name);
         };
     }
@@ -79,6 +78,7 @@
             show: function () { alert(log); log = ""; }
         }
     })();
+
 
     function run() {
 
@@ -99,8 +99,13 @@
 
         log.show();
     }
+  </pre>
 
-</script> -->
+  <button type="button" onclick="run();return false;">Run() in abstractfactory.js</button>
+
+  <button type="button" onclick="run1();return false;">Optimized Run() in abstractfactory.js</button>
+
+
 </body>
 
 </html>

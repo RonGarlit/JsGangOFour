@@ -39,6 +39,8 @@ VISUAL STUDIO CODE EXTENSIONS TO ADD
 =====================================================
 EditorConfig for VS Code
 Sublime Babel
+Markdown All in One
+
 
 VSCODE Extensions Commands:
 code --list-extensions
