@@ -46,6 +46,9 @@ app.get('/FactoryMethod', function(req, res) {
   res.sendFile(path.join(__dirname, '../src/FactoryMethod.html'));
 });
 
+app.get('/bs', function(req, res) {
+  res.sendFile(path.join(__dirname, '../src/bs.html'));
+});
 
 
 
