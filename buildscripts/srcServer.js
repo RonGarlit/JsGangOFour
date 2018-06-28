@@ -50,5 +50,10 @@ app.get('/bs', function(req, res) {
   res.sendFile(path.join(__dirname, '../src/bs.html'));
 });
 
+app.get('/about', function(req, res) {
+  res.sendFile(path.join(__dirname, '../src/About.html'));
+});
+
+
 
 

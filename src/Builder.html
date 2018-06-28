@@ -6,52 +6,106 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>JsGangOFour-Builder Pattern</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" media="screen" href="/main.css" />
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" type="text/css" media="screen" href="css/darkly.bootstrap.min.css" />
   <script src="scripts/scripts.js"></script>
   <style>
     /* this overrides the css in the main style sheet */
 
-    body {
+    /*     body {
       background-color: lightslategray;
-    }
+    } */
   </style>
 </head>
 
 <body>
-  <h2>My Second JavaScript Example</h2>
+  <!-- Start of Nav Section -->
+  <div class="container-fluid">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <!-- placing brand here by default puts hamburger menu to right. -->
+        <a class="navbar-brand" href="/">JsGangOFour</a>
+        <button class="navbar-toggler" aria-expanded="false" aria-controls="navbarColor01" aria-label="Toggle navigation" type="button"
+          data-target="#navbarColor01" data-toggle="collapse">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-  <h3>What Can JavaScript Do?</h3>
+        <div class="collapse navbar-collapse" id="navbarColor01">
+          <!-- placing brand here hides it and moves hamburger menu to left. -->
+          <!-- <a class="navbar-brand" href="/">JsGangOFour</a> -->
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="patterns">Patterns
+                <span class="caret"></span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="patterns">
+                <a class="dropdown-item" href="/AbstractFactory">Abstract Factory</a>
+                <a class="dropdown-item" href="/Builder">Builder</a>
+                <a class="dropdown-item" href="/FactoryMethod">Factory Method</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="bsplay">Bsplay
+                <span class="caret"></span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="bsplay">
+                <a class="dropdown-item" href="/bs">Bootstrap Play</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/about">About</a>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search">
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+    </div>
+    <!-- End of Nav Section -->
+    <div class="container">
+      <h2>My Second JavaScript Example</h2>
 
-  <p>JavaScript can change HTML attribute values.</p>
+      <h3>What Can JavaScript Do?</h3>
 
-  <p>In this case JavaScript changes the value of the src (source) attribute of an image.</p>
+      <p>JavaScript can change HTML attribute values.</p>
 
-  <button onclick="document.getElementById('myImage').src='images/pic_bulbon.gif'">Turn on the light</button>
+      <p>In this case JavaScript changes the value of the src (source) attribute of an image.</p>
 
-  <img id="myImage" src="images/pic_bulboff.gif" style="width:100px">
+      <button onclick="document.getElementById('myImage').src='images/pic_bulbon.gif'">Turn on the light</button>
 
-  <button onclick="document.getElementById('myImage').src='images/pic_bulboff.gif'">Turn off the light</button>
+      <img id="myImage" src="images/pic_bulboff.gif" style="width:100px">
 
-
-  <p id="demoFontSize">JavaScript can change the style of an HTML style element fontSize.</p>
-
-  <button type="button" onclick="document.getElementById('demoFontSize').style.fontSize='35px'">Click to make me BIGGER!</button>
-
-  <button type="button" onclick="document.getElementById('demoFontSize').style.fontSize='15px'">Click to make me smaller!</button>
-
-  <p id="demo">JavaScript can hide HTML elements.</p>
-
-  <button type="button" onclick="document.getElementById('demo').style.display='none'">Click Me!</button>
-
-  <button type="button" onclick="document.getElementById('demo').style.display='list-item'">Click Me!</button>
+      <button onclick="document.getElementById('myImage').src='images/pic_bulboff.gif'">Turn off the light</button>
 
 
-  <p id="scriptdemo">Ron Was Here.</p>
+      <p id="demoFontSize">JavaScript can change the style of an HTML style element fontSize.</p>
 
-  <script>
-    document.getElementById("scriptdemo").innerHTML = "I changed wahat was here from a script tag.  :-)";
-  </script>
+      <button type="button" onclick="document.getElementById('demoFontSize').style.fontSize='35px'">Click to make me BIGGER!</button>
 
+      <button type="button" onclick="document.getElementById('demoFontSize').style.fontSize='15px'">Click to make me smaller!</button>
+
+      <p id="demo">JavaScript can hide HTML elements.</p>
+
+      <button type="button" onclick="document.getElementById('demo').style.display='none'">Click Me!</button>
+
+      <button type="button" onclick="document.getElementById('demo').style.display='list-item'">Click Me!</button>
+
+
+      <p id="scriptdemo">Ron Was Here.</p>
+
+      <script>
+        document.getElementById("scriptdemo").innerHTML = "I changed wahat was here from a script tag.  :-)";
+      </script>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+      crossorigin="anonymous"></script>
 </body>
 
 </html>

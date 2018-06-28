@@ -6,8 +6,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>JsGangOFour-Abstract Factory Pattern</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" media="screen" href="css/main.css" />
-  <link href="css/prettify.css" rel="stylesheet" type="text/css" media="screen"/>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" type="text/css" media="screen" href="css/darkly.bootstrap.min.css" />
+  <!-- <link href="css/prettify.css" rel="stylesheet" type="text/css" media="screen"/> -->
   <script src="scripts/abstractfactory.js"></script>
   <script src="scripts/prettify.js"></script>
   <style>
@@ -32,18 +33,62 @@
 </head>
 
 <body>
-  <h2 title="Abstract Factory">Abstract Factory</h2>
+  <!-- Start of Nav Section -->
+  <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <a class="navbar-brand" href="/">JsGangOFour</a>
+      <button class="navbar-toggler" aria-expanded="false" aria-controls="navbarColor01" aria-label="Toggle navigation" type="button"
+        data-target="#navbarColor01" data-toggle="collapse">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-  <p>Provide an interface for creating families of related or dependent objects without specifying their concrete classes. </p>
+      <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="patterns">Patterns
+              <span class="caret"></span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="patterns">
+              <a class="dropdown-item" href="/AbstractFactory">Abstract Factory</a>
+              <a class="dropdown-item" href="/Builder">Builder</a>
+              <a class="dropdown-item" href="/FactoryMethod">Factory Method</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="bsplay">Bsplay
+              <span class="caret"></span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="bsplay">
+              <a class="dropdown-item" href="/bs">Bootstrap Play</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about">About</a>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search">
+          <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
+    </div>
+  </div>
+    <!-- End of Nav Section -->
+    <div class="container">
+      <h2 title="Abstract Factory">Abstract Factory</h2>
 
-  <p>An Abstract Factory creates objects that are related by a common theme. </p>
+      <p>Provide an interface for creating families of related or dependent objects without specifying their concrete classes.
+      </p>
 
-  <p>In object-oriented programming a Factory is an object that creates other objects. An Abstract Factory has abstracted out
-    a theme which is shared by the newly created objects. </p>
+      <p>An Abstract Factory creates objects that are related by a common theme. </p>
 
-  <img src="images/javascript-abstract-factory.jpg" alt="Abstract Factory Diagram">
+      <p>In object-oriented programming a Factory is an object that creates other objects. An Abstract Factory has abstracted
+        out a theme which is shared by the newly created objects. </p>
 
- <pre>
+      <img src="images/javascript-abstract-factory.jpg" alt="Abstract Factory Diagram">
+
+      <pre>
     function Employee(name) {
         this.name = name;
         this.say = function () {
@@ -101,11 +146,18 @@
     }
   </pre>
 
-  <button type="button" onclick="run();return false;">Run() in abstractfactory.js</button>
+      <button type="button" onclick="run();return false;">Run() in abstractfactory.js</button>
 
-  <button type="button" onclick="run1();return false;">Optimized Run() in abstractfactory.js</button>
-
-
+      <button type="button" onclick="run1();return false;">Optimized Run() in abstractfactory.js</button>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+      crossorigin="anonymous"></script>
 </body>
 
 </html>
