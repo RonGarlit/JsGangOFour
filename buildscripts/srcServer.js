@@ -93,13 +93,63 @@ app.get('/lux', function(req, res) {
 app.get('/materia', function(req, res) {
   res.sendFile(path.join(__dirname, '../src/materia.html'));
 });
+
+app.get('/minty', function(req, res) {
+  res.sendFile(path.join(__dirname, '../src/minty.html'));
+});
+
+app.get('/pulse', function(req, res) {
+  res.sendFile(path.join(__dirname, '../src/pulse.html'));
+});
+
+app.get('/sandstone', function(req, res) {
+  res.sendFile(path.join(__dirname, '../src/sandstone.html'));
+});
+
+app.get('/simplex', function(req, res) {
+  res.sendFile(path.join(__dirname, '../src/simplex.html'));
+});
+
+app.get('/sketchy', function(req, res) {
+  res.sendFile(path.join(__dirname, '../src/sketchy.html'));
+});
+
+app.get('/slate', function(req, res) {
+  res.sendFile(path.join(__dirname, '../src/slate.html'));
+});
+
+app.get('/solar', function(req, res) {
+  res.sendFile(path.join(__dirname, '../src/solar.html'));
+});
+
+app.get('/spacelab', function(req, res) {
+  res.sendFile(path.join(__dirname, '../src/spacelab.html'));
+});
+
+app.get('/superhero', function(req, res) {
+  res.sendFile(path.join(__dirname, '../src/superhero.html'));
+});
+
+app.get('/united', function(req, res) {
+  res.sendFile(path.join(__dirname, '../src/united.html'));
+});
+
+app.get('/yeti', function(req, res) {
+  res.sendFile(path.join(__dirname, '../src/yeti.html'));
+});
+
 //======================================================
 // About
 //======================================================
 app.get('/about', function(req, res) {
   res.sendFile(path.join(__dirname, '../src/About.html'));
 });
-
+//======================================================
+// About
+//======================================================
+app.get('/MainNavBar', function(req, res) {
+  res.sendFile(path.join(__dirname, '../src/MainNavBar.html'));
+});
 
 
 
