@@ -1,16 +1,15 @@
 import express from 'express';
-// import path from 'path';
+import path from 'path';
 import open from 'open';
 
 /* eslint-disable no-console */
 
 const port = 3000;
 const app = express();
-app.set('view engine', 'ejs');
 
 // In the app.js file, define the static folder paths so that it gets resolved in the node application
 app.use('/node_modules',  express.static(__dirname + '/node_modules'));
-app.use(express.static('public'));
+app.use(express.static('public'))
 
 app.listen(port, function(err) {
   if (err) {
@@ -31,128 +30,126 @@ app.listen(port, function(err) {
 }); */
 
 //Root - Home Page
-// app.get('/', function(req, res) {
-//   res.sendFile(path.join(__dirname, '../src/home.html'));
-// });
-
-app.get('/', (req, res) => {
-  // render `home.ejs` with the list of posts
-  res.render('home');
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname, '../src/home.html'));
 });
 //======================================================
 // Design Pattern Routes
 //======================================================
 app.get('/AbstractFactory', function(req, res) {
-  res.render('AbstractFactory');
+  res.sendFile(path.join(__dirname, '../src/AbstractFactory.html'));
 });
 
 app.get('/Builder', function(req, res) {
-  res.render('Builder');
+  res.sendFile(path.join(__dirname, '../src/Builder.html'));
 });
 
 app.get('/FactoryMethod', function(req, res) {
-  res.render('FactoryMethod');
+  res.sendFile(path.join(__dirname, '../src/FactoryMethod.html'));
 });
 //======================================================
 // Bootstrap Theme Routes
 //======================================================
 app.get('/bs', function(req, res) {
-  res.render('bs');
+  res.sendFile(path.join(__dirname, '../src/bs.html'));
 });
 
 app.get('/cerulean', function(req, res) {
-  res.render('cerulean');
+  res.sendFile(path.join(__dirname, '../src/cerulean.html'));
 });
 
 app.get('/cosmo', function(req, res) {
-  res.render('cosmo');
+  res.sendFile(path.join(__dirname, '../src/cosmo.html'));
 });
 
 app.get('/cyborg', function(req, res) {
-  res.render('cyborg');
+  res.sendFile(path.join(__dirname, '../src/cyborg.html'));
 });
 
 app.get('/darkly', function(req, res) {
-  res.render('darkly');
+  res.sendFile(path.join(__dirname, '../src/darkly.html'));
 });
 
 app.get('/flatly', function(req, res) {
-  res.render('flatly');
+  res.sendFile(path.join(__dirname, '../src/flatly.html'));
 });
 
 app.get('/journal', function(req, res) {
-  res.render('journal');
+  res.sendFile(path.join(__dirname, '../src/journal.html'));
 });
 
 app.get('/litera', function(req, res) {
-  res.render('litera');
+  res.sendFile(path.join(__dirname, '../src/litera.html'));
 });
 
 app.get('/lumen', function(req, res) {
-  res.render('lumen');
+  res.sendFile(path.join(__dirname, '../src/lumen.html'));
 });
 
 app.get('/lux', function(req, res) {
-  res.render('lux');
+  res.sendFile(path.join(__dirname, '../src/lux.html'));
 });
 
 app.get('/materia', function(req, res) {
-  res.render('materia');
+  res.sendFile(path.join(__dirname, '../src/materia.html'));
 });
 
 app.get('/minty', function(req, res) {
-  res.render('minty');
+  res.sendFile(path.join(__dirname, '../src/minty.html'));
 });
 
 app.get('/pulse', function(req, res) {
-  res.render('pulse');
+  res.sendFile(path.join(__dirname, '../src/pulse.html'));
 });
 
 app.get('/sandstone', function(req, res) {
-  res.render('sandstone');
+  res.sendFile(path.join(__dirname, '../src/sandstone.html'));
 });
 
 app.get('/simplex', function(req, res) {
-  res.render('simplex');
+  res.sendFile(path.join(__dirname, '../src/simplex.html'));
 });
 
 app.get('/sketchy', function(req, res) {
-  res.render('sketchy');
+  res.sendFile(path.join(__dirname, '../src/sketchy.html'));
 });
 
 app.get('/slate', function(req, res) {
-  res.render('slate');
+  res.sendFile(path.join(__dirname, '../src/slate.html'));
 });
 
 app.get('/solar', function(req, res) {
-  res.render('solar');
+  res.sendFile(path.join(__dirname, '../src/solar.html'));
 });
 
 app.get('/spacelab', function(req, res) {
-  res.render('spacelab');
+  res.sendFile(path.join(__dirname, '../src/spacelab.html'));
 });
 
 app.get('/superhero', function(req, res) {
-  res.render('superhero');
+  res.sendFile(path.join(__dirname, '../src/superhero.html'));
 });
 
 app.get('/united', function(req, res) {
-  res.render('united');
+  res.sendFile(path.join(__dirname, '../src/united.html'));
 });
 
 app.get('/yeti', function(req, res) {
-  res.render('yeti');
+  res.sendFile(path.join(__dirname, '../src/yeti.html'));
 });
 
 //======================================================
 // About
 //======================================================
-app.get('/about', (req, res) => {
-  // render `home.ejs` with the list of posts
-  res.render('about');
+app.get('/about', function(req, res) {
+  res.sendFile(path.join(__dirname, '../src/About.html'));
 });
 //======================================================
-
+// About
+//======================================================
+app.get('/MainNavBar', function(req, res) {
+  res.sendFile(path.join(__dirname, '../src/MainNavBar.html'));
+});
 
 
 
