@@ -2,6 +2,7 @@
 // Used to add() to var log
 // then display in alert box
 // via show() method
+// Keyboard test
 var log = (function () {
   var log = "";
   return {
