@@ -8,11 +8,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Bootstrap CSS -->
   <%- include('partials/MainStyles') %>
-  <!-- <link href="css/prettify.css" rel="stylesheet" type="text/css" media="screen"/> -->
-  <script src="scripts/abstractfactory.js"></script>
-  <script src="scripts/prettify.js"></script>
-  <style>
-    /*         body {
+    <link href='css/google-code-prettify/prettify.css' rel="stylesheet" />
+
+    <script src="scripts/abstractfactory.js"></script>
+    <!-- <script src="css/google-code-prettify/prettify.js"></script> -->
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+    <style>
+      /*         body {
       background-color: lightcoral;
     }
     h1 {
@@ -29,7 +31,7 @@
       color:black;
       background-color: khaki;
     } */
-  </style>
+    </style>
 </head>
 
 <body>
@@ -47,67 +49,77 @@
       <p>In object-oriented programming a Factory is an object that creates other objects. An Abstract Factory has abstracted
         out a theme which is shared by the newly created objects. </p>
 
-      <img src="images/javascript-abstract-factory.jpg" alt="Abstract Factory Diagram">
-
-      <pre>
-    function Employee(name) {
-        this.name = name;
-        this.say = function () {
-            log.add("I am employee " + name);
-        };
-    }
-
-    function EmployeeFactory() {
-        this.create = function(name) {
-            return new Employee(name);
-        };
-    }
-
-    function Vendor(name) {
-        this.name = name;
-        this.say = function () {
-            log.add("I am vendor " + name);
-        };
-    }
-
-    function VendorFactory() {
-        this.create = function(name) {
-            return new Vendor(name);
-        };
-    }
-
-    // log helper
-    var log = (function () {
-        var log = "";
-        return {
-            add: function (msg) { log += msg + "\n"; },
-            show: function () { alert(log); log = ""; }
-        }
-    })();
-
-
-    function run() {
-
-        var persons = [];
-
-        var employeeFactory = new EmployeeFactory();
-        var vendorFactory = new VendorFactory();
-
-        persons.push(employeeFactory.create("Joan DiSilva"));
-        persons.push(employeeFactory.create("Tim O'Neill"));
-
-        persons.push(vendorFactory.create("Gerald Watson"));
-        persons.push(vendorFactory.create("Nicole McNight"));
-
-        for (var i = 0, len = persons.length; i < len; i++) {
-            persons[i].say();
+      <img src="images/javascript-abstract-factory.jpg" alt="Abstract Factory Diagram" class="img-fluid img-thumbnail">
+      <p></p>
+      <br>
+      <div class="alert alert-dismissible alert-primary">
+        <h4 class="alert-heading">JavaScript Code</h4>
+        <div>
+          <!--       Follow these links for the google prettyify information
+      https://github.com/google/code-prettify
+      This is the link to the styple for prettyify - We choose Dessert and put in prettify.css
+      https://github.com/google/code-prettify/blob/master/styles/desert.css -->
+          <pre class="prettyprint">
+        function Employee(name) {
+            this.name = name;
+            this.say = function () {
+                log.add("I am employee " + name);
+            };
         }
 
-        log.show();
-    }
-  </pre>
+        function EmployeeFactory() {
+            this.create = function(name) {
+                return new Employee(name);
+            };
+        }
 
-      <button type="button" onclick="run();return false;">Run() in abstractfactory.js</button>
+        function Vendor(name) {
+            this.name = name;
+            this.say = function () {
+                log.add("I am vendor " + name);
+            };
+        }
+
+        function VendorFactory() {
+            this.create = function(name) {
+                return new Vendor(name);
+            };
+        }
+
+        // log helper
+        var log = (function () {
+            var log = "";
+            return {
+                add: function (msg) { log += msg + "\n"; },
+                show: function () { alert(log); log = ""; }
+            }
+        })();
+
+
+        function run() {
+
+            var persons = [];
+
+            var employeeFactory = new EmployeeFactory();
+            var vendorFactory = new VendorFactory();
+
+            persons.push(employeeFactory.create("Joan DiSilva"));
+            persons.push(employeeFactory.create("Tim O'Neill"));
+
+            persons.push(vendorFactory.create("Gerald Watson"));
+            persons.push(vendorFactory.create("Nicole McNight"));
+
+            for (var i = 0, len = persons.length; i < len; i++) {
+                persons[i].say();
+            }
+
+            log.show();
+        }
+        </pre>
+        </div>
+        <button type="button" onclick="run();return false;">Run() in abstractfactory.js</button>
+      </div>
+      <!-- <button type="button" onclick="run();return false;">Run() in abstractfactory.js</button> -->
 
       <button type="button" onclick="run1();return false;">Optimized Run() in abstractfactory.js</button>
     </div>
