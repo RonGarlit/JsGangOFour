@@ -8,46 +8,54 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Bootstrap CSS -->
   <%- include('partials/MainStyles') %>
-  <script src="scripts/scripts.js"></script>
-  <style>
-    /* this overrides the css in the main style sheet */
-
-    /*     body {
-      background-color: steelblue;
-    } */
-  </style>
+    <script src="scripts/scripts.js"></script>
 </head>
 
 <body>
   <!-- Start of Nav Section -->
   <%- include('partials/MainNavBar') %>
-  <!-- End of Nav Section -->
-  <div class="container">
-    <div class="page-header" id="banner">
-      <div class="row">
-        <div class="col-lg-8 col-md-7 col-sm-6">
-          <h1>JavaScript Design Patterns Playground</h1>
-        </div>
-        <div class="col-lg-4 col-md-5 col-sm-6">
-          <div class="sponsor">
-            <div><img src="images/js.png"></div>
+    <!-- End of Nav Section -->
+    <div class="container">
+      <div class="page-header" id="banner">
+        <div class="row">
+          <div class="col-lg-8 col-md-7 col-sm-6">
+            <h1>JavaScript Design Patterns Playground</h1>
+          </div>
+          <div class="col-lg-4 col-md-5 col-sm-6">
+            <div class="sponsor">
+              <div>
+                <img src="images/js.png">
+              </div>
+            </div>
           </div>
         </div>
       </div>
+      <p class="lead">This is an implementation of the Classic "Gang of Four" design patterns in JavaScript.</p>
+      <p></p>
+      <p>The body of code provided here is my playground. My intent is multi-purpose.</p>
+      <ul>
+        <li>First is to brush up on my JavaScript</li>
+        <li>Move from my core Microsoft .NET mindeset to a open source Node JS one.</li>
+        <li>As a software architect, where better to start than with the basic design patterns?</li>
+        <li>An with that in mind I wanted to also use this code for a user group presentation.</li>
+        <li>Plus I wanted to uplift my Bootstrap skills from Version 3 to 4.</li>
+      </ul>
+<p>The design patterns discussed here are based on the book "Design Patterns: Elements of Reusable Object-Oriented Software".</p>
+<p>Written somewhere around 1997 this book is the classic text for software engineering book describing software design patterns. Currently a copy of the book in PDF form can be found here: <a href="http://www.uml.org.cn/c%2B%2B/pdf/DesignPatterns.pdf">Design Patterns PDF</a> </p>
+<p>For us old salty developers and architects it is known as the "Gang Of Four" design patterns.  Which is a tribute to the book's authors, Erich Gamma, Richard Helm, Ralph Johnson and John Vlissides.</p>
+<p>The basic 23 classic design patterns are grouped into creational, structural and behavioral patterns. Which you can view under their respecitive menus above which I've demonstrated in JavaScript rather than in C or C#.</p>
+
+      <img src="images/DesignPatternsBookCover.jpg" alt="GoF Book Cover Image" class="img-fluid img-thumbnail">
     </div>
-    <h3>Classic JavaScript Patterns</h3>
-    <p></p>
-    <p>The original 23 Design Patterns were published in 1995 by the Gang of Four (GoF). Many of these are highly relevant to
-      JavaScript, whereas others are not so. </p>
-  </div>
-  <!-- Optional JavaScript -->
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
-    crossorigin="anonymous"></script>
+    <%- include('partials/MainFooter') %>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+      crossorigin="anonymous"></script>
 </body>
 
 </html>

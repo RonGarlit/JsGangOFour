@@ -151,6 +151,11 @@ app.get('/about', (req, res) => {
   // render `home.ejs` with the list of posts
   res.render('about');
 });
+
+app.get('/pageunderconstruction', (req, res) => {
+  // render `home.ejs` with the list of posts
+  res.render('pageunderconstruction');
+});
 //======================================================
 
 
