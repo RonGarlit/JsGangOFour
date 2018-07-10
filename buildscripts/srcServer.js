@@ -41,6 +41,8 @@ app.get('/', (req, res) => {
 });
 //======================================================
 // Design Pattern Routes
+//-------------------------
+// Creational Patterns
 //======================================================
 app.get('/AbstractFactory', function(req, res) {
   res.render('AbstractFactory');
@@ -52,6 +54,46 @@ app.get('/Builder', function(req, res) {
 
 app.get('/FactoryMethod', function(req, res) {
   res.render('FactoryMethod');
+});
+
+app.get('/Prototype', function(req, res) {
+  res.render('Prototype');
+});
+
+app.get('/Singleton', function(req, res) {
+  res.render('Singleton');
+});
+//======================================================
+// Design Pattern Routes
+//-------------------------
+// Structural Patterns
+//======================================================
+app.get('/Adapter', function(req, res) {
+  res.render('Adapter');
+});
+
+app.get('/Bridge', function(req, res) {
+  res.render('Bridge');
+});
+
+app.get('/Composite', function(req, res) {
+  res.render('Composite');
+});
+
+app.get('/Decorator', function(req, res) {
+  res.render('Decorator');
+});
+
+app.get('/Facade', function(req, res) {
+  res.render('Facade');
+});
+
+app.get('/Flyweight', function(req, res) {
+  res.render('Flyweight');
+});
+
+app.get('/Proxy', function(req, res) {
+  res.render('Proxy');
 });
 //======================================================
 // Bootstrap Theme Routes

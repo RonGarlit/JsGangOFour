@@ -39,7 +39,7 @@ function VendorFactory() {
 }
 
 
-function run() {
+function run_AbstractFactory() {
 
   var persons = [];
 
@@ -110,7 +110,7 @@ Patterns.namespace("Classic").AbstractFactory = (function () {
 
 
 
-function run1() {
+function run_OptimizedAbstractFactory() {
 
   var abstract = Patterns.Classic.AbstractFactory;
 

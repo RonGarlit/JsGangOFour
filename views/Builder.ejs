@@ -2,70 +2,219 @@
 <html>
 
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>JsGangOFour-Builder Pattern</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Bootstrap CSS -->
-  <%- include('partials/MainStyles') %>
-  <script src="scripts/scripts.js"></script>
-  <style>
-    /* this overrides the css in the main style sheet */
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>JsGangOFour-Factory Method Pattern</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <%- include('partials/MainStyles') %>
+        <link href='css/google-code-prettify/prettify.css' rel="stylesheet" />
 
-    /*     body {
-      background-color: lightslategray;
-    } */
-  </style>
+        <script src="scripts/abstractfactory.js"></script>
+        <!-- <script src="css/google-code-prettify/prettify.js"></script> -->
+        <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
 </head>
 
 <body>
-  <!-- Start of Nav Section -->
-  <%- include('partials/MainNavBar') %>
-  <!-- End of Nav Section -->
-    <div class="container">
-      <h2>My Second JavaScript Example</h2>
+    <!-- Start of Nav Section -->
+    <%- include('partials/MainNavBar') %>
+        <!-- End of Nav Section -->
+        <div class="container">
+            <h2 title="ReplaceMe">ReplaceMe</h2>
+            <p>ReplaceMe
+            </p>
 
-      <h3>What Can JavaScript Do?</h3>
+            <p>ReplaceMe </p>
 
-      <p>JavaScript can change HTML attribute values.</p>
+            <p>ReplaceMe </p>
 
-      <p>In this case JavaScript changes the value of the src (source) attribute of an image.</p>
+            <div class="card text-white bg-primary mb-3" style="max-width: 25rem;">
+                <div class="card-body">
+                    <h4 class="card-title">JavaScript Code</h4>
+                    <p>
+                        <img src="images/javascript-abstract-factory.jpg" alt="Abstract Factory Diagram" class="img-fluid img-thumbnail">
+                    </p>
+                </div>
+            </div>
 
-      <button onclick="document.getElementById('myImage').src='images/pic_bulbon.gif'">Turn on the light</button>
+            <p>ReplaceMe</p>
 
-      <img id="myImage" src="images/pic_bulboff.gif" style="width:100px">
-
-      <button onclick="document.getElementById('myImage').src='images/pic_bulboff.gif'">Turn off the light</button>
-
-
-      <p id="demoFontSize">JavaScript can change the style of an HTML style element fontSize.</p>
-
-      <button type="button" onclick="document.getElementById('demoFontSize').style.fontSize='35px'">Click to make me BIGGER!</button>
-
-      <button type="button" onclick="document.getElementById('demoFontSize').style.fontSize='15px'">Click to make me smaller!</button>
-
-      <p id="demo">JavaScript can hide HTML elements.</p>
-
-      <button type="button" onclick="document.getElementById('demo').style.display='none'">Click Me!</button>
-
-      <button type="button" onclick="document.getElementById('demo').style.display='list-item'">Click Me!</button>
+            <p>ReplaceMe </p>
 
 
-      <p id="scriptdemo">Ron Was Here.</p>
+            <p></p>
+            <br>
+            <div class="alert alert-dismissible alert-primary">
+                <h4 class="alert-heading">JavaScript Code</h4>
+                <div>
+                    <!--       Follow these links for the google prettyify information
+https://github.com/google/code-prettify
+This is the link to the styple for prettyify - We choose Dessert and put in prettify.css
+https://github.com/google/code-prettify/blob/master/styles/desert.css -->
+                    <pre class="prettyprint">
+  
+  //REPLACE THIS WITH CODE FROM JS FILE
+  function Employee(name) {
+      this.name = name;
+      this.say = function () {
+          log.add("I am employee " + name);
+      };
+  }
+  
+  function EmployeeFactory() {
+      this.create = function(name) {
+          return new Employee(name);
+      };
+  }
 
-      <script>
-        document.getElementById("scriptdemo").innerHTML = "I changed wahat was here from a script tag.  :-)";
-      </script>
-    </div>
-    <%- include('partials/MainFooter') %>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-      crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
-      crossorigin="anonymous"></script>
+  function Vendor(name) {
+      this.name = name;
+      this.say = function () {
+          log.add("I am vendor " + name);
+      };
+  }
+
+  function VendorFactory() {
+      this.create = function(name) {
+          return new Vendor(name);
+      };
+  }
+
+  // log helper
+  var log = (function () {
+      var log = "";
+      return {
+          add: function (msg) { log += msg + "\n"; },
+          show: function () { alert(log); log = ""; }
+      }
+  })();
+
+
+  function run_AbstractFactory() {
+
+      var persons = [];
+    
+      var employeeFactory = new EmployeeFactory();
+      var vendorFactory = new VendorFactory();
+    
+      persons.push(employeeFactory.create("Joan DiSilva"));
+      persons.push(employeeFactory.create("Tim O'Neill"));
+    
+      persons.push(vendorFactory.create("Gerald Watson"));
+      persons.push(vendorFactory.create("Nicole McNight"));
+    
+      for (var i = 0, len = persons.length; i < len; i++) {
+          persons[i].say();
+      }
+    
+      log.show();
+    }
+  </pre>
+                </div>
+                <button type="button" class="btn btn-success" onclick="run_AbstractFactory();return false;">Execute run_AbstractFactory()</button>
+            </div>
+
+
+            <p></p>
+            <br>
+            <div class="alert alert-dismissible alert-primary">
+                <h4 class="alert-heading">JavaScript Code</h4>
+                <div>
+                    <!--       Follow these links for the google prettyify information
+https://github.com/google/code-prettify
+This is the link to the styple for prettyify - We choose Dessert and put in prettify.css
+https://github.com/google/code-prettify/blob/master/styles/desert.css -->
+                    <pre class="prettyprint">
+      //REPLACE THIS WITH CODE FROM JS FILE
+      var Patterns = {
+          namespace: function (name) {
+              var parts = name.split(".");
+              var ns = this;
+        
+              for (var i = 0, len = parts.length; i < len; i++) {
+                  ns[parts[i]] = ns[parts[i]] || {};
+                  ns = ns[parts[i]];
+              }
+        
+              return ns;
+          }
+        };
+        
+        Patterns.namespace("Classic").AbstractFactory = (function () {
+        
+          var Family = function (name) {
+              this.name = name;
+              this.say = function () {
+                  log.add("My family member name is " + name);
+              };
+          };
+        
+          var Pet = function (name) {
+              this.name = name;
+              this.say = function () {
+                  log.add("I'm a pet named " + name);
+              };
+          };
+        
+          var FamilyFactory = function () {
+              this.create = function (name) {
+                  return new Family(name);
+              };
+          };
+        
+          var PetFactory = function () {
+              this.create = function (name) {
+                  return new Pet(name);
+              };
+          };
+        
+          return {
+              FamilyFactory: FamilyFactory,
+              PetFactory: PetFactory
+          };
+        })();
+        
+       
+        function run_OptimizedAbstractFactory() {
+
+          var abstract = Patterns.Classic.AbstractFactory;
+        
+          var familyFactory = new abstract.FamilyFactory();
+          var petFactory = new abstract.PetFactory();
+        
+          var persons = [];
+        
+          persons.push(familyFactory.create("Ron Garlit"));
+          persons.push(familyFactory.create("Cindi Garlit"));
+          persons.push(familyFactory.create("Devin Garlit"));
+          persons.push(familyFactory.create("Melissa Garlit"));
+          persons.push(familyFactory.create("Mark Garlit"));
+        
+          persons.push(petFactory.create("Molly Garlit"));
+          persons.push(petFactory.create("Max Garlit"));
+          persons.push(petFactory.create("Jax Garlit"));
+        
+          for (var i = 0, len = persons.length; i < len; i++) {
+              persons[i].say();
+        }
+        
+          log.show();
+        }          
+  </pre>
+                </div>
+                <button type="button" class="btn btn-success" onclick="run_OptimizedAbstractFactory();return false;">Execute run_OptimizedAbstractFactory()</button>
+            </div>
+
+        </div>
+        <%- include('partials/MainFooter') %>
+            <!-- Optional JavaScript -->
+            <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+                crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+                crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+                crossorigin="anonymous"></script>
 </body>
 
 </html>
