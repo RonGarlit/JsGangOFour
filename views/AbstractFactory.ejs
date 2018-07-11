@@ -8,11 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Bootstrap CSS -->
     <%- include('partials/MainStyles') %>
-        <link href='css/google-code-prettify/prettify.css' rel="stylesheet" />
+        <!-- PrettyPrints CSS and JS to handle code blocks in HTML code -->
+        <%- include('partials/PrettyPrint') %>
 
-        <script src="scripts/abstractfactory.js"></script>
-        <!-- <script src="css/google-code-prettify/prettify.js"></script> -->
-        <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+            <!-- load JavaScript code supporting this page -->
+            <script src="scripts/abstractfactory.js"></script>
+
 </head>
 
 <body>
@@ -27,12 +28,12 @@
 
             <p>An Abstract Factory creates objects that are related by a common theme. </p>
 
-            <p>In object-oriented programming languages like C#, a Factory is an object that creates other objects. An Abstract Factory
-                has abstracted out a theme, which is shared by the newly created objects. </p>
+            <p>In object-oriented programming languages like C#, a Factory is an object that creates other objects. An Abstract
+                Factory has abstracted out a theme, which is shared by the newly created objects. </p>
 
             <div class="card text-white bg-primary mb-3" style="max-width: 25rem;">
                 <div class="card-body">
-                    <h4 class="card-title">JavaScript Code</h4>
+                    <h4 class="card-title">Abstract Factory</h4>
                     <p>
                         <img src="images/javascript-abstract-factory.jpg" alt="Abstract Factory Diagram" class="img-fluid img-thumbnail">
                     </p>
@@ -57,152 +58,244 @@
       This is the link to the styple for prettyify - We choose Dessert and put in prettify.css
       https://github.com/google/code-prettify/blob/master/styles/desert.css -->
                     <pre class="prettyprint">
-        function Employee(name) {
-            this.name = name;
-            this.say = function () {
-                log.add("I am employee " + name);
-            };
-        }
-        
-        function EmployeeFactory() {
-            this.create = function(name) {
-                return new Employee(name);
-            };
-        }
-
-        function Vendor(name) {
-            this.name = name;
-            this.say = function () {
-                log.add("I am vendor " + name);
-            };
-        }
-
-        function VendorFactory() {
-            this.create = function(name) {
-                return new Vendor(name);
-            };
-        }
-
-        // log helper
-        var log = (function () {
-            var log = "";
-            return {
-                add: function (msg) { log += msg + "\n"; },
-                show: function () { alert(log); log = ""; }
-            }
-        })();
-
-
-        function run_AbstractFactory() {
-
-            var persons = [];
-          
-            var employeeFactory = new EmployeeFactory();
-            var vendorFactory = new VendorFactory();
-          
-            persons.push(employeeFactory.create("Joan DiSilva"));
-            persons.push(employeeFactory.create("Tim O'Neill"));
-          
-            persons.push(vendorFactory.create("Gerald Watson"));
-            persons.push(vendorFactory.create("Nicole McNight"));
-          
-            for (var i = 0, len = persons.length; i < len; i++) {
-                persons[i].say();
-            }
-          
-            log.show();
-          }
-        </pre>
+                //==============================================
+                // log helper
+                // Used to add() to var log
+                // then display in alert box
+                // via show() method
+                //==============================================
+                var log = (function () {
+                    var log = "";
+                    return {
+                        add: function (msg) { log += msg + "\n"; },
+                        show: function () { alert(log); log = ""; }
+                    }
+                })();
+                
+                //==============================================
+                // Abstract Factory
+                // JavaScript does not support class-based 
+                // inheritance therefore the abstract classes.
+                // we must ensure this consistency ourselves
+                // that properties and methods match!!!
+                //==============================================
+                
+                
+                // Here are two Factories: 
+                // EmployeeFactory and VendorFactory.
+                //----------------------------------------------
+                // Employee Factory
+                function EmployeeFactory() {
+                    this.create = function (name) {
+                        return new Employee(name);
+                    };
+                    }
+                // Employee Entity  
+                // If we could declare interfaces
+                // it would be the iPerson
+                function Employee(name) {
+                    this.name = name;
+                    this.say = function () {
+                        // add to log heler var 
+                        log.add("I am employee " + name);
+                    };
+                }
+                
+                // Vendor Factory
+                function VendorFactory() {
+                    this.create = function (name) {
+                        return new Vendor(name);
+                    };
+                    }
+                // Vendor Entity
+                // If we could declare interfaces
+                // it would be the iPerson
+                function Vendor(name) {
+                    this.name = name;
+                    this.say = function () {
+                        // add to log heler var 
+                        log.add("I am vendor " + name);
+                    };
+                }
+                //==============================================
+                // run_AbstractFactory() 
+                //----------------------------------------------
+                // Demo use of EmployeeFactory & VendorFactory
+                // and log to alert box.
+                //==============================================
+                function run_AbstractFactory() {
+                
+                    // Array of matching entity object types
+                    // If we could declare interfaces
+                    // it would be the iPerson
+                    // and this woud be and array of 
+                    // Persons or People :-)
+                    var persons = [];
+                
+                    // Create a couple factories
+                    var employeeFactory = new EmployeeFactory();
+                    var vendorFactory = new VendorFactory();
+                
+                    // Load the array with objects created by factories
+                    // Names from http://funnynames.com/  :-)                    
+                    persons.push(employeeFactory.create("Anita Potty"));
+                    persons.push(employeeFactory.create("Pete Moss"));
+                    persons.push(employeeFactory.create("Belle E. Flopp"));
+                    persons.push(employeeFactory.create("Tyron Shulaces"));
+                
+                    persons.push(vendorFactory.create("Heaven Lee"));
+                    persons.push(vendorFactory.create("Al K. Holic"));
+                    persons.push(vendorFactory.create("Lotta Hare"));
+                    persons.push(vendorFactory.create("Seymoure Butts"));
+                
+                    for (var i = 0, len = persons.length; i < len; i++) {
+                        persons[i].say();
+                    }
+                
+                    // Display alert box from our log helper var
+                    log.show();
+                }
+                    </pre>
                 </div>
                 <button type="button" class="btn btn-success" onclick="run_AbstractFactory();return false;">Execute run_AbstractFactory()</button>
             </div>
 
-            
+
             <p></p>
             <br>
             <div class="alert alert-dismissible alert-primary">
-                <h4 class="alert-heading">JavaScript Code</h4>
+                <h4 class="alert-heading">Optimized JavaScript Code</h4>
                 <div>
                     <!--       Follow these links for the google prettyify information
       https://github.com/google/code-prettify
       This is the link to the styple for prettyify - We choose Dessert and put in prettify.css
       https://github.com/google/code-prettify/blob/master/styles/desert.css -->
                     <pre class="prettyprint">
-
-            var Patterns = {
-                namespace: function (name) {
-                    var parts = name.split(".");
-                    var ns = this;
-              
-                    for (var i = 0, len = parts.length; i < len; i++) {
-                        ns[parts[i]] = ns[parts[i]] || {};
-                        ns = ns[parts[i]];
+                //==============================================
+                // Abstract Factory
+                // JavaScript does not support class-based 
+                // inheritance therefore the abstract classes.
+                // we must ensure this consistency ourselves
+                // that properties and methods match!!!
+                //==============================================
+                // Create our namespace called "Patterns".
+                //
+                // This is based on the NameSpace Pattern
+                // and this block of code should be at the top
+                // of separate files to better manage codebase.
+                //
+                // More importantly creating a structure to 
+                // avoid name collisions globally under one varable
+                // called Patterns.
+                //----------------------------------------------
+                // See these links: 
+                // https://addyosmani.com/blog/essential-js-namespacing/
+                // https://www.safaribooksonline.com/library/view/learning-javascript-design/9781449334840/ch13s15.html
+                //==============================================
+                var Patterns = {
+                    namespace: function (name) {
+                        var parts = name.split(".");
+                        var ns = this;
+                
+                        for (var i = 0, len = parts.length; i < len; i++) {
+                            ns[parts[i]] = ns[parts[i]] || {};
+                            ns = ns[parts[i]];
+                        }
+                
+                        return ns;
                     }
-              
-                    return ns;
-                }
-              };
-              
-              Patterns.namespace("Classic").AbstractFactory = (function () {
-              
-                var Family = function (name) {
-                    this.name = name;
-                    this.say = function () {
-                        log.add("My family member name is " + name);
+                };
+                //==============================================
+                // Create the "Classic" namespace with the
+                // AbstractFactory namespace which is also in
+                // the abstractfactory.js
+                //==============================================
+                
+                // This is our AbstractFactory that will return two factories
+                // called FamilyFactory and PetFactory  :-)
+                Patterns.namespace("Classic").AbstractFactory = (function () {
+                    // Here are two entities 
+                    // If we could declare interfaces
+                    // it would be iMember or iFamilyMember  :-)
+                    //----------------------------------------------
+                    // Family Entity
+                    var Family = function (name) {
+                        this.name = name;
+                        this.say = function () {
+                            // add to log heler var that is
+                            // declared in the top of abstractfactory.js
+                            log.add("My family member name is " + name);
+                        };
                     };
-                };
-              
-                var Pet = function (name) {
-                    this.name = name;
-                    this.say = function () {
-                        log.add("I'm a pet named " + name);
+                    // Pet Entity
+                    var Pet = function (name) {
+                        this.name = name;
+                        this.say = function () {
+                            // add to log heler var that is
+                            // declared in the top of abstractfactory.jss
+                            log.add("I'm a pet named " + name);
+                        };
                     };
-                };
-              
-                var FamilyFactory = function () {
-                    this.create = function (name) {
-                        return new Family(name);
+                    // Here are two Factories: 
+                    // FamilyFactory and PetFactory.
+                    //----------------------------------------------
+                    // Family Factory
+                    var FamilyFactory = function () {
+                        this.create = function (name) {
+                            return new Family(name);
+                        };
                     };
-                };
-              
-                var PetFactory = function () {
-                    this.create = function (name) {
-                        return new Pet(name);
+                    // Pet Factory
+                    var PetFactory = function () {
+                        this.create = function (name) {
+                            return new Pet(name);
+                        };
                     };
-                };
-              
-                return {
-                    FamilyFactory: FamilyFactory,
-                    PetFactory: PetFactory
-                };
-              })();
-              
-             
-              function run_OptimizedAbstractFactory() {
-
-                var abstract = Patterns.Classic.AbstractFactory;
-              
-                var familyFactory = new abstract.FamilyFactory();
-                var petFactory = new abstract.PetFactory();
-              
-                var persons = [];
-              
-                persons.push(familyFactory.create("Ron Garlit"));
-                persons.push(familyFactory.create("Cindi Garlit"));
-                persons.push(familyFactory.create("Devin Garlit"));
-                persons.push(familyFactory.create("Melissa Garlit"));
-                persons.push(familyFactory.create("Mark Garlit"));
-              
-                persons.push(petFactory.create("Molly Garlit"));
-                persons.push(petFactory.create("Max Garlit"));
-                persons.push(petFactory.create("Jax Garlit"));
-              
-                for (var i = 0, len = persons.length; i < len; i++) {
-                    persons[i].say();
-              }
-              
-                log.show();
-              }          
+                
+                    return {
+                        FamilyFactory: FamilyFactory,
+                        PetFactory: PetFactory
+                    };
+                })();
+                
+                //==============================================
+                // run_OptimizedAbstractFactory()
+                //----------------------------------------------
+                // Demo use of EmployeeFactory & VendorFactory
+                // and log to alert box.
+                //==============================================
+                function run_OptimizedAbstractFactory() {
+                    // Load our Abstract Factory in the abstract var
+                    var abstract = Patterns.Classic.AbstractFactory;
+                    // Create a couple factories new'ing up the 
+                    // factory functions in our abstract of 
+                    // AbstractFactory Namespace.
+                    var familyFactory = new abstract.FamilyFactory();
+                    var petFactory = new abstract.PetFactory();
+                    // Array of matching entity object types
+                    // If we could declare interfaces
+                    // it would be the iPerson
+                    // and this woud be and array of 
+                    // Persons or People :-)
+                    var persons = [];
+                    // Load the array with objects created by factories
+                    persons.push(familyFactory.create("Ron Garlit"));
+                    persons.push(familyFactory.create("Cindi Garlit"));
+                    persons.push(familyFactory.create("Devin Garlit"));
+                    persons.push(familyFactory.create("Melissa Garlit"));
+                    persons.push(familyFactory.create("Mark Garlit"));
+                
+                    persons.push(petFactory.create("Molly Garlit"));
+                    persons.push(petFactory.create("Max Garlit"));
+                    persons.push(petFactory.create("Jax Garlit"));
+                
+                    for (var i = 0, len = persons.length; i < len; i++) {
+                        persons[i].say();
+                    }
+                    // Display alert box from our log helper var
+                    // declared in the top of abstractfactory.js                    
+                    log.show();
+                }  
         </pre>
                 </div>
                 <button type="button" class="btn btn-success" onclick="run_OptimizedAbstractFactory();return false;">Execute run_OptimizedAbstractFactory()</button>
