@@ -11,7 +11,9 @@ app.set('view engine', 'ejs');
 // In the app.js file, define the static folder paths so that it gets resolved in the node application
 app.use('/node_modules',  express.static(__dirname + '/node_modules'));
 app.use(express.static('public'));
-
+//======================================================
+// Open the Server
+//======================================================
 app.listen(port, function(err) {
   if (err) {
     console.log(err);
@@ -23,22 +25,26 @@ app.listen(port, function(err) {
   }
 });
 
-//hardcoded routes
-// ========================================
-// JavaScript exposed to all pages
-/* app.get('/scripts.js', function(req, res) {
-  res.sendFile(path.join(__dirname, '../src/scripts.js'));
-}); */
-
-//Root - Home Page
-// app.get('/', function(req, res) {
-//   res.sendFile(path.join(__dirname, '../src/home.html'));
-// });
-
+//======================================================
+// Root - Home Page
+//======================================================
 app.get('/', (req, res) => {
   // render `home.ejs` with the list of posts
   res.render('home');
 });
+//======================================================
+// About
+//======================================================
+app.get('/about', (req, res) => {
+  // render `home.ejs` with the list of posts
+  res.render('about');
+});
+
+app.get('/pageunderconstruction', (req, res) => {
+  // render `home.ejs` with the list of posts
+  res.render('pageunderconstruction');
+});
+//======================================================
 //======================================================
 // Design Pattern Routes
 //-------------------------
@@ -94,6 +100,54 @@ app.get('/Flyweight', function(req, res) {
 
 app.get('/Proxy', function(req, res) {
   res.render('Proxy');
+});
+//======================================================
+// Design Pattern Routes
+//-------------------------
+// Behavioral Patterns
+//======================================================
+app.get('/Chain', function(req, res) {
+  res.render('Chain');
+});
+
+app.get('/Command', function(req, res) {
+  res.render('Command');
+});
+
+app.get('/Interpreter', function(req, res) {
+  res.render('Interpreter');
+});
+
+app.get('/Iterator', function(req, res) {
+  res.render('Iterator');
+});
+
+app.get('/Mediator', function(req, res) {
+  res.render('Mediator');
+});
+
+app.get('/Memento', function(req, res) {
+  res.render('Memento');
+});
+
+app.get('/Observer', function(req, res) {
+  res.render('Observer');
+});
+
+app.get('/State', function(req, res) {
+  res.render('State');
+});
+
+app.get('/Strategy', function(req, res) {
+  res.render('Strategy');
+});
+
+app.get('/Template', function(req, res) {
+  res.render('Template');
+});
+
+app.get('/Visitor', function(req, res) {
+  res.render('Visitor');
 });
 //======================================================
 // Bootstrap Theme Routes
@@ -186,18 +240,6 @@ app.get('/yeti', function(req, res) {
   res.render('yeti');
 });
 
-//======================================================
-// About
-//======================================================
-app.get('/about', (req, res) => {
-  // render `home.ejs` with the list of posts
-  res.render('about');
-});
-
-app.get('/pageunderconstruction', (req, res) => {
-  // render `home.ejs` with the list of posts
-  res.render('pageunderconstruction');
-});
 //======================================================
 
 
