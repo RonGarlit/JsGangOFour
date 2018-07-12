@@ -26,13 +26,13 @@ var log = (function () {
 // Here are two Factories: 
 // EmployeeFactory and VendorFactory.
 //----------------------------------------------
-// Employee Factory
+// Employee Factory - Created using named function
 function EmployeeFactory() {
     this.create = function (name) {
         return new Employee(name);
     };
 }
-// Employee Entity  
+// Employee Object  
 // If we could declare interfaces
 // it would be the iPerson
 function Employee(name) {
@@ -49,7 +49,7 @@ function VendorFactory() {
         return new Vendor(name);
     };
 }
-// Vendor Entity
+// Vendor Object
 // If we could declare interfaces
 // it would be the iPerson
 function Vendor(name) {
@@ -145,11 +145,11 @@ var Patterns = {
 // This is our AbstractFactory that will return two factories
 // called FamilyFactory and PetFactory  :-)
 Patterns.namespace("Classic").AbstractFactory = (function () {
-    // Here are two entities 
-    // If we could declare interfaces
-    // it would be iMember or iFamilyMember  :-)
+    // Here are two entity objects 
+    // If we could declare interfaces and abstract classes
+    // it would be iMember or iFamilyMember and so on.
     //----------------------------------------------
-    // Family Entity
+    // Family Function Object - Created using anonymous constructor function
     var Family = function (name) {
         this.name = name;
         this.say = function () {
@@ -158,7 +158,7 @@ Patterns.namespace("Classic").AbstractFactory = (function () {
             log.add("My family member name is " + name);
         };
     };
-    // Pet Entity
+    // Pet Function Object - Created using anonymous constructor function
     var Pet = function (name) {
         this.name = name;
         this.say = function () {
@@ -169,14 +169,18 @@ Patterns.namespace("Classic").AbstractFactory = (function () {
     };
     // Here are two Factories: 
     // FamilyFactory and PetFactory.
+    // This uses our resuable objects as a base to 
+    // create other objects.
+    // Again we use the anonymous constructor function
+    // in creating out factory object simulating a OOP Class
     //----------------------------------------------
-    // Family Factory
+    // Family Factory Function Object - Created using anonymous constructor function
     var FamilyFactory = function () {
         this.create = function (name) {
             return new Family(name);
         };
     };
-    // Pet Factory
+    // Pet Factory Function Object - Created using anonymous constructor function
     var PetFactory = function () {
         this.create = function (name) {
             return new Pet(name);
