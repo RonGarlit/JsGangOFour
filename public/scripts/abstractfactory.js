@@ -105,25 +105,28 @@ function run_AbstractFactory() {
 //==============================================
 // Abstract Factory
 // JavaScript does not support class-based 
-// inheritance therefore the abstract classes.
+// inheritance or abstract classes.
 // we must ensure this consistency ourselves
 // that properties and methods match!!!
 //==============================================
-// Create our namespace called "Patterns".
+// Create our namespace called "JsGangOfFour".
 //
-// This is based on the NameSpace Pattern
-// and this block of code should be at the top
-// of separate files to better manage codebase.
+// This is based on the NameSpace Pattern and 
+// Module Pattern. This block of code should 
+// be at the top of separate files to better 
+// manage codebase.
 //
 // More importantly creating a structure to 
 // avoid name collisions globally under one varable
-// called Patterns.
+// called JsGangOfFour.
 //----------------------------------------------
 // See these links: 
 // https://addyosmani.com/blog/essential-js-namespacing/
 // https://www.safaribooksonline.com/library/view/learning-javascript-design/9781449334840/ch13s15.html
+// https://medium.freecodecamp.org/javascript-modules-a-beginner-s-guide-783f7d7a5fcc
+// http://www.adequatelygood.com/JavaScript-Module-Pattern-In-Depth.html
 //==============================================
-var Patterns = {
+var JsGangOfFour = {
     namespace: function (name) {
         var parts = name.split(".");
         var ns = this;
@@ -144,7 +147,7 @@ var Patterns = {
 
 // This is our AbstractFactory that will return two factories
 // called FamilyFactory and PetFactory  :-)
-Patterns.namespace("Classic").AbstractFactory = (function () {
+JsGangOfFour.namespace("Classic").AbstractFactory = (function () {
     // Here are two entity objects 
     // If we could declare interfaces and abstract classes
     // it would be iMember or iFamilyMember and so on.
@@ -201,7 +204,7 @@ Patterns.namespace("Classic").AbstractFactory = (function () {
 //==============================================
 function run_OptimizedAbstractFactory() {
     // Load our Abstract Factory in the abstract var
-    var abstract = Patterns.Classic.AbstractFactory;
+    var abstract = JsGangOfFour.Classic.AbstractFactory;
     // Create a couple factories new'ing up the 
     // factory functions in our abstract of 
     // AbstractFactory Namespace.

@@ -11,7 +11,7 @@
         <!-- PrettyPrints CSS and JS to handle code blocks in HTML code -->
         <%- include('partials/PrettyPrint') %>
 
-            <script src="scripts/abstractfactory.js"></script>
+            <script src="scripts/builder.js"></script>
 
 </head>
 
@@ -20,13 +20,15 @@
     <%- include('partials/MainNavBar') %>
         <!-- End of Nav Section -->
         <div class="container">
-            <h2 title="ReplaceMe">ReplaceMe</h2>
-            <p>ReplaceMe
+            <h2 title="ReplaceMe">Builder</h2>
+            <p>	Separates object construction from its representation
             </p>
 
-            <p>ReplaceMe </p>
+            <p>The Builder pattern allows a client to construct a complex object by specifying the type and content only. Construction details are hidden entirely.</p>
 
-            <p>ReplaceMe </p>
+            <p>In object-oriented programming languages like C# an AbstractBuilder is not used because JavaScript does not support abstract classes.</p>
+
+            <p>However, the individual builders must implement the same multistep interface for the Director (See code below) to be able to step through the assembly process. </p>
 
             <div class="card text-white bg-primary mb-3" style="max-width: 25rem;">
                 <div class="card-body">
@@ -36,11 +38,12 @@
                     </p>
                 </div>
             </div>
+            <p>JavaScript does not support class-based inheritance therefore the abstract classes as depicted in the diagram
+                are not used in the JavaScript sample code. </p>
 
-            <p>ReplaceMe</p>
-
-            <p>ReplaceMe </p>
-
+            <p>Abstract classes and interfaces enforce consistent interfaces in derived classes. In JavaScript we must ensure
+                this consistency ourselves by making sure that each 'Concrete' object has the same interface definition (i.e.
+                properties and methods) as the others. </p>
 
             <p></p>
             <br>
@@ -52,66 +55,128 @@ https://github.com/google/code-prettify
 This is the link to the styple for prettyify - We choose Dessert and put in prettify.css
 https://github.com/google/code-prettify/blob/master/styles/desert.css -->
                     <pre class="prettyprint">
-  
-  //REPLACE THIS WITH CODE FROM JS FILE
-  function Employee(name) {
-      this.name = name;
-      this.say = function () {
-          log.add("I am employee " + name);
-      };
-  }
-  
-  function EmployeeFactory() {
-      this.create = function(name) {
-          return new Employee(name);
-      };
-  }
-
-  function Vendor(name) {
-      this.name = name;
-      this.say = function () {
-          log.add("I am vendor " + name);
-      };
-  }
-
-  function VendorFactory() {
-      this.create = function(name) {
-          return new Vendor(name);
-      };
-  }
-
-  // log helper
-  var log = (function () {
-      var log = "";
-      return {
-          add: function (msg) { log += msg + "\n"; },
-          show: function () { alert(log); log = ""; }
-      }
-  })();
-
-
-  function run_AbstractFactory() {
-
-      var persons = [];
-    
-      var employeeFactory = new EmployeeFactory();
-      var vendorFactory = new VendorFactory();
-    
-      persons.push(employeeFactory.create("Joan DiSilva"));
-      persons.push(employeeFactory.create("Tim O'Neill"));
-    
-      persons.push(vendorFactory.create("Gerald Watson"));
-      persons.push(vendorFactory.create("Nicole McNight"));
-    
-      for (var i = 0, len = persons.length; i < len; i++) {
-          persons[i].say();
-      }
-    
-      log.show();
-    }
-  </pre>
+                    //==============================================
+                    // log helper
+                    // Used to add() to var log
+                    // then display in alert box
+                    // via show() method
+                    //==============================================
+                    var log = (function () {
+                        var log = "";
+                        return {
+                            add: function (msg) { log += msg + "\n"; },
+                            show: function () { alert(log); log = ""; }
+                        }
+                    })();
+                    
+                        //==============================================
+                        // Builder
+                        // JavaScript does not support class-based 
+                        // inheritance therefore the abstract classes.
+                        // we must ensure this consistency ourselves
+                        // that properties and methods match!!!
+                        //----------------------------------------------
+                        // Note here again in OOP we would define a interface
+                        // or multiple interfaces to define the multiple steps
+                        // that the builder objects need.    
+                        //==============================================
+                        
+                        
+                        // Here are three builders under control of a director: 
+                        // WidgetBuilder, GadgetBuilder and ThingamajigBuilder.
+                        //----------------------------------------------
+                        // Manufacturing - Is our "Director" of construction using 
+                        // the builders  - Created using named function
+                        // The construct function accepts an instance of a "Builder" 
+                        // to build the appropriate object. Say like iBuilder
+                        function Manufacturing() {
+                            this.construct = function (builder) {
+                                builder.step1();
+                                builder.step2();
+                                return builder.get();
+                            }
+                        }
+                        // Widget Builder
+                        function WidgetBuilder() {
+                            this.widget = null;
+                            this.step1 = function () {
+                                this.widget = new Widget();
+                            };
+                            this.step2 = function () {
+                                this.widget.addParts();
+                            };
+                            this.get = function () {
+                                return this.widget;
+                            };
+                        }
+                        // Gadget Builder
+                        function GadgetBuilder() {
+                            this.gadget = null;
+                            this.step1 = function () {
+                                this.gadget = new Gadget();
+                            };
+                            this.step2 = function () {
+                                this.gadget.addParts();
+                            };
+                            this.get = function () {
+                                return this.gadget;
+                            };
+                        }
+                        // Thingamajig Builder
+                        function ThingamajigBuilder() {
+                            this.thingamajig = null;
+                            this.step1 = function () {
+                                this.thingamajig = new Thingamajig();
+                            };
+                            this.step2 = function () {
+                                this.thingamajig.addParts();
+                            };
+                            this.get = function () {
+                                return this.thingamajig;
+                            };
+                        }
+                        //=============================================
+                        // Product objects we are going to build
+                        //=============================================        
+                        // Widget Object
+                        // If we could declare interfaces
+                        // it be based on say the iThingamabob interface
+                        function Widget() {
+                            this.buttons = 0;
+                            this.addParts = function () {
+                                this.buttons = 4;
+                            };
+                            this.say = function () {
+                                log.add("I am a " + this.buttons + "-button widget");
+                            };
+                        }
+                        // Gadget Object
+                        // If we could declare interfaces
+                        // it be based on say the iThingamabob interface
+                        function Gadget() {
+                            this.buttons = 0;
+                            this.addParts = function () {
+                                this.buttons = 2;
+                            };
+                            this.say = function () {
+                                log.add("I am a " + this.buttons + "-button gadget");
+                            };
+                        }
+                        // Thingamajig Object
+                        // If we could declare interfaces
+                        // it be based on say the iThingamabob interface
+                        function Thingamajig() {
+                            this.buttons = 0;
+                            this.addParts = function () {
+                                this.buttons = 8;
+                            };
+                            this.say = function () {
+                                log.add("I am a " + this.buttons + "-button thingamajig");
+                            };
+                        }
+                    </pre>
                 </div>
-                <button type="button" class="btn btn-success" onclick="run_AbstractFactory();return false;">Execute run_AbstractFactory()</button>
+                <button type="button" class="btn btn-success" onclick="run_Builder();return false;">Execute run_Builder()</button>
             </div>
 
 
@@ -125,84 +190,203 @@ https://github.com/google/code-prettify
 This is the link to the styple for prettyify - We choose Dessert and put in prettify.css
 https://github.com/google/code-prettify/blob/master/styles/desert.css -->
                     <pre class="prettyprint">
-      //REPLACE THIS WITH CODE FROM JS FILE
-      var Patterns = {
-          namespace: function (name) {
-              var parts = name.split(".");
-              var ns = this;
-        
-              for (var i = 0, len = parts.length; i < len; i++) {
-                  ns[parts[i]] = ns[parts[i]] || {};
-                  ns = ns[parts[i]];
-              }
-        
-              return ns;
-          }
-        };
-        
-        Patterns.namespace("Classic").AbstractFactory = (function () {
-        
-          var Family = function (name) {
-              this.name = name;
-              this.say = function () {
-                  log.add("My family member name is " + name);
-              };
-          };
-        
-          var Pet = function (name) {
-              this.name = name;
-              this.say = function () {
-                  log.add("I'm a pet named " + name);
-              };
-          };
-        
-          var FamilyFactory = function () {
-              this.create = function (name) {
-                  return new Family(name);
-              };
-          };
-        
-          var PetFactory = function () {
-              this.create = function (name) {
-                  return new Pet(name);
-              };
-          };
-        
-          return {
-              FamilyFactory: FamilyFactory,
-              PetFactory: PetFactory
-          };
-        })();
-        
-       
-        function run_OptimizedAbstractFactory() {
-
-          var abstract = Patterns.Classic.AbstractFactory;
-        
-          var familyFactory = new abstract.FamilyFactory();
-          var petFactory = new abstract.PetFactory();
-        
-          var persons = [];
-        
-          persons.push(familyFactory.create("Ron Garlit"));
-          persons.push(familyFactory.create("Cindi Garlit"));
-          persons.push(familyFactory.create("Devin Garlit"));
-          persons.push(familyFactory.create("Melissa Garlit"));
-          persons.push(familyFactory.create("Mark Garlit"));
-        
-          persons.push(petFactory.create("Molly Garlit"));
-          persons.push(petFactory.create("Max Garlit"));
-          persons.push(petFactory.create("Jax Garlit"));
-        
-          for (var i = 0, len = persons.length; i < len; i++) {
-              persons[i].say();
-        }
-        
-          log.show();
-        }          
-  </pre>
+                    //==============================================
+                    // Builder
+                    // JavaScript does not support class-based 
+                    // inheritance therefore the abstract classes.
+                    // we must ensure this consistency ourselves
+                    // that properties and methods match!!!
+                    //----------------------------------------------
+                    // Note here again in OOP we would define a interface
+                    // or multiple interfaces to define the multiple steps
+                    // that the builder objects need.    
+                    //==============================================
+                    // Create our namespace called "JsGangOfFour".
+                    //
+                    // This is based on the NameSpace Pattern and 
+                    // Module Pattern. This block of code should 
+                    // be at the top of separate files to better 
+                    // manage codebase.
+                    //
+                    // More importantly creating a structure to 
+                    // avoid name collisions globally under one varable
+                    // called JsGangOfFour.
+                    //----------------------------------------------
+                    // See these links: 
+                    // https://addyosmani.com/blog/essential-js-namespacing/
+                    // https://www.safaribooksonline.com/library/view/learning-javascript-design/9781449334840/ch13s15.html
+                    // https://medium.freecodecamp.org/javascript-modules-a-beginner-s-guide-783f7d7a5fcc
+                    // http://www.adequatelygood.com/JavaScript-Module-Pattern-In-Depth.html
+                    //==============================================
+                    var JsGangOfFour = {
+                        // Look at links above for details on NameSpace pattern
+                        // and this function and popular other methods to manage it.
+                        namespace: function (name) {
+                            var parts = name.split(".");
+                            var ns = this;
+                    
+                            for (var i = 0, len = parts.length; i < len; i++) {
+                                ns[parts[i]] = ns[parts[i]] || {};
+                                ns = ns[parts[i]];
+                            }
+                    
+                            return ns;
+                        }
+                    };
+                    //==============================================
+                    // Create the "Classic" namespace with the
+                    // AbstractFactory namespace which is also in
+                    // the builder.js
+                    //==============================================
+                    
+                    // Add our Builder Module on the "Classic" namespace
+                    // of JsGangOfFour
+                    JsGangOfFour.namespace("Classic").Builder = (function () {
+                        //==============================================    
+                        // Here are three builders under control of a director: 
+                        // WidgetBuilder, GadgetBuilder and ThingamajigBuilder.
+                        //----------------------------------------------
+                        // Manufacturing - Is our "Director" of construction using 
+                        // the builders  - Created using named function
+                        // The construct function accepts an instance of a "Builder" 
+                        // to build the appropriate object. Say like iBuilder
+                        //==============================================  
+                    
+                        //==============================================  
+                        // This is the private area of the module.
+                        // You define variables and functions which represent the 
+                        // module's private state. It is off-limits to the outside world. 
+                        //
+                        // This is courtesy of the closure created by the function 
+                        // in which the private state is maintained.
+                        //==============================================     
+                        var Manufacturing = function () {
+                            this.construct = function (builder) {
+                                builder.step1();
+                                builder.step2();
+                                return builder.get();
+                            }
+                        };
+                        // WidgetBuilder Builder- Created using anonymous constructor function
+                        var WidgetBuilder = function () {
+                            this.widget = null;
+                            this.step1 = function () {
+                                this.widget = new Widget();
+                            };
+                            this.step2 = function () {
+                                this.widget.addParts();
+                            };
+                            this.get = function () {
+                                return this.widget;
+                            }
+                        };
+                        // GadgetBuilder Builder- Created using anonymous constructor function
+                        var GadgetBuilder = function () {
+                            this.gadget = null;
+                            this.step1 = function () {
+                                this.gadget = new Gadget();
+                            };
+                            this.step2 = function () {
+                                this.gadget.addParts();
+                            };
+                            this.get = function () {
+                                return this.gadget;
+                            };
+                        };
+                    
+                        // Thingamajig Builder- Created using anonymous constructor function
+                        var ThingamajigBuilder = function () {
+                            this.thingamajig = null;
+                            this.step1 = function () {
+                                this.thingamajig = new Thingamajig();
+                            };
+                            this.step2 = function () {
+                                this.thingamajig.addParts();
+                            };
+                            this.get = function () {
+                                return this.thingamajig;
+                            };
+                        }
+                    
+                        //=============================================
+                        // Product objects we are going to build
+                        //=============================================        
+                        // Widget Object- Created using anonymous constructor function
+                        // If we could declare interfaces
+                        // it be based on say the iThingamabob interface
+                        var Widget = function () {
+                            this.buttons = 0;
+                            this.addParts = function () {
+                                this.buttons = 4;
+                            };
+                            this.say = function () {
+                                log.add("I am a " + this.buttons + "-button widget");
+                            };
+                        };
+                        // Gadget Object- Created using anonymous constructor function
+                        // If we could declare interfaces
+                        // it be based on say the iThingamabob interface
+                        var Gadget = function () {
+                            this.buttons = 0;
+                            this.addParts = function () {
+                                this.buttons = 2;
+                            };
+                            this.say = function () {
+                                log.add("I am a " + this.buttons + "-button gadget");
+                            };
+                        };
+                        // Gadget Object- Created using anonymous constructor function
+                        // If we could declare interfaces
+                        // it be based on say the iThingamabob interface 
+                        var Thingamajig = function () {
+                            this.buttons = 0;
+                            this.addParts = function () {
+                                this.buttons = 8;
+                            };
+                            this.say = function () {
+                                log.add("I am a " + this.buttons + "-button thingamajig");
+                            };
+                        };
+                        //==============================================  
+                        // The public area is the returned object literal. It represents 
+                        // the public interface (properties and methods) of the module 
+                        // which is accessible from anywhere in the program.
+                        //==============================================  
+                        return {
+                            Manufacturing: Manufacturing,
+                            WidgetBuilder: WidgetBuilder,
+                            GadgetBuilder: GadgetBuilder,
+                            ThingamajigBuilder: ThingamajigBuilder
+                    
+                        };
+                    })();
+                    
+                    //==============================================
+                    // run_OptimizedBuilder()
+                    //==============================================
+                    function run_OptimizedBuilder() {
+                        // Make a shorter verson of our namespace of Builder Module
+                        var builder = JsGangOfFour.Classic.Builder;
+                        // Create concrete instance of our director
+                        var manufacturing = new builder.Manufacturing();
+                        // create concrete builder objects
+                        var widgetBuilder = new builder.WidgetBuilder();
+                        var gadgetBuilder = new builder.GadgetBuilder();
+                        var thingamagigBuilder = new builder.ThingamajigBuilder();
+                        // Manufacture (create) the products
+                        var widget = manufacturing.construct(widgetBuilder);
+                        var gadget = manufacturing.construct(gadgetBuilder);
+                        var thingamagig = manufacturing.construct(thingamagigBuilder);
+                        // Use the products
+                        thingamagig.say();
+                        widget.say();
+                        gadget.say();
+                    
+                        log.show();
+                    }       
+                    </pre>
                 </div>
-                <button type="button" class="btn btn-success" onclick="run_OptimizedAbstractFactory();return false;">Execute run_OptimizedAbstractFactory()</button>
+                <button type="button" class="btn btn-success" onclick="run_OptimizedBuilder();return false;">Execute run_OptimizedBuilder()</button>
             </div>
 
         </div>
