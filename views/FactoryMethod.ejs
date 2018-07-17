@@ -131,14 +131,14 @@ https://github.com/google/code-prettify/blob/master/styles/desert.css -->
                     }
                     </pre>
                 </div>
-                <button type="button" class="btn btn-success" onclick="run_FactoryMethod();return false;">Execute run_AbstractFactory()</button>
+                <button type="button" class="btn btn-success" onclick="run_FactoryMethod();return false;">Execute run_FactoryMethod()</button>
             </div>
 
 
             <p></p>
             <br>
             <div class="alert alert-dismissible alert-primary">
-                <h4 class="alert-heading">JavaScript Code</h4>
+                <h4 class="alert-heading">Optimized JavaScript Code</h4>
                 <div>
                     <!--       Follow these links for the google prettyify information
 https://github.com/google/code-prettify
@@ -180,13 +180,8 @@ https://github.com/google/code-prettify/blob/master/styles/desert.css -->
                     
                     JsGangOfFour.namespace("Classic").FactoryMethod = (function () {
                         //==============================================    
-                        // Here are three builders under control of a director: 
-                        // WidgetBuilder, GadgetBuilder and ThingamajigBuilder.
-                        //----------------------------------------------
-                        // Manufacturing - Is our "Director" of construction using 
-                        // the builders  - Created using named function
-                        // The construct function accepts an instance of a "Builder" 
-                        // to build the appropriate object. Say like iBuilder
+                        // Here our FactoryMethod module has the createVehicle
+                        // method which we again created with an anonymous function 
                         //==============================================  
                         var createVehicle = function (type) {
                             var employee;
@@ -255,7 +250,7 @@ https://github.com/google/code-prettify/blob/master/styles/desert.css -->
                     }
                     </pre>
                 </div>
-                <button type="button" class="btn btn-success" onclick="run_OptimizedFactoryMethod();return false;">Execute run_OptimizedAbstractFactory()</button>
+                <button type="button" class="btn btn-success" onclick="run_OptimizedFactoryMethod();return false;">Execute run_OptimizedFactoryMethod()</button>
             </div>
 
         </div>

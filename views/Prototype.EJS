@@ -11,7 +11,7 @@
         <!-- PrettyPrints CSS and JS to handle code blocks in HTML code -->
         <%- include('partials/PrettyPrint') %>
 
-            <script src="scripts/abstractfactory.js"></script>
+            <script src="scripts/prototype.js"></script>
 
 </head>
 
@@ -21,8 +21,9 @@
         <!-- End of Nav Section -->
         <br>
         <div class="container">
-            <h2 title="ReplaceMe">ReplaceMe</h2>
-            <p>ReplaceMe
+            <h2 title="Prototype">Prototype</h2>
+            <p>Intent according to the GoF: "SSpecify the kinds of objects to create using a prototypical instance, and create
+                new objects by copying this prototype."
             </p>
 
             <p>ReplaceMe </p>
@@ -38,9 +39,13 @@
                 </div>
             </div>
 
-            <p>ReplaceMe</p>
+            <p>Done the "javaScript way" we have a CustomerPrototype object that clones objects given a prototype object.</p>
 
-            <p>ReplaceMe </p>
+            <p>The constructor function accepts a prototype of type Customer. It calls the clone method which will generate
+                a new Customer object with its property values initialized with the prototype values.</p>
+
+            <p>This is classical implementation of the Prototype pattern. JavaScript can do this better using its built-in prototype
+                facility in the JavaScript optimized code below.</p>
 
 
             <p></p>
@@ -53,157 +58,173 @@ https://github.com/google/code-prettify
 This is the link to the styple for prettyify - We choose Dessert and put in prettify.css
 https://github.com/google/code-prettify/blob/master/styles/desert.css -->
                     <pre class="prettyprint">
-  
-  //REPLACE THIS WITH CODE FROM JS FILE
-  function Employee(name) {
-      this.name = name;
-      this.say = function () {
-          log.add("I am employee " + name);
-      };
-  }
-  
-  function EmployeeFactory() {
-      this.create = function(name) {
-          return new Employee(name);
-      };
-  }
-
-  function Vendor(name) {
-      this.name = name;
-      this.say = function () {
-          log.add("I am vendor " + name);
-      };
-  }
-
-  function VendorFactory() {
-      this.create = function(name) {
-          return new Vendor(name);
-      };
-  }
-
-  // log helper
-  var log = (function () {
-      var log = "";
-      return {
-          add: function (msg) { log += msg + "\n"; },
-          show: function () { alert(log); log = ""; }
-      }
-  })();
-
-
-  function run_AbstractFactory() {
-
-      var persons = [];
-    
-      var employeeFactory = new EmployeeFactory();
-      var vendorFactory = new VendorFactory();
-    
-      persons.push(employeeFactory.create("Joan DiSilva"));
-      persons.push(employeeFactory.create("Tim O'Neill"));
-    
-      persons.push(vendorFactory.create("Gerald Watson"));
-      persons.push(vendorFactory.create("Nicole McNight"));
-    
-      for (var i = 0, len = persons.length; i < len; i++) {
-          persons[i].say();
-      }
-    
-      log.show();
-    }
-  </pre>
+                    // Customer ojbect to clone
+                    function Customer(first, last, status) {
+                    
+                        this.first = first;
+                        this.last = last;
+                        this.status = status;
+                    
+                        this.say = function () {
+                            alert("name: " + this.first + " " + this.last +
+                                ", status: " + this.status);
+                        };
+                    }
+                    // Classic JavaScript Proto way
+                    function CustomerPrototype(proto) {
+                        this.proto = proto;
+                    
+                        this.clone = function () {
+                            var customer = new Customer();
+                    
+                            customer.first = proto.first;
+                            customer.last = proto.last;
+                            customer.status = proto.status;
+                    
+                            return customer;
+                        };
+                    }
+                    //==============================================    
+                    // run_Prototype() 
+                    //============================================== 
+                    function run_Prototype() {
+                    
+                        var proto = new Customer("n/a", "n/a", "pending");
+                        var prototype = new CustomerPrototype(proto);
+                    
+                        var customer = prototype.clone();
+                        customer.say();
+                    }
+                    </pre>
                 </div>
-                <button type="button" class="btn btn-success" onclick="run_AbstractFactory();return false;">Execute run_AbstractFactory()</button>
+                <button type="button" class="btn btn-success" onclick="run_Prototype();return false;">Execute run_Prototype()</button>
             </div>
 
 
             <p></p>
             <br>
+            <p>The Namespace pattern is applied to keep the code out of the global namespace. Our namespace is named JsGangOfFour.Classic.
+                </p>
+
+            <p>A Revealing Module named Prototype encapsulates all of Prototype's functions. It exposes the Customer constructor
+                function and by association its prototype.</p>
+
+            <p>In the run function, first a default customer is created in which all properties have default values. </p>
+
+            <p>Then the kevin customer is created by providing two property values: Kevin and Summer as "first" and "last" name
+                respectively.</p>
+
+            <p>In addition we create the Ron customer by providing three property values for "first", "last" and "status" respectively.</p>
+
+            <p>Notice that when overriding the defaults, we are not changing the prototype values. Instead, two (and three)
+                new properties are added to both new Customer objects. These new property values hide the prototype values.</p>
+
+            <p>The JsGangOfFour object contains the namespace function which constructs namespaces non-destructively, that is,
+                if a name already exists it won't overwrite it.</p>
+            <p></p>
+            <br>
             <div class="alert alert-dismissible alert-primary">
-                <h4 class="alert-heading">JavaScript Code</h4>
+                <h4 class="alert-heading">Optimized JavaScript Code</h4>
                 <div>
                     <!--       Follow these links for the google prettyify information
 https://github.com/google/code-prettify
 This is the link to the styple for prettyify - We choose Dessert and put in prettify.css
 https://github.com/google/code-prettify/blob/master/styles/desert.css -->
                     <pre class="prettyprint">
-      //REPLACE THIS WITH CODE FROM JS FILE
-      var Patterns = {
-          namespace: function (name) {
-              var parts = name.split(".");
-              var ns = this;
-        
-              for (var i = 0, len = parts.length; i < len; i++) {
-                  ns[parts[i]] = ns[parts[i]] || {};
-                  ns = ns[parts[i]];
-              }
-        
-              return ns;
-          }
-        };
-        
-        Patterns.namespace("Classic").AbstractFactory = (function () {
-        
-          var Family = function (name) {
-              this.name = name;
-              this.say = function () {
-                  log.add("My family member name is " + name);
-              };
-          };
-        
-          var Pet = function (name) {
-              this.name = name;
-              this.say = function () {
-                  log.add("I'm a pet named " + name);
-              };
-          };
-        
-          var FamilyFactory = function () {
-              this.create = function (name) {
-                  return new Family(name);
-              };
-          };
-        
-          var PetFactory = function () {
-              this.create = function (name) {
-                  return new Pet(name);
-              };
-          };
-        
-          return {
-              FamilyFactory: FamilyFactory,
-              PetFactory: PetFactory
-          };
-        })();
-        
-       
-        function run_OptimizedAbstractFactory() {
-
-          var abstract = Patterns.Classic.AbstractFactory;
-        
-          var familyFactory = new abstract.FamilyFactory();
-          var petFactory = new abstract.PetFactory();
-        
-          var persons = [];
-        
-          persons.push(familyFactory.create("Ron Garlit"));
-          persons.push(familyFactory.create("Cindi Garlit"));
-          persons.push(familyFactory.create("Devin Garlit"));
-          persons.push(familyFactory.create("Melissa Garlit"));
-          persons.push(familyFactory.create("Mark Garlit"));
-        
-          persons.push(petFactory.create("Molly Garlit"));
-          persons.push(petFactory.create("Max Garlit"));
-          persons.push(petFactory.create("Jax Garlit"));
-        
-          for (var i = 0, len = persons.length; i < len; i++) {
-              persons[i].say();
-        }
-        
-          log.show();
-        }          
-  </pre>
+                    //==============================================
+                    // Prototype
+                    // JavaScript does not support class-based 
+                    // inheritance therefore the abstract classes.
+                    // we must ensure this consistency ourselves
+                    // that properties and methods match!!!
+                    //----------------------------------------------
+                    // Note here again in OOP we would define a interface
+                    // or abstract classes.   
+                    //==============================================
+                    
+                    //==============================================
+                    // Create the "Classic" namespace with the
+                    // Prototype namespace which is also in
+                    // the prototype.js
+                    //==============================================
+                    // The Namespace pattern is applied to keep the code 
+                    // out of the global namespace.
+                    //==============================================
+                    
+                    // Add our Prototype Module on the "Classic" on 
+                    // main namespace called JsGangOfFour
+                    var JsGangOfFour = {
+                        namespace: function (name) {
+                            var parts = name.split(".");
+                            var ns = this;
+                    
+                            for (var i = 0, len = parts.length; i < len; i++) {
+                                ns[parts[i]] = ns[parts[i]] || {};
+                                ns = ns[parts[i]];
+                            }
+                    
+                            return ns;
+                        }
+                    };
+                    //==============================================    
+                    // Here our Prototype module is added to namespace
+                    //============================================== 
+                    JsGangOfFour.namespace("Classic").Prototype = (function () {
+                        //==============================================    
+                        // Revealing Module named Prototype encapsulates 
+                        // all of Prototype's functions.
+                        // Note the use of "this"
+                        //==============================================  
+                        function Customer(first, last, status) {
+                    
+                            if (first) this.first = first;
+                            if (last) this.last = last;
+                            if (status) this.status = status;
+                        }
+                    
+                        Customer.prototype = {
+                            say: function () {
+                                log.add("name: " + this.first + " " + this.last +
+                                    ", status: " + this.status);
+                            },
+                            first: "n/a",
+                            last: "n/a",
+                            status: "pending"
+                        };
+                    
+                        return { Customer: Customer };
+                    
+                    })();
+                    //==============================================    
+                    // run_OptimizedPrototype()
+                    //----------------------------------------------
+                    // See lenghtly explaination on webpage
+                    //============================================== 
+                    function run_OptimizedPrototype() {
+                        var proto = JsGangOfFour.Classic.Prototype;
+                        // add to log heler var
+                        log.add("This is customer prototype with no parameters ");
+                        // create customer as just prototype for comparison
+                        var customer = new proto.Customer();
+                        customer.say();
+                        // add to log heler var
+                        log.add("------------------------------------------");
+                        log.add("Created a Kevin object with Customer prototype ");
+                        // create kevin with prototype
+                        var kevin = new proto.Customer("Kevin", "Summer");
+                        kevin.say();
+                        // add to log heler var
+                        log.add("------------------------------------------");
+                        log.add("Created a Ron object with Customer prototype ");
+                        // create ron with prototype
+                        var ron = new proto.Customer("Ron", "Garlit", "Really cool guy!");
+                        ron.say();
+                        // Display alert box from our log helper var
+                        log.show();
+                    }
+                    </pre>
                 </div>
-                <button type="button" class="btn btn-success" onclick="run_OptimizedAbstractFactory();return false;">Execute run_OptimizedAbstractFactory()</button>
+                <button type="button" class="btn btn-success" onclick="run_OptimizedPrototype();return false;">Execute run_OptimizedPrototype()</button>
             </div>
 
         </div>

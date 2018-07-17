@@ -128,13 +128,8 @@ var JsGangOfFour = {
 
 JsGangOfFour.namespace("Classic").FactoryMethod = (function () {
     //==============================================    
-    // Here are three builders under control of a director: 
-    // WidgetBuilder, GadgetBuilder and ThingamajigBuilder.
-    //----------------------------------------------
-    // Manufacturing - Is our "Director" of construction using 
-    // the builders  - Created using named function
-    // The construct function accepts an instance of a "Builder" 
-    // to build the appropriate object. Say like iBuilder
+    // Here our FactoryMethod module has the createVehicle
+    // method which we again created with an anonymous function 
     //==============================================  
     var createVehicle = function (type) {
         var employee;
