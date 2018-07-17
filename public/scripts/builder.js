@@ -92,6 +92,7 @@ function Widget() {
         this.buttons = 4;
     };
     this.say = function () {
+        // add to log heler var 
         log.add("I am a " + this.buttons + "-button widget");
     };
 }
@@ -104,6 +105,7 @@ function Gadget() {
         this.buttons = 2;
     };
     this.say = function () {
+        // add to log heler var 
         log.add("I am a " + this.buttons + "-button gadget");
     };
 }
@@ -116,6 +118,7 @@ function Thingamajig() {
         this.buttons = 8;
     };
     this.say = function () {
+        // add to log heler var 
         log.add("I am a " + this.buttons + "-button thingamajig");
     };
 }
@@ -138,7 +141,7 @@ function run_Builder() {
     widget.say();
     gadget.say();
     thingamajig.say();
-
+    // Display alert box from our log helper var
     log.show();
 }
 
@@ -191,7 +194,7 @@ var JsGangOfFour = {
 };
 //==============================================
 // Create the "Classic" namespace with the
-// AbstractFactory namespace which is also in
+// Builder namespace which is also in
 // the builder.js
 //==============================================
 
@@ -276,6 +279,7 @@ JsGangOfFour.namespace("Classic").Builder = (function () {
             this.buttons = 4;
         };
         this.say = function () {
+            // add to log heler var 
             log.add("I am a " + this.buttons + "-button widget");
         };
     };
@@ -288,6 +292,7 @@ JsGangOfFour.namespace("Classic").Builder = (function () {
             this.buttons = 2;
         };
         this.say = function () {
+            // add to log heler var 
             log.add("I am a " + this.buttons + "-button gadget");
         };
     };
@@ -300,6 +305,7 @@ JsGangOfFour.namespace("Classic").Builder = (function () {
             this.buttons = 8;
         };
         this.say = function () {
+            // add to log heler var 
             log.add("I am a " + this.buttons + "-button thingamajig");
         };
     };
@@ -337,6 +343,6 @@ function run_OptimizedBuilder() {
     thingamagig.say();
     widget.say();
     gadget.say();
-
+    // Display alert box from our log helper var
     log.show();
 }

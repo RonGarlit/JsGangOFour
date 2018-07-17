@@ -11,7 +11,7 @@
         <!-- PrettyPrints CSS and JS to handle code blocks in HTML code -->
         <%- include('partials/PrettyPrint') %>
 
-            <script src="scripts/abstractfactory.js"></script>
+            <script src="scripts/factorymethod.js"></script>
 
 </head>
 
@@ -20,13 +20,14 @@
     <%- include('partials/MainNavBar') %>
 <!-- End of Nav Section --> <br>
         <div class="container">
-            <h2 title="ReplaceMe">ReplaceMe</h2>
-            <p>ReplaceMe
+            <h2 title="Factory Method">Factory Method</h2>
+            <p>Intent according to the GoF: "Define an interface for creating an object, but let subclasses decide which class 
+                to instantiate. Factory Method lets a class defer instantiation to subclasses."
+            </p>
+            <p>The key objective of the Factory Method is extensibility.
             </p>
 
-            <p>ReplaceMe </p>
-
-            <p>ReplaceMe </p>
+            <p>Factory Methods are frequently used in JavaScript applications that manage, maintain, or manipulate collections of objects that are different but at the same time have many characteristics (i.e. methods and properties) in common. </p>
 
             <div class="card text-white bg-primary mb-3" style="max-width: 25rem;">
                 <div class="card-body">
@@ -37,10 +38,12 @@
                 </div>
             </div>
 
-            <p>ReplaceMe</p>
+            <p>JavaScript does not support class-based inheritance therefore the abstract classes as depicted in the diagram
+                are not used in the JavaScript sample code. </p>
 
-            <p>ReplaceMe </p>
-
+            <p>Abstract classes and interfaces enforce consistent interfaces in derived classes. In JavaScript we must ensure
+                this consistency ourselves by making sure that each 'Concrete' object has the same interface definition (i.e.
+                properties and methods) as the others. </p>
 
             <p></p>
             <br>
@@ -52,66 +55,83 @@ https://github.com/google/code-prettify
 This is the link to the styple for prettyify - We choose Dessert and put in prettify.css
 https://github.com/google/code-prettify/blob/master/styles/desert.css -->
                     <pre class="prettyprint">
-  
-  //REPLACE THIS WITH CODE FROM JS FILE
-  function Employee(name) {
-      this.name = name;
-      this.say = function () {
-          log.add("I am employee " + name);
-      };
-  }
-  
-  function EmployeeFactory() {
-      this.create = function(name) {
-          return new Employee(name);
-      };
-  }
-
-  function Vendor(name) {
-      this.name = name;
-      this.say = function () {
-          log.add("I am vendor " + name);
-      };
-  }
-
-  function VendorFactory() {
-      this.create = function(name) {
-          return new Vendor(name);
-      };
-  }
-
-  // log helper
-  var log = (function () {
-      var log = "";
-      return {
-          add: function (msg) { log += msg + "\n"; },
-          show: function () { alert(log); log = ""; }
-      }
-  })();
-
-
-  function run_AbstractFactory() {
-
-      var persons = [];
-    
-      var employeeFactory = new EmployeeFactory();
-      var vendorFactory = new VendorFactory();
-    
-      persons.push(employeeFactory.create("Joan DiSilva"));
-      persons.push(employeeFactory.create("Tim O'Neill"));
-    
-      persons.push(vendorFactory.create("Gerald Watson"));
-      persons.push(vendorFactory.create("Nicole McNight"));
-    
-      for (var i = 0, len = persons.length; i < len; i++) {
-          persons[i].say();
-      }
-    
-      log.show();
-    }
-  </pre>
+                    //==============================================
+                    // Factory Method
+                    // JavaScript does not support class-based 
+                    // inheritance therefore the abstract classes.
+                    // we must ensure this consistency ourselves
+                    // that properties and methods match!!!
+                    //----------------------------------------------
+                    // Note here again in OOP we would define a interface
+                    // or abstract classes.   
+                    //==============================================
+                    
+                    // Here our factory creates a different vehicle 
+                    // (or product) based on the type requested
+                    function Factory() {
+                        this.createVehicle = function (type) {
+                            var employee;
+                    
+                            if (type === "truck") {
+                                employee = new Truck();
+                            } else if (type === "suv") {
+                                employee = new SUV();
+                            } else if (type === "sedan") {
+                                employee = new Sedan();
+                            } else if (type === "sportscar") {
+                                employee = new SportsCar();
+                            }
+                    
+                            employee.type = type;
+                            employee.say = function () {
+                                // add to log heler var 
+                                log.add("The cost of each " + this.type + " is " + this.cost + ".");
+                            }
+                            return employee;
+                        }
+                    }
+                    //=============================================
+                    // Vehicle/Product objects we are going to build
+                    //=============================================        
+                    // Vehicle Objects
+                    // If we could declare interfaces
+                    // it be based on say the iThingamabob 
+                    // here we us anonymous function
+                    var Truck = function () {
+                        this.cost = "$120,000";
+                    };
+                    var SUV = function () {
+                        this.cost = "$52,000";
+                    };
+                    var Sedan = function () {
+                        this.cost = "$35,000";
+                    };
+                    var SportsCar = function () {
+                        this.cost = "$45,000";
+                    };
+                    //=============================================
+                    // run_FactoryMethod()
+                    //=============================================
+                    function run_FactoryMethod() {
+                    
+                        var vehicles = [];
+                    
+                        var factory = new Factory();
+                    
+                        vehicles.push(factory.createVehicle("truck"));
+                        vehicles.push(factory.createVehicle("suv"));
+                        vehicles.push(factory.createVehicle("sedan"));
+                        vehicles.push(factory.createVehicle("sportscar"));
+                    
+                        for (var i = 0, len = vehicles.length; i < len; i++) {
+                            vehicles[i].say();
+                        }
+                        // Display alert box from our log helper var
+                        log.show();
+                    }
+                    </pre>
                 </div>
-                <button type="button" class="btn btn-success" onclick="run_AbstractFactory();return false;">Execute run_AbstractFactory()</button>
+                <button type="button" class="btn btn-success" onclick="run_FactoryMethod();return false;">Execute run_AbstractFactory()</button>
             </div>
 
 
@@ -125,84 +145,117 @@ https://github.com/google/code-prettify
 This is the link to the styple for prettyify - We choose Dessert and put in prettify.css
 https://github.com/google/code-prettify/blob/master/styles/desert.css -->
                     <pre class="prettyprint">
-      //REPLACE THIS WITH CODE FROM JS FILE
-      var Patterns = {
-          namespace: function (name) {
-              var parts = name.split(".");
-              var ns = this;
-        
-              for (var i = 0, len = parts.length; i < len; i++) {
-                  ns[parts[i]] = ns[parts[i]] || {};
-                  ns = ns[parts[i]];
-              }
-        
-              return ns;
-          }
-        };
-        
-        Patterns.namespace("Classic").AbstractFactory = (function () {
-        
-          var Family = function (name) {
-              this.name = name;
-              this.say = function () {
-                  log.add("My family member name is " + name);
-              };
-          };
-        
-          var Pet = function (name) {
-              this.name = name;
-              this.say = function () {
-                  log.add("I'm a pet named " + name);
-              };
-          };
-        
-          var FamilyFactory = function () {
-              this.create = function (name) {
-                  return new Family(name);
-              };
-          };
-        
-          var PetFactory = function () {
-              this.create = function (name) {
-                  return new Pet(name);
-              };
-          };
-        
-          return {
-              FamilyFactory: FamilyFactory,
-              PetFactory: PetFactory
-          };
-        })();
-        
-       
-        function run_OptimizedAbstractFactory() {
-
-          var abstract = Patterns.Classic.AbstractFactory;
-        
-          var familyFactory = new abstract.FamilyFactory();
-          var petFactory = new abstract.PetFactory();
-        
-          var persons = [];
-        
-          persons.push(familyFactory.create("Ron Garlit"));
-          persons.push(familyFactory.create("Cindi Garlit"));
-          persons.push(familyFactory.create("Devin Garlit"));
-          persons.push(familyFactory.create("Melissa Garlit"));
-          persons.push(familyFactory.create("Mark Garlit"));
-        
-          persons.push(petFactory.create("Molly Garlit"));
-          persons.push(petFactory.create("Max Garlit"));
-          persons.push(petFactory.create("Jax Garlit"));
-        
-          for (var i = 0, len = persons.length; i < len; i++) {
-              persons[i].say();
-        }
-        
-          log.show();
-        }          
-  </pre>
+                    //==============================================
+                    // Factory Method
+                    // JavaScript does not support class-based 
+                    // inheritance therefore the abstract classes.
+                    // we must ensure this consistency ourselves
+                    // that properties and methods match!!!
+                    //----------------------------------------------
+                    // Note here again in OOP we would define a interface
+                    // or abstract classes.   
+                    //==============================================
+                    
+                    //==============================================
+                    // Create the "Classic" namespace with the
+                    // FactoryMethod namespace which is also in
+                    // the factorymethod.js
+                    //==============================================
+                    
+                    // Add our FactoryMethod Module on the "Classic" namespace
+                    // of JsGangOfFour
+                    var JsGangOfFour = {
+                        namespace: function (name) {
+                            var parts = name.split(".");
+                            var ns = this;
+                    
+                            for (var i = 0, len = parts.length; i < len; i++) {
+                                ns[parts[i]] = ns[parts[i]] || {};
+                                ns = ns[parts[i]];
+                            }
+                    
+                            return ns;
+                        }
+                    };
+                    
+                    JsGangOfFour.namespace("Classic").FactoryMethod = (function () {
+                        //==============================================    
+                        // Here are three builders under control of a director: 
+                        // WidgetBuilder, GadgetBuilder and ThingamajigBuilder.
+                        //----------------------------------------------
+                        // Manufacturing - Is our "Director" of construction using 
+                        // the builders  - Created using named function
+                        // The construct function accepts an instance of a "Builder" 
+                        // to build the appropriate object. Say like iBuilder
+                        //==============================================  
+                        var createVehicle = function (type) {
+                            var employee;
+                    
+                            if (type === "truck") {
+                                employee = new Truck();
+                            } else if (type === "suv") {
+                                employee = new SUV();
+                            } else if (type === "sedan") {
+                                employee = new Sedan();
+                            } else if (type === "sportscar") {
+                                employee = new SportsCar();
+                            }
+                    
+                            employee.type = type;
+                            employee.say = function () {
+                                // add to log heler var 
+                                log.add("The cost of each " + this.type + " is " + this.cost + ".");
+                            }
+                            return employee;
+                        };
+                        //=============================================
+                        // Vehicle/Product objects we are going to build
+                        //=============================================        
+                        // Vehicle Objects
+                        // If we could declare interfaces
+                        // it be based on say the iThingamabob 
+                        // here we us anonymous function
+                        var Truck = function () {
+                            this.cost = "$135,000";
+                        };
+                        var SUV = function () {
+                            this.cost = "$58,000";
+                        };
+                        var Sedan = function () {
+                            this.cost = "$45,000";
+                        };
+                        var SportsCar = function () {
+                            this.cost = "$95,000";
+                        };
+                    
+                        return {
+                            createVehicle: createVehicle
+                        };
+                    
+                    })();
+                    //=============================================
+                    // run_OptimizedFactoryMethod()
+                    //=============================================
+                    function run_OptimizedFactoryMethod() {
+                    
+                        var vehicles = [];
+                    
+                        var factory = JsGangOfFour.Classic.FactoryMethod;
+                    
+                        vehicles.push(factory.createVehicle("truck"));
+                        vehicles.push(factory.createVehicle("suv"));
+                        vehicles.push(factory.createVehicle("sedan"));
+                        vehicles.push(factory.createVehicle("sportscar"));
+                    
+                        for (var i = 0, len = vehicles.length; i < len; i++) {
+                            vehicles[i].say();
+                        }
+                        // Display alert box from our log helper var
+                        log.show();
+                    }
+                    </pre>
                 </div>
-                <button type="button" class="btn btn-success" onclick="run_OptimizedAbstractFactory();return false;">Execute run_OptimizedAbstractFactory()</button>
+                <button type="button" class="btn btn-success" onclick="run_OptimizedFactoryMethod();return false;">Execute run_OptimizedAbstractFactory()</button>
             </div>
 
         </div>
