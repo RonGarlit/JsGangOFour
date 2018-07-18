@@ -21,17 +21,21 @@
         <!-- End of Nav Section -->
         <br>
         <div class="container">
-            <h2 title="ReplaceMe">ReplaceMe</h2>
-            <p>Intent according to the GoF: "Ensure a class only has one instance, and provide a global point of access to it."
-            </p>
-
+            <h2 title="Singleton">Singleton</h2>
+            <div class="card text-white bg-secondary">
+                <div class="card-body">
+                    <div class="card-title">Intent according to the GoF: </div>
+                    <p class="card-text">"Ensure a class only has one instance, and provide a global point of access to it."
+                    </p>
+                </div>
+            </div>
             <p>The Singleton Pattern limits the number of instances of a particular object to just one. </p>
 
 
             <p>Singletons are useful in situations where system-wide actions need to be coordinated from a single central place.
                 Being the database geek that I am a good example is the database connection pool. The pool manages the creation,
                 destruction, and lifetime of all database connections for the entire application ensuring that no connections
-                are 'lost'. </p>            
+                are 'lost'. </p>
 
             <div class="card text-white bg-primary mb-3" style="max-width: 25rem;">
                 <div class="card-body">
@@ -46,13 +50,14 @@
 
             <p>In JavaScript the Module pattern is manifestation of the Singleton pattern. Several other patterns, such as,
                 Factory, Prototype, and Façade are frequently implemented as Singletons when only one instance is needed.
-                </p>
+            </p>
 
-                <p>The Singleton object is implemented as an immediate anonymous function. The function executes immediately by 
-                    wrapping it in brackets followed by two additional brackets. It is called anonymous because it doesn't have a name.</p>
+            <p>The Singleton object is implemented as an immediate anonymous function. The function executes immediately by
+                wrapping it in brackets followed by two additional brackets. It is called anonymous because it doesn't have
+                a name.</p>
 
-                <p>The getInstance method is Singleton's public method which returns the one and only instance of the object 
-                    while maintaining a private reference to it which is not accessible to the outside world.</p>                
+            <p>The getInstance method is Singleton's public method which returns the one and only instance of the object while
+                maintaining a private reference to it which is not accessible to the outside world.</p>
 
             <p></p>
             <br>

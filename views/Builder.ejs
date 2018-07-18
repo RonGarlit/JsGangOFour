@@ -18,20 +18,31 @@
 <body>
     <!-- Start of Nav Section -->
     <%- include('partials/MainNavBar') %>
-<!-- End of Nav Section --> <br>
+        <!-- End of Nav Section -->
+        <br>
         <div class="container">
             <h2 title="Builder">Builder</h2>
-            <p>Intent according to the GoF: "Separate the construction of a complex object from its representation so that 
-                the same construction process can create different representations." 
-            </p>
+            <div class="card text-white bg-secondary">
+                <div class="card-body">
+                    <div class="card-title">Intent according to the GoF: </div>
+                    <p class="card-text">"Separate the construction of a complex object from its representation so that the same construction
+                        process can create different representations."
+                    </p>
+                </div>
+            </div>
+            <p>The Builder pattern allows a client to construct a complex object by specifying the type and content only. Construction
+                details are hidden entirely. Builders frequently encapsulate construction of Composite objects (another GoF
+                design pattern) because the procedures involved are often repetitive and complex.</p>
 
-            <p>The Builder pattern allows a client to construct a complex object by specifying the type and content only. Construction details are hidden entirely.  Builders frequently encapsulate construction of Composite objects (another GoF design pattern) because the procedures involved are often repetitive and complex.</p>
-
-            <p>In JavaScript the Builder is not used much but can be found in fluent interfaces in which multiple method calls, separated by dot operators that are chained together (note: fluent interfaces are implementation of the <a href="https://www.bennadel.com/blog/2798-using-method-chaining-with-the-revealing-module-pattern-in-javascript.htm">Chaining Pattern</a>). </p>            
+            <p>In JavaScript the Builder is not used much but can be found in fluent interfaces in which multiple method calls,
+                separated by dot operators that are chained together (note: fluent interfaces are implementation of the
+                <a
+                    href="https://www.bennadel.com/blog/2798-using-method-chaining-with-the-revealing-module-pattern-in-javascript.htm">Chaining Pattern</a>). </p>
 
             <p>In object-oriented programming languages like C# an AbstractBuilder would be used.</p>
 
-            <p>However, the individual builders must implement the same multistep interface for the Director (See code below) to be able to step through the assembly process. </p>
+            <p>However, the individual builders must implement the same multistep interface for the Director (See code below)
+                to be able to step through the assembly process. </p>
 
             <div class="card text-white bg-primary mb-3" style="max-width: 25rem;">
                 <div class="card-body">
