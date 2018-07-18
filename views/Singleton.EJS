@@ -11,7 +11,7 @@
         <!-- PrettyPrints CSS and JS to handle code blocks in HTML code -->
         <%- include('partials/PrettyPrint') %>
 
-            <script src="scripts/abstractfactory.js"></script>
+            <script src="scripts/singleton.js"></script>
 
 </head>
 
@@ -22,12 +22,16 @@
         <br>
         <div class="container">
             <h2 title="ReplaceMe">ReplaceMe</h2>
-            <p>ReplaceMe
+            <p>Intent according to the GoF: "Ensure a class only has one instance, and provide a global point of access to it."
             </p>
 
-            <p>ReplaceMe </p>
+            <p>The Singleton Pattern limits the number of instances of a particular object to just one. </p>
 
-            <p>ReplaceMe </p>
+
+            <p>Singletons are useful in situations where system-wide actions need to be coordinated from a single central place.
+                Being the database geek that I am a good example is the database connection pool. The pool manages the creation,
+                destruction, and lifetime of all database connections for the entire application ensuring that no connections
+                are 'lost'. </p>            
 
             <div class="card text-white bg-primary mb-3" style="max-width: 25rem;">
                 <div class="card-body">
@@ -37,11 +41,6 @@
                     </p>
                 </div>
             </div>
-            <p>Intent according to the GoF: "Ensure a class only has one instance, and provide a global point of access to it."
-            </p>
-
-            <p>The Singleton Pattern limits the number of instances of a particular object to just one. </p>
-
             <p>Singletons reduce the need for global variables which is particularly important in JavaScript because it limits
                 namespace pollution and associated risk of name collisions. </p>
 
@@ -49,10 +48,12 @@
                 Factory, Prototype, and Façade are frequently implemented as Singletons when only one instance is needed.
                 </p>
 
-            <p>Singletons are useful in situations where system-wide actions need to be coordinated from a single central place.
-                Being the database geek that I am a good example is the database connection pool. The pool manages the creation,
-                destruction, and lifetime of all database connections for the entire application ensuring that no connections
-                are 'lost'. </p>
+                <p>The Singleton object is implemented as an immediate anonymous function. The function executes immediately by 
+                    wrapping it in brackets followed by two additional brackets. It is called anonymous because it doesn't have a name.</p>
+
+                <p>The getInstance method is Singleton's public method which returns the one and only instance of the object 
+                    while maintaining a private reference to it which is not accessible to the outside world.</p>                
+
             <p></p>
             <br>
             <div class="alert alert-dismissible alert-primary">
@@ -63,66 +64,45 @@
                     This is the link to the styple for prettyify - We choose Dessert and put in prettify.css
                     https://github.com/google/code-prettify/blob/master/styles/desert.css -->
                     <pre class="prettyprint">
-  
-  //REPLACE THIS WITH CODE FROM JS FILE
-  function Employee(name) {
-      this.name = name;
-      this.say = function () {
-          log.add("I am employee " + name);
-      };
-  }
-  
-  function EmployeeFactory() {
-      this.create = function(name) {
-          return new Employee(name);
-      };
-  }
-
-  function Vendor(name) {
-      this.name = name;
-      this.say = function () {
-          log.add("I am vendor " + name);
-      };
-  }
-
-  function VendorFactory() {
-      this.create = function(name) {
-          return new Vendor(name);
-      };
-  }
-
-  // log helper
-  var log = (function () {
-      var log = "";
-      return {
-          add: function (msg) { log += msg + "\n"; },
-          show: function () { alert(log); log = ""; }
-      }
-  })();
-
-
-  function run_AbstractFactory() {
-
-      var persons = [];
-    
-      var employeeFactory = new EmployeeFactory();
-      var vendorFactory = new VendorFactory();
-    
-      persons.push(employeeFactory.create("Joan DiSilva"));
-      persons.push(employeeFactory.create("Tim O'Neill"));
-    
-      persons.push(vendorFactory.create("Gerald Watson"));
-      persons.push(vendorFactory.create("Nicole McNight"));
-    
-      for (var i = 0, len = persons.length; i < len; i++) {
-          persons[i].say();
-      }
-    
-      log.show();
-    }
-  </pre>
+                    //==============================================
+                    // singleton.js
+                    //==============================================
+                    
+                    // Singleton object is implemented as an immediate anonymous function
+                    // Eek!! This is in the global space
+                    var Singleton = (function () {
+                        // Private variable
+                        var instance;
+                        // Create our main and only real instance!!!!!
+                        function createInstance() {
+                            var object = new Object("I am the instance");
+                            return object;
+                        }
+                        // Public Method to get instance and if it doesn't exist create one. 
+                        return {
+                            getInstance: function () {
+                                if (!instance) {
+                                    instance = createInstance();
+                                }
+                    
+                                return instance;
+                            }
+                        };
+                    })();
+                    //==============================================    
+                    // run_Singleton()
+                    //============================================== 
+                    function run_Singleton() {
+                        // separately create two instance variables 
+                        // using the getInstance method in our module
+                        var instance1 = Singleton.getInstance();
+                        var instance2 = Singleton.getInstance();
+                        // AlertBox with results comparing whether both instances are the same.
+                        alert("Same instance? " + (instance1 === instance2));
+                    }
+                    </pre>
                 </div>
-                <button type="button" class="btn btn-success" onclick="run_AbstractFactory();return false;">Execute run_AbstractFactory()</button>
+                <button type="button" class="btn btn-success" onclick="run_Singleton();return false;">Execute run_Singleton()</button>
             </div>
 
 
@@ -136,84 +116,91 @@
                     This is the link to the styple for prettyify - We choose Dessert and put in prettify.css
                     https://github.com/google/code-prettify/blob/master/styles/desert.css -->
                     <pre class="prettyprint">
-      //REPLACE THIS WITH CODE FROM JS FILE
-      var Patterns = {
-          namespace: function (name) {
-              var parts = name.split(".");
-              var ns = this;
-        
-              for (var i = 0, len = parts.length; i < len; i++) {
-                  ns[parts[i]] = ns[parts[i]] || {};
-                  ns = ns[parts[i]];
-              }
-        
-              return ns;
-          }
-        };
-        
-        Patterns.namespace("Classic").AbstractFactory = (function () {
-        
-          var Family = function (name) {
-              this.name = name;
-              this.say = function () {
-                  log.add("My family member name is " + name);
-              };
-          };
-        
-          var Pet = function (name) {
-              this.name = name;
-              this.say = function () {
-                  log.add("I'm a pet named " + name);
-              };
-          };
-        
-          var FamilyFactory = function () {
-              this.create = function (name) {
-                  return new Family(name);
-              };
-          };
-        
-          var PetFactory = function () {
-              this.create = function (name) {
-                  return new Pet(name);
-              };
-          };
-        
-          return {
-              FamilyFactory: FamilyFactory,
-              PetFactory: PetFactory
-          };
-        })();
-        
-       
-        function run_OptimizedAbstractFactory() {
-
-          var abstract = Patterns.Classic.AbstractFactory;
-        
-          var familyFactory = new abstract.FamilyFactory();
-          var petFactory = new abstract.PetFactory();
-        
-          var persons = [];
-        
-          persons.push(familyFactory.create("Ron Garlit"));
-          persons.push(familyFactory.create("Cindi Garlit"));
-          persons.push(familyFactory.create("Devin Garlit"));
-          persons.push(familyFactory.create("Melissa Garlit"));
-          persons.push(familyFactory.create("Mark Garlit"));
-        
-          persons.push(petFactory.create("Molly Garlit"));
-          persons.push(petFactory.create("Max Garlit"));
-          persons.push(petFactory.create("Jax Garlit"));
-        
-          for (var i = 0, len = persons.length; i < len; i++) {
-              persons[i].say();
-        }
-        
-          log.show();
-        }          
+                    //==============================================
+                    // Singleton
+                    // JavaScript does not support class-based 
+                    // inheritance therefore the abstract classes.
+                    // we must ensure this consistency ourselves
+                    // that properties and methods match!!!
+                    //----------------------------------------------
+                    // Note here again in OOP we would define a interface
+                    // or abstract classes.   
+                    //==============================================
+                    
+                    //==============================================
+                    // Create the "Classic" namespace with the
+                    // Singleton namespace which is also in
+                    // the singleton.js
+                    //==============================================
+                    // The Namespace pattern is applied to keep the code 
+                    // out of the global namespace.
+                    //==============================================
+                    
+                    // Add our Singleton Module on the "Classic" on 
+                    // main namespace called JsGangOfFour
+                    var JsGangOfFour = {
+                        namespace: function (name) {
+                            var parts = name.split(".");
+                            var ns = this;
+                    
+                            for (var i = 0, len = parts.length; i < len; i++) {
+                                ns[parts[i]] = ns[parts[i]] || {};
+                                ns = ns[parts[i]];
+                            }
+                    
+                            return ns;
+                        }
+                    };
+                    //==============================================    
+                    // Here our Singleton module is added to namespace
+                    //============================================== 
+                    JsGangOfFour.namespace("Classic").Singleton = (function () {
+                        //==============================================    
+                        // Revealing Module named Singleton encapsulates 
+                        // all of Singleton functions and properties.
+                        //==============================================  
+                        // Delcare private variable
+                        var instance;
+                        // Create our main and only real instance!!!!!
+                        var createInstance = function () {
+                            return {
+                                say: function () {
+                                    alert("It is just little ole me. The only instance of me!");
+                                }
+                            };
+                        }
+                        // Create private method to get instance and if it doesn't exist create one. 
+                        var getInstance = function () {
+                            return instance = instance || createInstance();
+                        }
+                        // Create public method for getinstance 
+                        // actually REVEALing the private getInstance. 
+                        // (LOL ==> You see what I did there?)
+                        return {
+                            getInstance: getInstance
+                        };
+                    
+                    })();
+                    //==============================================    
+                    // run_OptimizedSingleton()
+                    //============================================== 
+                    function run_OptimizedSingleton() {
+                        // create instance of Singleton module
+                        var singleton = JsGangOfFour.Classic.Singleton;
+                        // separately create two instance variables 
+                        // using the getInstance method in our module
+                        var instance1 = singleton.getInstance();
+                        var instance2 = singleton.getInstance();
+                    
+                        instance1.say();    // => First AlertBox says: It is just little ole me.
+                        instance2.say();    // => Second AlertBox says: It is just little ole me.
+                        // AlertBox with results comparing whether both instances are the same.
+                        alert("Result of test to see if instance1 and instance2 are the same? " 
+                        + (instance1 === instance2)); // => true
+                    }          
   </pre>
                 </div>
-                <button type="button" class="btn btn-success" onclick="run_OptimizedAbstractFactory();return false;">Execute run_OptimizedAbstractFactory()</button>
+                <button type="button" class="btn btn-success" onclick="run_OptimizedSingleton();return false;">Execute run_OptimizedSingleton()</button>
             </div>
 
         </div>

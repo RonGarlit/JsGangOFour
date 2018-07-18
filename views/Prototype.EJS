@@ -22,13 +22,18 @@
         <br>
         <div class="container">
             <h2 title="Prototype">Prototype</h2>
-            <p>Intent according to the GoF: "SSpecify the kinds of objects to create using a prototypical instance, and create
+            <p>Intent according to the GoF: "Specify the kinds of objects to create using a prototypical instance, and create
                 new objects by copying this prototype."
             </p>
 
-            <p>ReplaceMe </p>
+            <p>The Prototype Pattern creates new objects, but rather than creating non-initialized objects it returns objects
+                that are initialized with values it copied from a prototype</p>
 
-            <p>ReplaceMe </p>
+            <p>The prototype object holds the default values that are copied over into a newly created business object.</p>
+
+            <p>Classical computer languages rarely use the Prototype pattern because of class inheritance and abstract classes.
+                JavaScript is itself a prototypal language that uses the prototype pattern in the construction of new objects
+                and their prototypes.</p>
 
             <div class="card text-white bg-primary mb-3" style="max-width: 25rem;">
                 <div class="card-body">
@@ -104,7 +109,7 @@
             <p></p>
             <br>
             <p>The Namespace pattern is applied to keep the code out of the global namespace. Our namespace is named JsGangOfFour.Classic.
-                </p>
+            </p>
 
             <p>A Revealing Module named Prototype encapsulates all of Prototype's functions. It exposes the Customer constructor
                 function and by association its prototype.</p>
@@ -112,7 +117,8 @@
             <p>In the run function, first a default customer is created in which all properties have default values. </p>
 
             <p>Then the kevin customer is created by providing two property values: Kevin and Summer as "first" and "last" name
-                respectively.</p>
+                respectively.
+            </p>
 
             <p>In addition we create the Ron customer by providing three property values for "first", "last" and "status" respectively.</p>
 
