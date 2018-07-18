@@ -148,6 +148,17 @@ function run_Builder() {
 //==============================================
 // Optimized JavaScript Code
 //==============================================
+// To understand "Optimized JavaScript Code" we must
+// review some modern javascript design patterns and techniques
+// which the provided links cover nicely.
+//----------------------------------------------
+// See these links: 
+// https://addyosmani.com/blog/essential-js-namespacing/
+// https://www.safaribooksonline.com/library/view/learning-javascript-design/9781449334840/ch13s15.html
+// https://medium.freecodecamp.org/javascript-modules-a-beginner-s-guide-783f7d7a5fcc
+// http://www.adequatelygood.com/JavaScript-Module-Pattern-In-Depth.html
+// http://esbueno.noahstokes.com/post/77292606977/self-executing-anonymous-functions-or-how-to-write
+//==============================================
 
 //==============================================
 // Builder
@@ -170,12 +181,6 @@ function run_Builder() {
 // More importantly creating a structure to 
 // avoid name collisions globally under one varable
 // called JsGangOfFour.
-//----------------------------------------------
-// See these links: 
-// https://addyosmani.com/blog/essential-js-namespacing/
-// https://www.safaribooksonline.com/library/view/learning-javascript-design/9781449334840/ch13s15.html
-// https://medium.freecodecamp.org/javascript-modules-a-beginner-s-guide-783f7d7a5fcc
-// http://www.adequatelygood.com/JavaScript-Module-Pattern-In-Depth.html
 //==============================================
 var JsGangOfFour = {
     // Look at links above for details on NameSpace pattern

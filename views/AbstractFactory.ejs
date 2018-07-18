@@ -19,11 +19,12 @@
 <body>
     <!-- Start of Nav Section -->
     <%- include('partials/MainNavBar') %>
-<!-- End of Nav Section --> <br>
+        <!-- End of Nav Section -->
+        <br>
         <div class="container">
             <h2 title="Abstract Factory">Abstract Factory</h2>
-            <p>Intent according to the GoF: "Provide an interface for creating families of related or dependent objects without specifying their concrete
-                classes.
+            <p>Intent according to the GoF: "Provide an interface for creating families of related or dependent objects without
+                specifying their concrete classes.
             </p>
 
             <p>An Abstract Factory creates objects that are related by a common theme. </p>
@@ -53,10 +54,10 @@
             <div class="alert alert-dismissible alert-primary">
                 <h4 class="alert-heading">JavaScript Code</h4>
                 <div>
-                    <!--       Follow these links for the google prettyify information
-      https://github.com/google/code-prettify
-      This is the link to the styple for prettyify - We choose Dessert and put in prettify.css
-      https://github.com/google/code-prettify/blob/master/styles/desert.css -->
+                    <!-- Follow these links for the google prettyify information
+                    https://github.com/google/code-prettify
+                    This is the link to the styple for prettyify - We choose Dessert and put in prettify.css
+                    https://github.com/google/code-prettify/blob/master/styles/desert.css -->
                     <pre class="prettyprint">
                     //==============================================                        
                     // log helper
@@ -155,21 +156,20 @@
                         // Display alert box from our log helper var
                         log.show();
                     }
-                    </pre>
+                </pre>
                 </div>
-                <button type="button" class="btn btn-success"" onclick="run_AbstractFactory();return false;">Execute run_AbstractFactory()</button>
+                <button type="button" class="btn btn-success" onclick="run_AbstractFactory();return false;">Execute run_AbstractFactory()</button>
             </div>
-
 
             <p></p>
             <br>
             <div class="alert alert-dismissible alert-primary">
                 <h4 class="alert-heading">Optimized JavaScript Code</h4>
                 <div>
-                    <!--       Follow these links for the google prettyify information
-      https://github.com/google/code-prettify
-      This is the link to the styple for prettyify - We choose Dessert and put in prettify.css
-      https://github.com/google/code-prettify/blob/master/styles/desert.css -->
+                    <!-- Follow these links for the google prettyify information
+                    https://github.com/google/code-prettify
+                    This is the link to the styple for prettyify - We choose Dessert and put in prettify.css
+                    https://github.com/google/code-prettify/blob/master/styles/desert.css -->
                     <pre class="prettyprint">
                     //==============================================
                     // Abstract Factory
@@ -178,7 +178,7 @@
                     // we must ensure this consistency ourselves
                     // that properties and methods match!!!
                     //==============================================
-                    // Create our namespace called "JsGangOfFour".
+                    // Create our namespace called "JsGangOfFour ".
                     //
                     // This is based on the NameSpace Pattern and 
                     // Module Pattern. This block of code should 
@@ -188,16 +188,10 @@
                     // More importantly creating a structure to 
                     // avoid name collisions globally under one varable
                     // called JsGangOfFour.
-                    //----------------------------------------------
-                    // See these links: 
-                    // https://addyosmani.com/blog/essential-js-namespacing/
-                    // https://www.safaribooksonline.com/library/view/learning-javascript-design/9781449334840/ch13s15.html
-                    // https://medium.freecodecamp.org/javascript-modules-a-beginner-s-guide-783f7d7a5fcc
-                    // http://www.adequatelygood.com/JavaScript-Module-Pattern-In-Depth.html
                     //==============================================
                     var JsGangOfFour = {
                         namespace: function (name) {
-                            var parts = name.split(".");
+                            var parts = name.split(". ");
                             var ns = this;
                     
                             for (var i = 0, len = parts.length; i < len; i++) {
@@ -209,14 +203,14 @@
                         }
                     };
                     //==============================================
-                    // Create the "Classic" namespace with the
+                    // Create the "Classic " namespace with the
                     // AbstractFactory namespace which is also in
                     // the abstractfactory.js
                     //==============================================
                     
                     // This is our AbstractFactory that will return two factories
                     // called FamilyFactory and PetFactory  :-)
-                    JsGangOfFour.namespace("Classic").AbstractFactory = (function () {
+                    JsGangOfFour.namespace("Classic ").AbstractFactory = (function () {
                         // Here are two entity objects 
                         // If we could declare interfaces and abstract classes
                         // it would be iMember or iFamilyMember and so on.
@@ -236,7 +230,7 @@
                             this.say = function () {
                                 // add to log heler var that is
                                 // declared in the top of abstractfactory.jss
-                                log.add("I'm a pet named " + name);
+                                log.add("I 'm a pet named " + name);
                             };
                         };
                         // Here are two Factories: 
@@ -274,36 +268,16 @@
                     function run_OptimizedAbstractFactory() {
                         // Load our Abstract Factory in the abstract var
                         var abstract = JsGangOfFour.Classic.AbstractFactory;
-                        // Create a couple factories new'ing up the 
-                        // factory functions in our abstract of 
-                        // AbstractFactory Namespace.
-                        var familyFactory = new abstract.FamilyFactory();
-                        var petFactory = new abstract.PetFactory();
-                        // Array of matching entity object types
-                        // If we could declare interfaces
-                        // it would be the iPerson
-                        // and this woud be and array of 
-                        // Persons or People :-)
-                        var persons = [];
-                        // Load the array with objects created by factories
-                        persons.push(familyFactory.create("Ron Garlit"));
-                        persons.push(familyFactory.create("Cindi Garlit"));
-                        persons.push(familyFactory.create("Devin Garlit"));
-                        persons.push(familyFactory.create("Melissa Garlit"));
-                        persons.push(familyFactory.create("Mark Garlit"));
-                    
-                        persons.push(petFactory.create("Molly Garlit"));
-                        persons.push(petFactory.create("Max Garlit"));
-                        persons.push(petFactory.create("Jax Garlit"));
-                    
-                        for (var i = 0, len = persons.length; i < len; i++) {
-                            persons[i].say();
-                        }
-                        // Display alert box from our log helper var
-                        // declared in the top of abstractfactory.js                    
-                        log.show();
-                    }  
-                    </pre>
+                        // Create a couple factories new'ing up the // factory functions in our abstract of // AbstractFactory
+                    Namespace. var familyFactory=n ew abstract.FamilyFactory(); var petFactory=n ew abstract.PetFactory(); //
+                    Array of matching entity object types // If we could declare interfaces // it would be the iPerson // and
+                    this woud be and array of // Persons or People :-) var persons=[ ]; // Load the array with objects created
+                    by factories persons.push(familyFactory.create( "Ron Garlit")); persons.push(familyFactory.create(
+                    "Cindi Garlit")); persons.push(familyFactory.create( "Devin Garlit")); persons.push(familyFactory.create(
+                    "Melissa Garlit")); persons.push(familyFactory.create( "Mark Garlit")); persons.push(petFactory.create( "Molly Garlit"));
+                    persons.push(petFactory.create( "Max Garlit")); persons.push(petFactory.create( "Jax Garlit")); for (var
+                    i=0 , len=p ersons.length; i < len; i++) { persons[i].say(); } // Display alert box from our log helper var
+                // declared in the top of abstractfactory.js log.show(); } </pre>
                 </div>
                 <button type="button" class="btn btn-success" onclick="run_OptimizedAbstractFactory();return false;">Execute run_OptimizedAbstractFactory()</button>
             </div>
