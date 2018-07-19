@@ -22,8 +22,6 @@ var log = (function () {
 // that properties and methods match!!!
 //==============================================
 
-
-
 // old interface
 function Shipping() {
     this.request = function(zipStart, zipEnd, weight) {
