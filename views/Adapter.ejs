@@ -50,8 +50,10 @@
                     </p>
                 </div>
             </div>
-            <p>Creating an adapter is about creating an intermediary abstraction that translates, or maps, the old component 
-                to the new system. Clients call methods on the Adapter object which redirects them into calls to the legacy component.</p>
+            <p>Creating an adapter is about creating an intermediary abstraction that translates, or maps, the old component
+                to the new system. Clients call methods on the Adapter object which redirects them into calls to the legacy
+                component.
+            </p>
 
 
             <p></p>
@@ -64,66 +66,84 @@
                     This is the link to the styple for prettyify - We choose Dessert and put in prettify.css
                     https://github.com/google/code-prettify/blob/master/styles/desert.css -->
                     <pre class="prettyprint">
-  
-  //REPLACE THIS WITH CODE FROM JS FILE
-  function Employee(name) {
-      this.name = name;
-      this.say = function () {
-          log.add("I am employee " + name);
-      };
-  }
-  
-  function EmployeeFactory() {
-      this.create = function(name) {
-          return new Employee(name);
-      };
-  }
-
-  function Vendor(name) {
-      this.name = name;
-      this.say = function () {
-          log.add("I am vendor " + name);
-      };
-  }
-
-  function VendorFactory() {
-      this.create = function(name) {
-          return new Vendor(name);
-      };
-  }
-
-  // log helper
-  var log = (function () {
-      var log = "";
-      return {
-          add: function (msg) { log += msg + "\n"; },
-          show: function () { alert(log); log = ""; }
-      }
-  })();
-
-
-  function run_AbstractFactory() {
-
-      var persons = [];
-    
-      var employeeFactory = new EmployeeFactory();
-      var vendorFactory = new VendorFactory();
-    
-      persons.push(employeeFactory.create("Joan DiSilva"));
-      persons.push(employeeFactory.create("Tim O'Neill"));
-    
-      persons.push(vendorFactory.create("Gerald Watson"));
-      persons.push(vendorFactory.create("Nicole McNight"));
-    
-      for (var i = 0, len = persons.length; i < len; i++) {
-          persons[i].say();
-      }
-    
-      log.show();
-    }
-  </pre>
+                    //==============================================
+                    // Adapter
+                    // JavaScript does not support class-based 
+                    // inheritance therefore the abstract classes.
+                    // we must ensure this consistency ourselves
+                    // that properties and methods match!!!
+                    //==============================================
+                    
+                    // Here are old and new interfaces
+                    // and adapter that is used to simulate old 
+                    // functionality but hiding the new functionality
+                    // without breaking things.
+                    //----------------------------------------------
+                    
+                    // old interface
+                    function Shipping() {
+                        // Old interface lacks security
+                        this.request = function (zipStart, zipEnd, weight) {
+                            // Does a bunch of stuff ...
+                            return "$49.75";
+                        }
+                    }
+                    
+                    // new interface
+                    function AdvancedShipping() {
+                        // Requires security something old interface didn't have
+                        this.login = function (credentials) { /* ... */ };
+                        // Does a bunch of stuff similar to old interface
+                        // process same old data differently
+                        this.setStart = function (start) { /* ... */ };
+                        this.setDestination = function (destination) { /* ... */ };
+                        this.calculate = function (weight) { return "$39.50"; };
+                    }
+                    
+                    // adapter interface
+                    function ShippingAdapter(credentials) {
+                        var shipping = new AdvancedShipping();
+                        shipping.login(credentials);
+                    
+                        return {
+                            // create matching method like old interface
+                            // with same signature of parameters and return value
+                            // so it can be called the same way as old interface
+                            request: function (zipStart, zipEnd, weight) {
+                                shipping.setStart(zipStart);
+                                shipping.setDestination(zipEnd);
+                                return shipping.calculate(weight);
+                            }
+                        };
+                    }
+                    //==============================================
+                    // run_Adapter()
+                    //==============================================
+                    function run_Adapter() {
+                        // create original interface
+                        var shipping = new Shipping();
+                        // New evolved interface which requires credentials
+                        var credentials = { token: "30a8-6ee1" };
+                        var adapter = new ShippingAdapter(credentials);
+                    
+                        // add to log heler var 
+                        log.add("Adapter Test:");
+                        // original shipping object and interface
+                        var cost = shipping.request("78701", "10010", "2 lbs");
+                        // add to log heler var 
+                        log.add("Legacy code cost: " + cost);
+                        // add to log heler var 
+                        log.add("-------------------------");
+                        // new shipping object with adapted interface
+                        cost = adapter.request("78701", "10010", "2 lbs");
+                        // add to log heler var 
+                        log.add("New code cost: " + cost);
+                        // Display alert box from our log helper var
+                        log.show();
+                    }
+                    </pre>
                 </div>
-                <button type="button" class="btn btn-success" onclick="run_AbstractFactory();return false;">Execute run_AbstractFactory()</button>
+                <button type="button" class="btn btn-success" onclick="run_Adapter();return false;">Execute run_Adapter()</button>
             </div>
 
 
@@ -137,84 +157,127 @@
                     This is the link to the styple for prettyify - We choose Dessert and put in prettify.css
                     https://github.com/google/code-prettify/blob/master/styles/desert.css -->
                     <pre class="prettyprint">
-      //REPLACE THIS WITH CODE FROM JS FILE
-      var Patterns = {
-          namespace: function (name) {
-              var parts = name.split(".");
-              var ns = this;
-        
-              for (var i = 0, len = parts.length; i < len; i++) {
-                  ns[parts[i]] = ns[parts[i]] || {};
-                  ns = ns[parts[i]];
-              }
-        
-              return ns;
-          }
-        };
-        
-        Patterns.namespace("Classic").AbstractFactory = (function () {
-        
-          var Family = function (name) {
-              this.name = name;
-              this.say = function () {
-                  log.add("My family member name is " + name);
-              };
-          };
-        
-          var Pet = function (name) {
-              this.name = name;
-              this.say = function () {
-                  log.add("I'm a pet named " + name);
-              };
-          };
-        
-          var FamilyFactory = function () {
-              this.create = function (name) {
-                  return new Family(name);
-              };
-          };
-        
-          var PetFactory = function () {
-              this.create = function (name) {
-                  return new Pet(name);
-              };
-          };
-        
-          return {
-              FamilyFactory: FamilyFactory,
-              PetFactory: PetFactory
-          };
-        })();
-        
-       
-        function run_OptimizedAbstractFactory() {
-
-          var abstract = Patterns.Classic.AbstractFactory;
-        
-          var familyFactory = new abstract.FamilyFactory();
-          var petFactory = new abstract.PetFactory();
-        
-          var persons = [];
-        
-          persons.push(familyFactory.create("Ron Garlit"));
-          persons.push(familyFactory.create("Cindi Garlit"));
-          persons.push(familyFactory.create("Devin Garlit"));
-          persons.push(familyFactory.create("Melissa Garlit"));
-          persons.push(familyFactory.create("Mark Garlit"));
-        
-          persons.push(petFactory.create("Molly Garlit"));
-          persons.push(petFactory.create("Max Garlit"));
-          persons.push(petFactory.create("Jax Garlit"));
-        
-          for (var i = 0, len = persons.length; i < len; i++) {
-              persons[i].say();
-        }
-        
-          log.show();
-        }          
-  </pre>
+                    //==============================================
+                    // Adapter
+                    // JavaScript does not support class-based 
+                    // inheritance or abstract classes.
+                    // we must ensure this consistency ourselves
+                    // that properties and methods match!!!
+                    //==============================================
+                    // Create our namespace called "JsGangOfFour".
+                    //
+                    // This is based on the NameSpace Pattern and 
+                    // Module Pattern. This block of code should 
+                    // be at the top of separate files to better 
+                    // manage codebase.
+                    //
+                    // More importantly creating a structure to 
+                    // avoid name collisions globally under one varable
+                    // called JsGangOfFour.
+                    //==============================================
+                    var JsGangOfFour = {
+                        namespace: function (name) {
+                            var parts = name.split(".");
+                            var ns = this;
+                    
+                            for (var i = 0, len = parts.length; i < len; i++) {
+                                ns[parts[i]] = ns[parts[i]] || {};
+                                ns = ns[parts[i]];
+                            }
+                    
+                            return ns;
+                        }
+                    };
+                    //==============================================
+                    // Create the "Classic" namespace with the
+                    // AbstractFactory namespace which is also in
+                    // the abstractfactory.js
+                    //==============================================
+                    // In the namespace we have the new interface
+                    // and adapter that is used to simulate old 
+                    // functionality but hiding the new functionality
+                    // without breaking things.
+                    // *** NOTE: The old interface is NOT in the 
+                    // JsGangOfFour namespaces.
+                    //----------------------------------------------
+                    JsGangOfFour.namespace("Classic").Adapter = (function () {
+                    
+                        // Private area variables and methods
+                        // new interface
+                        var AdvancedShipping = function () {
+                            // Requires security something old interface didn't have
+                            this.login = function (credentials) { /* ... */ };
+                            // Does a bunch of stuff similar to old interface
+                            // process same old data differently
+                            this.setStart = function (start) { /* ... */ };
+                            this.setDestination = function (destination) { /* ... */ };
+                            this.calculate = function (weight) { return "$39.50"; };
+                        }
+                    
+                        // adapter interface
+                        var ShippingAdapter = function (credentials) {
+                            var shipping = new AdvancedShipping();
+                            shipping.login(credentials);
+                    
+                            return {
+                                // create matching method like old interface
+                                // with same signature of parameters and return value
+                                // so it can be called the same way as old interface            
+                                request: function (zipStart, zipEnd, weight) {
+                                    shipping.setStart(zipStart);
+                                    shipping.setDestination(zipEnd);
+                                    return shipping.calculate(weight);
+                                }
+                            };
+                        };
+                        // Public area method
+                        return {
+                            ShippingAdapter: ShippingAdapter
+                        };
+                    })(); // End of JsGangOfFour.Classic.Adapter Namespace
+                    //----------------------------------------------
+                    // If you look in adapter.js
+                    // Shipping duplicated twice in JS file 
+                    // intentionally it will just replace itself.
+                    // for the sake of pasting in code windows in 
+                    // adapter.ejs :-)
+                    //----------------------------------------------
+                    // Old interface
+                    var Shipping = function () {
+                        this.request = function (zipStart, zipEnd, weight) {
+                            // ...
+                            return "$49.75";
+                        }
+                    }
+                    //==============================================
+                    // run_OptimizedAdapter()
+                    //==============================================
+                    function run_OptimizedAdapter() {
+                        // create original interface
+                        var shipping = new Shipping();
+                        // New evolved interface which requires credentials
+                        var credentials = { token: "30a8-6ee1" };
+                        // This calls the Public area method in adapter namespace
+                        var adapter = new JsGangOfFour.Classic.Adapter.ShippingAdapter(credentials);
+                    
+                        // add to log heler var 
+                        log.add("Optimized Adapter Test:");
+                        // original shipping object and interface
+                        var cost = shipping.request("78701", "10010", "2 lbs");
+                        // add to log heler var 
+                        log.add("Legacy code cost: " + cost);
+                        // add to log heler var 
+                        log.add("-------------------------");
+                        // new shipping object with adapted interface
+                        cost = adapter.request("78701", "10010", "2 lbs");
+                        // add to log heler var 
+                        log.add("New code cost: " + cost);
+                        // Display alert box from our log helper var
+                        log.show();
+                    }       
+                    </pre>
                 </div>
-                <button type="button" class="btn btn-success" onclick="run_OptimizedAbstractFactory();return false;">Execute run_OptimizedAbstractFactory()</button>
+                <button type="button" class="btn btn-success" onclick="run_OptimizedAdapter();return false;">Execute run_OptimizedAdapter()</button>
             </div>
 
         </div>

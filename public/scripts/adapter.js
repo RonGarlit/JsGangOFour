@@ -22,20 +22,30 @@ var log = (function () {
 // that properties and methods match!!!
 //==============================================
 
+// Here are old and new interfaces
+// and adapter that is used to simulate old 
+// functionality but hiding the new functionality
+// without breaking things.
+//----------------------------------------------
+
 // old interface
 function Shipping() {
-    this.request = function(zipStart, zipEnd, weight) {
-        // ...
+    // Old interface lacks security
+    this.request = function (zipStart, zipEnd, weight) {
+        // Does a bunch of stuff ...
         return "$49.75";
     }
 }
 
 // new interface
 function AdvancedShipping() {
-    this.login = function(credentials) { /* ... */ };
-    this.setStart = function(start) { /* ... */ };
-    this.setDestination = function(destination) { /* ... */ };
-    this.calculate = function(weight) { return "$39.50"; };
+    // Requires security something old interface didn't have
+    this.login = function (credentials) { /* ... */ };
+    // Does a bunch of stuff similar to old interface
+    // process same old data differently
+    this.setStart = function (start) { /* ... */ };
+    this.setDestination = function (destination) { /* ... */ };
+    this.calculate = function (weight) { return "$39.50"; };
 }
 
 // adapter interface
@@ -44,7 +54,10 @@ function ShippingAdapter(credentials) {
     shipping.login(credentials);
 
     return {
-        request: function(zipStart, zipEnd, weight) {
+        // create matching method like old interface
+        // with same signature of parameters and return value
+        // so it can be called the same way as old interface
+        request: function (zipStart, zipEnd, weight) {
             shipping.setStart(zipStart);
             shipping.setDestination(zipEnd);
             return shipping.calculate(weight);
@@ -55,22 +68,28 @@ function ShippingAdapter(credentials) {
 // run_Adapter()
 //==============================================
 function run_Adapter() {
-
+    // create original interface
     var shipping = new Shipping();
-
-    var credentials = {token: "30a8-6ee1"};
+    // New evolved interface which requires credentials
+    var credentials = { token: "30a8-6ee1" };
     var adapter = new ShippingAdapter(credentials);
 
+    // add to log heler var 
+    log.add("Adapter Test:");
     // original shipping object and interface
     var cost = shipping.request("78701", "10010", "2 lbs");
-    log.add("Old cost: " + cost);
-
+    // add to log heler var 
+    log.add("Legacy code cost: " + cost);
+    // add to log heler var 
+    log.add("-------------------------");
     // new shipping object with adapted interface
     cost = adapter.request("78701", "10010", "2 lbs");
-    log.add("New cost: " + cost);
-
+    // add to log heler var 
+    log.add("New code cost: " + cost);
+    // Display alert box from our log helper var
     log.show();
 }
+
 //==============================================
 // Optimized JavaScript Code
 //==============================================
@@ -104,10 +123,6 @@ function run_Adapter() {
 // avoid name collisions globally under one varable
 // called JsGangOfFour.
 //==============================================
-
-
-
-
 var JsGangOfFour = {
     namespace: function (name) {
         var parts = name.split(".");
@@ -121,12 +136,27 @@ var JsGangOfFour = {
         return ns;
     }
 };
-
+//==============================================
+// Create the "Classic" namespace with the
+// AbstractFactory namespace which is also in
+// the abstractfactory.js
+//==============================================
+// In the namespace we have the new interface
+// and adapter that is used to simulate old 
+// functionality but hiding the new functionality
+// without breaking things.
+// *** NOTE: The old interface is NOT in the 
+// JsGangOfFour namespaces.
+//----------------------------------------------
 JsGangOfFour.namespace("Classic").Adapter = (function () {
 
+    // Private area variables and methods
     // new interface
     var AdvancedShipping = function () {
+        // Requires security something old interface didn't have
         this.login = function (credentials) { /* ... */ };
+        // Does a bunch of stuff similar to old interface
+        // process same old data differently
         this.setStart = function (start) { /* ... */ };
         this.setDestination = function (destination) { /* ... */ };
         this.calculate = function (weight) { return "$39.50"; };
@@ -138,6 +168,9 @@ JsGangOfFour.namespace("Classic").Adapter = (function () {
         shipping.login(credentials);
 
         return {
+            // create matching method like old interface
+            // with same signature of parameters and return value
+            // so it can be called the same way as old interface            
             request: function (zipStart, zipEnd, weight) {
                 shipping.setStart(zipStart);
                 shipping.setDestination(zipEnd);
@@ -145,46 +178,48 @@ JsGangOfFour.namespace("Classic").Adapter = (function () {
             }
         };
     };
-
+    // Public area method
     return {
         ShippingAdapter: ShippingAdapter
     };
-
-})();
-
-// old interface
+})(); // End of JsGangOfFour.Classic.Adapter Namespace
+//----------------------------------------------
+// If you look in adapter.js
+// Shipping duplicated twice in JS file 
+// intentionally it will just replace itself.
+// for the sake of pasting in code windows in 
+// adapter.ejs :-)
+//----------------------------------------------
+// Old interface
 var Shipping = function () {
     this.request = function (zipStart, zipEnd, weight) {
         // ...
         return "$49.75";
     }
 }
-
-// log helper
-var log = (function () {
-    var log = "";
-    return {
-        add: function (msg) { log += msg + "\n"; },
-        show: function () { alert(log); log = ""; }
-    }
-})();
 //==============================================
 // run_OptimizedAdapter()
 //==============================================
 function run_OptimizedAdapter() {
-
+    // create original interface
     var shipping = new Shipping();
-
+    // New evolved interface which requires credentials
     var credentials = { token: "30a8-6ee1" };
+    // This calls the Public area method in adapter namespace
     var adapter = new JsGangOfFour.Classic.Adapter.ShippingAdapter(credentials);
 
+    // add to log heler var 
+    log.add("Optimized Adapter Test:");
     // original shipping object and interface
     var cost = shipping.request("78701", "10010", "2 lbs");
-    log.add("Old cost: " + cost);
-
+    // add to log heler var 
+    log.add("Legacy code cost: " + cost);
+    // add to log heler var 
+    log.add("-------------------------");
     // new shipping object with adapted interface
     cost = adapter.request("78701", "10010", "2 lbs");
-    log.add("New cost: " + cost);
-
+    // add to log heler var 
+    log.add("New code cost: " + cost);
+    // Display alert box from our log helper var
     log.show();
 }
