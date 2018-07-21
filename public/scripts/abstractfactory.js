@@ -1,5 +1,5 @@
 //==============================================
-// AbstractFactory.ejs
+// AbstractFactory.js
 //==============================================
 // log helper
 // Used to add() to var log
@@ -42,7 +42,6 @@ function Employee(name) {
         log.add("I am employee " + name);
     };
 }
-
 // Vendor Factory
 function VendorFactory() {
     this.create = function (name) {

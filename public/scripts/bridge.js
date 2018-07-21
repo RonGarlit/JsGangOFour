@@ -1,5 +1,5 @@
 //==============================================
-// AbstractFactory.ejs
+// bridge.js
 //==============================================
 // log helper
 // Used to add() to var log
@@ -14,8 +14,25 @@ var log = (function () {
     }
 })();
 
+//==============================================
+// JavaScript does not support class-based 
+// inheritance therefore the abstract classes.
+// we must ensure this consistency ourselves
+// that properties and methods match!!!
+//----------------------------------------------
+// Note here again in OOP we would define a interface
+// or abstract classes.   
+//==============================================
 
+// I modified and extended Joseph Zimmerman's bridge pattern version frankly 
+// because his example of remote control was way cooler than my original example
+// which was something lame with hand and mouse movements.  LOL :-)
+// See his article on Bridge Pattern here:
+// https://www.joezimjs.com/javascript/javascript-design-patterns-bridge/
 
+// this would be our interface or abstract class.
+// but we can't do that.  So we are making this
+// to be our BASE functionality for a remote control 
 var RemoteControl = function (tv) {
     this.tv = tv;
     this.on = function () {
@@ -28,6 +45,11 @@ var RemoteControl = function (tv) {
         this.tv.tuneChannel(ch);
     };
 };
+// this would be another interface or abstract class.
+// but we can't do that.  So we are making this
+// to be our base functionality for another remote control 
+// notice this has different functionality
+
 /* Newer, Better Remote Control */
 var PowerRemote = function (tv) {
     this.tv = tv;
@@ -43,6 +65,8 @@ var PowerRemote = function (tv) {
         this.setChannel(this.currChannel - 1);
     };
 };
+// Take the PowerRemote and add the BASE functionality
+// of the RemoteControl
 PowerRemote.prototype = new RemoteControl();
 /** TV Interface
     Since there are no Interfaces in JavaScript I am just
@@ -52,48 +76,64 @@ PowerRemote.prototype = new RemoteControl();
     function off
     function tuneChannel(channel)
 */
+//Set up some specific functionality for a couple TV's.
+//----------------------------------------------
 /* Sony TV */
 var SonyTV = function () {
     this.on = function () {
+        // add to log heler var 
         log.add('Sony TV is on');
     };
     this.off = function () {
+        // add to log heler var 
         log.add('Sony TV is off');
     };
     this.tuneChannel = function (ch) {
+        // add to log heler var 
         log.add('Sony TV tuned to channel ' + ch);
     };
 }
 /* Toshiba TV */
 var ToshibaTV = function () {
     this.on = function () {
+        // add to log heler var 
         log.add('Welcome to Toshiba entertainment');
     };
     this.off = function () {
+        // add to log heler var 
         log.add('Goodbye Toshiba user');
     };
     this.tuneChannel = function (ch) {
+        // add to log heler var 
         log.add('Channel ' + ch + ' is set on your Toshiba television');
     };
 }
-
+//==============================================    
+// run_Bridge() 
+//============================================== 
 function run_Bridge() {
-/* Let's see it in action */
-var sony = new SonyTV(),
-    toshiba = new ToshibaTV(),
-    std_remote = new RemoteControl(sony),
-    pwr_remote = new PowerRemote(toshiba);
-std_remote.on();            // prints "Sony TV is on"
-std_remote.setChannel(55);  // prints "Sony TV tuned to channel 55"
-std_remote.setChannel(20);  // prints "Sony TV tuned to channel 20"
-std_remote.off();           // prints "Sony TV is off"
-pwr_remote.on();            // prints "Welcome to Toshiba entertainment"
-pwr_remote.setChannel(55);  // prints "Channel 55 is set on your Toshiba television"
-pwr_remote.nextChannel();   // prints "Channel 56 is set on your Toshiba television"
-pwr_remote.prevChannel();   // prints "Channel 55 is set on your Toshiba television"
-pwr_remote.off();           // prints "Goodbye Toshiba user"
+    /* Let's see it in action */
+    // Let setup some functionality for a sony tv
+    var sony = new SonyTV();
+    // Let setup some functionality for a toshiba tv
+    var toshiba = new ToshibaTV();
+    // create a remote for sony
+    var std_remote = new RemoteControl(sony);
+    // create a remote for toshiba
+    var pwr_remote = new PowerRemote(toshiba);
+    // Let put the remotes through their paces.
+    std_remote.on();            // prints "Sony TV is on"
+    std_remote.setChannel(55);  // prints "Sony TV tuned to channel 55"
+    std_remote.setChannel(20);  // prints "Sony TV tuned to channel 20"
+    std_remote.off();           // prints "Sony TV is off"
+    pwr_remote.on();            // prints "Welcome to Toshiba entertainment"
+    pwr_remote.setChannel(55);  // prints "Channel 55 is set on your Toshiba television"
+    pwr_remote.nextChannel();   // prints "Channel 56 is set on your Toshiba television"
+    pwr_remote.prevChannel();   // prints "Channel 55 is set on your Toshiba television"
+    pwr_remote.off();           // prints "Goodbye Toshiba user"
 
-log.show();
+    // Display alert box from our log helper var
+    log.show();
 
 }
 
@@ -166,16 +206,6 @@ JsGangOfFour.namespace("Classic").Bridge = (function () {
     };
 
 })();
-
-// log helper
-var log = (function () {
-    var log = "";
-    return {
-        add: function (msg) { log += msg + "\n"; },
-        show: function () { alert(log); log = ""; }
-    }
-})();
-
 
 function run() {
 
