@@ -24,7 +24,7 @@ var log = (function () {
 // or abstract classes.   
 //==============================================
 
-// I modified and extended Joseph Zimmerman's bridge pattern version frankly 
+// I modified and extended Joseph Zimmerman's bridge pattern version, frankly 
 // because his example of remote control was way cooler than my original example
 // which was something lame with hand and mouse movements.  LOL :-)
 // See his article on Bridge Pattern here:
@@ -121,15 +121,30 @@ function run_Bridge() {
     var std_remote = new RemoteControl(sony);
     // create a remote for toshiba
     var pwr_remote = new PowerRemote(toshiba);
+
     // Let put the remotes through their paces.
+    log.add("-------------------------");    
+    // add to log heler var 
+    log.add("Sony Remote Test:");
+    // add to log heler var 
+    log.add("-------------------------");
     std_remote.on();            // prints "Sony TV is on"
     std_remote.setChannel(55);  // prints "Sony TV tuned to channel 55"
     std_remote.setChannel(20);  // prints "Sony TV tuned to channel 20"
     std_remote.off();           // prints "Sony TV is off"
+
+    log.add("");
+    log.add("-------------------------");
+    // add to log heler var 
+    log.add("Toshiba Remote Test:");
+    // add to log heler var 
+    log.add("-------------------------");
     pwr_remote.on();            // prints "Welcome to Toshiba entertainment"
     pwr_remote.setChannel(55);  // prints "Channel 55 is set on your Toshiba television"
     pwr_remote.nextChannel();   // prints "Channel 56 is set on your Toshiba television"
     pwr_remote.prevChannel();   // prints "Channel 55 is set on your Toshiba television"
+    // add to log heler var 
+    log.add("-------------------------");
     pwr_remote.off();           // prints "Goodbye Toshiba user"
 
     // Display alert box from our log helper var
