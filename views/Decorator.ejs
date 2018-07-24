@@ -11,7 +11,7 @@
         <!-- PrettyPrints CSS and JS to handle code blocks in HTML code -->
         <%- include('partials/PrettyPrint') %>
 
-            <script src="scripts/abstractfactory.js"></script>
+            <script src="scripts/decorator.js"></script>
 
 </head>
 
@@ -21,18 +21,25 @@
         <!-- End of Nav Section -->
         <br>
         <div class="container">
-            <h2 title="ReplaceMe">ReplaceMe</h2>
+            <h2 title="Decorator">Decorator</h2>
             <div class="card text-white bg-secondary">
                 <div class="card-body">
                     <div class="card-title">Intent according to the GoF: </div>
-                    <p class="card-text">"Ensure a class only has one instance, and provide a global point of access to it."
+                    <p class="card-text">"Attach additional responsibilities to an object dynamically. Decorators provide a flexible alternative
+                        to subclassing for extending functionality. "
                     </p>
                 </div>
             </div>
+            <p>The Decorator pattern extends (decorates) an object’s behavior dynamically. The ability to add new behavior at
+                runtime is accomplished by a Decorator object which ‘wraps itself’ around the original object. Multiple decorators
+                can add or override functionality to the original object. Some people call this a wrapper pattern. There
+                are actually a couple patterns that you could call a wrapper pattern. The thing to keeep in mind that when
+                we talk patterns they are kind of abstract. </p>
 
-            <p>ReplaceMe </p>
+            <p>Decorators provide flexibility to statically typed languages by allowing runtime changes as opposed to inheritance
+                which takes place at compile time. JavaScript, is a dynamic language and the ability to extend an object
+                at runtime is baked into the language.</p>
 
-            <p>ReplaceMe </p>
 
             <div class="card text-white bg-primary mb-3" style="max-width: 25rem;">
                 <div class="card-body">
@@ -43,9 +50,9 @@
                 </div>
             </div>
 
-            <p>ReplaceMe</p>
-
-            <p>ReplaceMe </p>
+            <p>If you start down the Angualr Framework road you will see the decorator pattern used. Granted in Angular versus
+                the older AnuglarJS, Angular uses TypeScript to allow coding using object Oreinted Programming (OOP) techniques.
+                TypeScript does this by aplying techniques used in our Optimized JavaScript Code through JsGangOFour.</p>
 
 
             <p></p>
@@ -63,7 +70,7 @@
   
                     </pre>
                 </div>
-                <button type="button" class="btn btn-success" onclick="run_AbstractFactory();return false;">Execute run_AbstractFactory()</button>
+                <button type="button" class="btn btn-success" onclick="run_Decorator();return false;">Execute run_Decorator()</button>
             </div>
 
 
