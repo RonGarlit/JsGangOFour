@@ -11,7 +11,7 @@
         <!-- PrettyPrints CSS and JS to handle code blocks in HTML code -->
         <%- include('partials/PrettyPrint') %>
 
-            <script src="scripts/abstractfactory.js"></script>
+            <script src="scripts/composite.js"></script>
 
 </head>
 
@@ -21,18 +21,22 @@
         <!-- End of Nav Section -->
         <br>
         <div class="container">
-            <h2 title="ReplaceMe">ReplaceMe</h2>
+            <h2 title="Composite">Composite</h2>
             <div class="card text-white bg-secondary">
                 <div class="card-body">
                     <div class="card-title">Intent according to the GoF: </div>
-                    <p class="card-text">"Compose objects into tree structures to represent part-whole hierarchies. Composite lets clients treat individual objects and compositions of objects uniformly. "
+                    <p class="card-text">"Compose objects into tree structures to represent part-whole hierarchies. Composite lets clients treat
+                        individual objects and compositions of objects uniformly. "
                     </p>
                 </div>
             </div>
+            <p>A Composite pattern allows the creation of objects with properties that are primitive items or a collection of
+                objects. Notice how each item in the collection can hold other collections themselves, creating deeply nested
+                structures.
+            </p>
 
-            <p>ReplaceMe </p>
-
-            <p>ReplaceMe </p>
+            <p>A tree control is a perfect example of a Composite pattern. The nodes of the tree either contain an individual
+                object (branch/leaf node) or a group of objects (a subtree of nodes).</p>
 
             <div class="card text-white bg-primary mb-3" style="max-width: 25rem;">
                 <div class="card-body">
@@ -42,10 +46,11 @@
                     </p>
                 </div>
             </div>
+            <p>In the code that follows note how ALL nodes in the Composite pattern share a common set of properties and methods
+                which supports individual objects as well as object collections. </p>
 
-            <p>ReplaceMe</p>
-
-            <p>ReplaceMe </p>
+            <p>This common interface greatly facilitates the design and construction of recursive algorithms that iterate over
+                each object in the Composite collection.</p>
 
 
             <p></p>
@@ -58,66 +63,129 @@
                     This is the link to the styple for prettyify - We choose Dessert and put in prettify.css
                     https://github.com/google/code-prettify/blob/master/styles/desert.css -->
                     <pre class="prettyprint">
-  
-  //REPLACE THIS WITH CODE FROM JS FILE
-  function Employee(name) {
-      this.name = name;
-      this.say = function () {
-          log.add("I am employee " + name);
-      };
-  }
-  
-  function EmployeeFactory() {
-      this.create = function(name) {
-          return new Employee(name);
-      };
-  }
-
-  function Vendor(name) {
-      this.name = name;
-      this.say = function () {
-          log.add("I am vendor " + name);
-      };
-  }
-
-  function VendorFactory() {
-      this.create = function(name) {
-          return new Vendor(name);
-      };
-  }
-
-  // log helper
-  var log = (function () {
-      var log = "";
-      return {
-          add: function (msg) { log += msg + "\n"; },
-          show: function () { alert(log); log = ""; }
-      }
-  })();
-
-
-  function run_AbstractFactory() {
-
-      var persons = [];
-    
-      var employeeFactory = new EmployeeFactory();
-      var vendorFactory = new VendorFactory();
-    
-      persons.push(employeeFactory.create("Joan DiSilva"));
-      persons.push(employeeFactory.create("Tim O'Neill"));
-    
-      persons.push(vendorFactory.create("Gerald Watson"));
-      persons.push(vendorFactory.create("Nicole McNight"));
-    
-      for (var i = 0, len = persons.length; i < len; i++) {
-          persons[i].say();
-      }
-    
-      log.show();
-    }
-  </pre>
+                    //==============================================
+                    // composite.js
+                    //==============================================
+                    // log helper
+                    // Used to add() to var log
+                    // then display in alert box
+                    // via show() method
+                    //==============================================
+                    var log = (function () {
+                        var log = "";
+                        return {
+                            add: function (msg) { log += msg + "\n"; },
+                            show: function () { alert(log); log = ""; }
+                        }
+                    })();
+                    
+                    //==============================================
+                    // Composite
+                    // JavaScript does not support class-based 
+                    // inheritance therefore the abstract classes.
+                    // we must ensure this consistency ourselves
+                    // that properties and methods match!!!
+                    //==============================================
+                    
+                    // Here are old and new interfaces
+                    // and abstract classes that are used to simulate old 
+                    // functionality but hiding the new functionality
+                    // without breaking things.
+                    //----------------------------------------------
+                    
+                    // Basic node class/entity as I like to think of it.
+                    var Node = function (name) {
+                        this.children = [];
+                        this.name = name;
+                    }
+                    // Add functionality to the prototype
+                    // so that the Node inherits (so to speak)
+                    // the same functionality to track it children
+                    // trim or remove the children, now if it has children
+                    // get a child, etc...
+                    Node.prototype = {
+                        add: function (child) {
+                            this.children.push(child);
+                        },
+                        remove: function (child) {
+                            var len = this.children.length;
+                            for (var i = 0; i < len; i++) {
+                                if (this.children[i] === child) {
+                                    this.children.splice(i, 1);
+                                    return;
+                                }
+                            }
+                        },
+                        getChild: function (i) {
+                            return this.children[i];
+                        },
+                        hasChildren: function () {
+                            return this.children.length > 0;
+                        }
+                    }
+                    
+                    // recursively traverse the nodes in the tree
+                    function traverse(indent, node) {
+                        // add to log heler var 
+                        log.add(Array(indent++).join("--") + node.name);
+                    
+                        for (var i = 0, len = node.children.length; i < len; i++) {
+                            // Traverse the tree
+                            traverse(indent, node.getChild(i));
+                        }
+                    }
+                    //=============================================
+                    // run_Composite()
+                    //=============================================     
+                    function run_Composite() {
+                        // Name some nodes to the levels we want to assign them too
+                        // as we build our tree.  Boy was I tempted to build a 
+                        // family tree here.  LOL  :-)
+                        // Instead I kept with Jack Poorte example at DOFactory.com
+                        // See our home page of this app.
+                        var tree = new Node("root");
+                        var leftBranch = new Node("leftBranch")
+                        var rightBranch = new Node("rightBranch");
+                        var leftBranchleftLeaf = new Node("leftBranchleftLeaf");
+                        var leftBranchrightLeaf = new Node("leftBranchrightLeaf");
+                        var leftBranchrightLeafHasBabyLeaf = new Node("leftBranchrightLeafHasBabyLeaf");
+                        var rightBranchleftLeaf = new Node("rightBranchleftLeaf");
+                        var rightBranchrightLeaf = new Node("rightBranchrightLeaf");
+                    
+                        //=============================================
+                        // built a tree establish the root 
+                        // (node - Component in diagram)
+                        // Net add branchs (nodes) to the tree root
+                        // then add some leafs (leaves) that could become
+                        // branches.  :-)
+                        //=============================================  
+                        // add  the left branch
+                        tree.add(leftBranch);
+                        // add  the right branch
+                        tree.add(rightBranch);
+                        // trim the right branch off
+                        tree.remove(rightBranch);  // note: remove branch to test remove
+                        // add right branch back
+                        tree.add(rightBranch);
+                        // add left leaf on to the main left branch
+                        leftBranch.add(leftBranchleftLeaf);
+                        // add right leaf on to the main left branch
+                        leftBranch.add(leftBranchrightLeaf);
+                        // add a Baby leaf to the right leaf on to the main left branch
+                        leftBranchrightLeaf.add(leftBranchrightLeafHasBabyLeaf);
+                        // add left leaf on to the main right branch
+                        rightBranch.add(rightBranchleftLeaf);
+                        // add right leaf on to the main right branch    
+                        rightBranch.add(rightBranchrightLeaf);
+                    
+                        // Traverse the tree we have built
+                        traverse(1, tree);
+                        // Display alert box from our log helper var
+                        log.show();
+                    }
+                    </pre>
                 </div>
-                <button type="button" class="btn btn-success" onclick="run_AbstractFactory();return false;">Execute run_AbstractFactory()</button>
+                <button type="button" class="btn btn-success" onclick="run_Composite();return false;">Execute run_Composite()</button>
             </div>
 
 
@@ -131,84 +199,164 @@
                     This is the link to the styple for prettyify - We choose Dessert and put in prettify.css
                     https://github.com/google/code-prettify/blob/master/styles/desert.css -->
                     <pre class="prettyprint">
-      //REPLACE THIS WITH CODE FROM JS FILE
-      var Patterns = {
-          namespace: function (name) {
-              var parts = name.split(".");
-              var ns = this;
-        
-              for (var i = 0, len = parts.length; i < len; i++) {
-                  ns[parts[i]] = ns[parts[i]] || {};
-                  ns = ns[parts[i]];
-              }
-        
-              return ns;
-          }
-        };
-        
-        Patterns.namespace("Classic").AbstractFactory = (function () {
-        
-          var Family = function (name) {
-              this.name = name;
-              this.say = function () {
-                  log.add("My family member name is " + name);
-              };
-          };
-        
-          var Pet = function (name) {
-              this.name = name;
-              this.say = function () {
-                  log.add("I'm a pet named " + name);
-              };
-          };
-        
-          var FamilyFactory = function () {
-              this.create = function (name) {
-                  return new Family(name);
-              };
-          };
-        
-          var PetFactory = function () {
-              this.create = function (name) {
-                  return new Pet(name);
-              };
-          };
-        
-          return {
-              FamilyFactory: FamilyFactory,
-              PetFactory: PetFactory
-          };
-        })();
-        
-       
-        function run_OptimizedAbstractFactory() {
-
-          var abstract = Patterns.Classic.AbstractFactory;
-        
-          var familyFactory = new abstract.FamilyFactory();
-          var petFactory = new abstract.PetFactory();
-        
-          var persons = [];
-        
-          persons.push(familyFactory.create("Ron Garlit"));
-          persons.push(familyFactory.create("Cindi Garlit"));
-          persons.push(familyFactory.create("Devin Garlit"));
-          persons.push(familyFactory.create("Melissa Garlit"));
-          persons.push(familyFactory.create("Mark Garlit"));
-        
-          persons.push(petFactory.create("Molly Garlit"));
-          persons.push(petFactory.create("Max Garlit"));
-          persons.push(petFactory.create("Jax Garlit"));
-        
-          for (var i = 0, len = persons.length; i < len; i++) {
-              persons[i].say();
-        }
-        
-          log.show();
-        }          
-  </pre>
+                    //==============================================
+                    // Optimized JavaScript Code
+                    //==============================================
+                    // To understand "Optimized JavaScript Code" we must
+                    // review some modern javascript design patterns and techniques
+                    // which the provided links cover nicely.
+                    //----------------------------------------------
+                    // See these links: 
+                    // https://addyosmani.com/blog/essential-js-namespacing/
+                    // https://www.safaribooksonline.com/library/view/learning-javascript-design/9781449334840/ch13s15.html
+                    // https://medium.freecodecamp.org/javascript-modules-a-beginner-s-guide-783f7d7a5fcc
+                    // http://www.adequatelygood.com/JavaScript-Module-Pattern-In-Depth.html
+                    // http://esbueno.noahstokes.com/post/77292606977/self-executing-anonymous-functions-or-how-to-write
+                    //==============================================
+                    
+                    var JsGangOfFour = {
+                        namespace: function (name) {
+                            var parts = name.split(".");
+                            var ns = this;
+                    
+                            for (var i = 0, len = parts.length; i < len; i++) {
+                                ns[parts[i]] = ns[parts[i]] || {};
+                                ns = ns[parts[i]];
+                            }
+                    
+                            return ns;
+                        }
+                    };
+                    
+                    JsGangOfFour.namespace("Classic").Composite = (function () {
+                        //==============================================
+                        // JavaScript does not support class-based 
+                        // inheritance therefore the abstract classes.
+                        // we must ensure this consistency ourselves
+                        // that properties and methods match!!!
+                        //----------------------------------------------
+                        // Note here again in OOP we would define a interface
+                        // or abstract classes.   
+                        //==============================================
+                    
+                        // PRIVATE AREA
+                    
+                        // Basic node class/entity as I like to think of it.
+                        var Node = function (name) {
+                            this.children = [];
+                            this.name = name;
+                        }
+                        // Add functionality to the prototype
+                        // so that the Node inherits (so to speak)
+                        // the same functionality to track it children
+                        // trim or remove the children, now if it has children
+                        // get a child, etc...
+                        Node.prototype = {
+                            add: function (child) {
+                                this.children.push(child);
+                            },
+                            remove: function (child) {
+                                var len = this.children.length;
+                                for (var i = 0; i < len; i++) {
+                                    if (this.children[i] === child) {
+                                        this.children.splice(i, 1);
+                                        return;
+                                    }
+                                }
+                            },
+                            getChild: function (i) {
+                                return this.children[i];
+                            },
+                            hasChildren: function () {
+                                return this.children.length > 0;
+                            }
+                        }
+                    
+                        // recursively traverse the nodes in the tree
+                        function traverse(indent, node) {
+                            // add to log heler var 
+                            log.add(Array(indent++).join("--") + node.name);
+                    
+                            for (var i = 0, len = node.children.length; i < len; i++) {
+                                // Traverse the tree
+                                traverse(indent, node.getChild(i));
+                            }
+                        }
+                    
+                        // ******** PUBLIC AREA ******** 
+                        //Exposing our functions (What I like to call - Pseudo Classes
+                        // because I'm OOP progreammer at heart)
+                        return {
+                            Node: Node,
+                            Traverse: traverse
+                        };
+                    
+                    })();
+                    
+                    //==============================================    
+                    // run_OptimizedComposite()
+                    //============================================== 
+                    function run_OptimizedComposite() {
+                    
+                        // Load our Bridge module name in the bridge var
+                        var composite = JsGangOfFour.Classic.Composite;
+                        // Name some nodes to the levels we want to assign them too
+                        // as we build our tree.  Boy was I tempted to build a 
+                        // family tree here.  LOL  :-)
+                        // Instead I kept with Jack Poorte example at DOFactory.com
+                        // See our home page of this app.
+                        var tree = new composite.Node("root");
+                        var leftBranch = new composite.Node("leftBranch")
+                        var rightBranch = new composite.Node("rightBranch");
+                        var leftBranchleftLeaf = new composite.Node("leftBranchleftLeaf");
+                        var leftBranchrightLeaf = new composite.Node("leftBranchrightLeaf");
+                        var leftBranchrightLeafHasBabyLeaf = new composite.Node("leftBranchrightLeafHasBabyLeaf");
+                        var rightBranchleftLeaf = new composite.Node("rightBranchleftLeaf");
+                        var rightBranchrightLeaf = new composite.Node("rightBranchrightLeaf");
+                    
+                    
+                        // Let put the remotes through their paces.
+                        log.add("=========================");
+                        // add to log heler var 
+                        log.add("Optimized JavaScript Code");
+                        // add to log heler var 
+                        log.add("=========================");
+                        //=============================================
+                        // built a tree establish the root 
+                        // (node - Component in diagram)
+                        // Net add branchs (nodes) to the tree root
+                        // then add some leafs (leaves) that could become
+                        // branches.  :-)
+                        //=============================================  
+                        // add  the left branch
+                        tree.add(leftBranch);
+                        // add  the right branch
+                        tree.add(rightBranch);
+                        // trim the right branch off
+                        tree.remove(rightBranch);  // note: remove branch to test remove
+                        // add right branch back
+                        tree.add(rightBranch);
+                        // add left leaf on to the main left branch
+                        leftBranch.add(leftBranchleftLeaf);
+                        // add right leaf on to the main left branch
+                        leftBranch.add(leftBranchrightLeaf);
+                        // add a Baby leaf to the right leaf on to the main left branch
+                        leftBranchrightLeaf.add(leftBranchrightLeafHasBabyLeaf);
+                        // add left leaf on to the main right branch
+                        rightBranch.add(rightBranchleftLeaf);
+                        // add right leaf on to the main right branch    
+                        rightBranch.add(rightBranchrightLeaf);
+                    
+                        // Traverse the tree we have built
+                        composite.Traverse(1, tree);
+                        // add to log heler var 
+                        log.add("=========================");
+                        // Display alert box from our log helper var
+                        log.show();
+                    }                                              
+                    </pre>
                 </div>
-                <button type="button" class="btn btn-success" onclick="run_OptimizedAbstractFactory();return false;">Execute run_OptimizedAbstractFactory()</button>
+                <button type="button" class="btn btn-success" onclick="run_OptimizedComposite();return false;">Execute run_OptimizedComposite()</button>
             </div>
 
         </div>

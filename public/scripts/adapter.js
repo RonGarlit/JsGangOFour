@@ -23,7 +23,7 @@ var log = (function () {
 //==============================================
 
 // Here are old and new interfaces
-// and adapter that is used to simulate old 
+// and abstract clases that are used to simulate old 
 // functionality but hiding the new functionality
 // without breaking things.
 //----------------------------------------------

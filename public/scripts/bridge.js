@@ -293,7 +293,7 @@ JsGangOfFour.namespace("Classic").Bridge = (function () {
 // run_OptimizedBridge()
 //============================================== 
 function run_OptimizedBridge() {
-    var bridge = JsGangOfFour.Classic.Bridge;
+
     // Load our Bridge module name in the bridge var
     var bridge = JsGangOfFour.Classic.Bridge;
     /* Let's see it in action */
