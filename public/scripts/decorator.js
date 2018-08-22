@@ -28,21 +28,25 @@ var log = (function () {
 // without breaking things.
 //----------------------------------------------
 
-var User = function(name) {
+// Create the User object we will
+// later decorate with more properties
+var User = function (name) {
     this.name = name;
-    this.say = function() {
-        log.add("User: " + this.name);
+    this.say = function () {
+        log.add("User: \n Name: " + this.name);
     };
 }
 
-var DecoratedUser = function(user, street, city) {
+// Now pass the User object to the "decorator" object
+// that we created.
+var DecoratedUser = function (user, street, city) {
     this.user = user;
     this.name = user.name;  // ensures interface stays the same
     this.street = street;
     this.city = city;
-    this.say = function() {
-        log.add("Decorated User: " + this.name + ", " +
-                   this.street + ", " + this.city);
+    this.say = function () {
+        log.add("Decorated User: \n Name: " + this.name + ", \n Street: " +
+            this.street + ", \n City: " + this.city);
     };
 }
 
@@ -51,9 +55,19 @@ var DecoratedUser = function(user, street, city) {
 //==============================================
 function run_Decorator() {
 
+    log.add("-------------------------");
+    // add to log heler var 
+    log.add("Create the User Object:");
+    // add to log heler var 
+    log.add("-------------------------");
     var user = new User("Kelly");
     user.say();
 
+    log.add("-------------------------");
+    // add to log heler var 
+    log.add("Now decorate above User Object:");
+    // add to log heler var 
+    log.add("-------------------------");
     var decorated = new DecoratedUser(user, "Broadway", "New York");
     decorated.say();
 
