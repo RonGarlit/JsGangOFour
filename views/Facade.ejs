@@ -8,93 +8,113 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Bootstrap CSS -->
     <%- include('partials/MainStyles') %>
-        <!-- PrettyPrints CSS and JS to handle code blocks in HTML code -->
-        <%- include('partials/PrettyPrint') %>
+    <!-- PrettyPrints CSS and JS to handle code blocks in HTML code -->
+    <%- include('partials/PrettyPrint') %>
 
-            <script src="scripts/abstractfactory.js"></script>
+    <script src="scripts/facade.js"></script>
 
 </head>
 
 <body>
     <!-- Start of Nav Section -->
     <%- include('partials/MainNavBar') %>
-        <!-- End of Nav Section -->
-        <br>
-        <div class="container">
-            <h2 title="ReplaceMe">ReplaceMe</h2>
-            <div class="card text-white bg-secondary">
-                <div class="card-body">
-                    <div class="card-title">Intent according to the GoF: </div>
-                    <p class="card-text">"Ensure a class only has one instance, and provide a global point of access to it."
-                    </p>
-                </div>
-            </div>>
-
-            <p>ReplaceMe </p>
-
-            <p>ReplaceMe </p>
-
-            <div class="card text-white bg-primary mb-3" style="max-width: 25rem;">
-                <div class="card-body">
-                    <h4 class="card-title">JavaScript Code</h4>
-                    <p>
-                        <img src="images/javascript-facade.jpg" alt="Abstract Factory Diagram" class="img-fluid img-thumbnail">
-                    </p>
-                </div>
+    <!-- End of Nav Section -->
+    <br>
+    <div class="container">
+        <h2 title="ReplaceMe">ReplaceMe</h2>
+        <div class="card text-white bg-secondary">
+            <div class="card-body">
+                <div class="card-title">Intent according to the GoF: </div>
+                <p class="card-text">"Provide a unified interface to a set of interfaces in a subsystem. Facade defines
+                    a higher-level interface that makes the subsystem easier to use."
+                </p>
             </div>
-
-            <p>ReplaceMe</p>
-
-            <p>ReplaceMe </p>
-
-
-            <p></p>
-            <br>
-            <div class="alert alert-dismissible alert-primary">
-                <h4 class="alert-heading">JavaScript Code</h4>
-                <div>
-                    <!-- Follow these links for the google prettyify information
-                    https://github.com/google/code-prettify
-                    This is the link to the styple for prettyify - We choose Dessert and put in prettify.css
-                    https://github.com/google/code-prettify/blob/master/styles/desert.css -->
-                    <pre class="prettyprint">
-  
-                        //REPLACE THIS WITH CODE FROM JS FILE
-      
-                    </pre>
-                </div>
-                <button type="button" class="btn btn-success" onclick="run_AbstractFactory();return false;">Execute run_AbstractFactory()</button>
-            </div>
-
-
-            <p></p>
-            <br>
-            <div class="alert alert-dismissible alert-primary">
-                <h4 class="alert-heading">Optimized JavaScript Code</h4>
-                <div>
-                    <!-- Follow these links for the google prettyify information
-                    https://github.com/google/code-prettify
-                    This is the link to the styple for prettyify - We choose Dessert and put in prettify.css
-                    https://github.com/google/code-prettify/blob/master/styles/desert.css -->
-                    <pre class="prettyprint">
-  
-                        //REPLACE THIS WITH CODE FROM JS FILE
-      
-                    </pre>
-                </div>
-                <button type="button" class="btn btn-success" onclick="run_OptimizedAbstractFactory();return false;">Execute run_OptimizedAbstractFactory()</button>
-            </div>
-
         </div>
-        <%- include('partials/MainFooter') %>
-            <!-- Optional JavaScript -->
-            <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-                crossorigin="anonymous"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-                crossorigin="anonymous"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
-                crossorigin="anonymous"></script>
+        <p>The Facade pattern provides an interface which shields clients from complex functionality in one or more
+            subsystems.
+            It is a simple pattern that may seem trivial but it is powerful and extremely useful. It is often present
+            in systems that are built around a multi-layer architecture.</p>
+
+        <p>The intent of the Facade is to provide a high-level interface (properties and methods) that makes a
+            subsystem or toolkit easy to use for the client. </p>
+
+        <div class="card text-white bg-primary mb-3" style="max-width: 25rem;">
+            <div class="card-body">
+                <h4 class="card-title">JavaScript Code</h4>
+                <p>
+                    <img src="images/javascript-facade.jpg" alt="Abstract Factory Diagram" class="img-fluid img-thumbnail">
+                </p>
+            </div>
+        </div>
+
+
+        <p>On the server, in a multi-layer web application you frequently have a presentation layer which is a client
+            to a service layer.</p>
+
+        <p>Communication between these two layers takes place via a well-defined API. This API, or Facade, hides the
+            complexities of the
+            business objects and their interactions from the presentation layer. </p>
+
+        <p>Another area where Facades are used is in refactoring.
+            Suppose you have a confusing or messy set of legacy objects that the client should not be concerned about.
+        </p>
+
+        <p>You can hide this code behind a Facade. The Facade exposes only what is necessary and presents a cleaner and
+            easy-to-use interface. </p>
+
+        <p>Facades are a structural pattern that can often be seen in JavaScript libraries such as jQuery where,
+            although an implementation may support methods with a wide range of behaviors,
+            only a “facade,” or limited abstraction of these methods, is presented to the public for use.</p>
+
+        <p></p>
+        <br>
+        <div class="alert alert-dismissible alert-primary">
+            <h4 class="alert-heading">JavaScript Code</h4>
+            <div>
+                <!-- Follow these links for the google prettyify information
+                    https://github.com/google/code-prettify
+                    This is the link to the styple for prettyify - We choose Dessert and put in prettify.css
+                    https://github.com/google/code-prettify/blob/master/styles/desert.css -->
+                <pre class="prettyprint">
+
+                        //REPLACE THIS WITH CODE FROM JS FILE
+      
+                    </pre>
+            </div>
+            <button type="button" class="btn btn-success" onclick="run_Facade();return false;">Execute
+                run_Facade()</button>
+        </div>
+
+
+        <p></p>
+        <br>
+        <div class="alert alert-dismissible alert-primary">
+            <h4 class="alert-heading">Optimized JavaScript Code</h4>
+            <div>
+                <!-- Follow these links for the google prettyify information
+                    https://github.com/google/code-prettify
+                    This is the link to the styple for prettyify - We choose Dessert and put in prettify.css
+                    https://github.com/google/code-prettify/blob/master/styles/desert.css -->
+                <pre class="prettyprint">
+
+                        //REPLACE THIS WITH CODE FROM JS FILE
+      
+                    </pre>
+            </div>
+            <button type="button" class="btn btn-success" onclick="run_OptimizedFacade();return false;">Execute
+                run_OptimizedFacade()</button>
+        </div>
+
+    </div>
+    <%- include('partials/MainFooter') %>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
