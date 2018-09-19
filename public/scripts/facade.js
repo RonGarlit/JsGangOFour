@@ -1,23 +1,5 @@
-/*
-***************NOTES Remove once code is wwritten***************
-Provide a unified interface to a set of interfaces in a subsystem. Facade defines a higher-level interface that makes the subsystem easier to use.
-
-
-The Façade pattern provides an interface which shields clients from complex functionality in one or more subsystems. It is a simple pattern that may seem trivial but it is powerful and extremely useful. It is often present in systems that are built around a multi-layer architecture.
-
-The intent of the Façade is to provide a high-level interface (properties and methods) that makes a subsystem or toolkit easy to use for the client.
-
-On the server, in a multi-layer web application you frequently have a presentation layer which is a client to a service layer. 
-
-Communication between these two layers takes place via a well-defined API. This API, or façade, hides the complexities of the business objects and their interactions from the presentation layer.
-
-Another area where Façades are used is in refactoring. Suppose you have a confusing or messy set of legacy objects that the client should not be concerned about. 
-
-You can hide this code behind a Façade. The Façade exposes only what is necessary and presents a cleaner and easy-to-use interface.
-
-Facades are a structural pattern that can often be seen in JavaScript libraries such as jQuery where, although an implementation may support methods with a wide range of behaviors, only a “facade,” or limited abstraction of these methods, is presented to the public for use.
-
-
+/**********************************************
+Some links on the facade pattern in JavaScript
 https://www.safaribooksonline.com/library/view/learning-javascript-design/9781449334840/ch09s09.html
 
 https://anasshekhamis.com/2017/09/21/facade-design-pattern-in-javascript/
@@ -26,7 +8,7 @@ http://www.discoversdk.com/blog/javascript-facade-pattern
 
 https://www.joezimjs.com/javascript/javascript-design-patterns-facade/
 
-*/
+***********************************************/
 
 
 //==============================================
@@ -58,11 +40,16 @@ var log = (function () {
 // functionality but hiding the new functionality
 // without breaking things.
 //----------------------------------------------
-
+// Example based on one given in Jack Poorte JavaScript 
+// class which I've modified and extended
+//----------------------------------------------
+// Create Mortgage function
 var Mortgage = function (name) {
     this.name = name;
 }
 
+// Add applyFor function to prototype that 
+// is facade that accesses subsystems
 Mortgage.prototype = {
     applyFor: function (amount) {
 
@@ -82,53 +69,75 @@ Mortgage.prototype = {
     }
 }
 
+// Access to subsytem we are hiding behind facade
 var Bank = function () {
     this.verify = function (name, amount) {
         // complex logic ...
-        var loadAndDoSomething = amount;
-        return true;
+        var BankLoanAmountLimit = amount;
+        if (BankLoanAmountLimit == "$100,000") {
+            return true;
+
+        } else {
+            return false;
+        }
     }
 }
+// Access to subsytem we are hiding behind facade
 var Credit = function () {
     this.get = function (name) {
         // complex logic ...
-        var loadNameandDoSomething = name;
-        return true;
+        var RunCreditCheck = name;
+        if (RunCreditCheck == "Ronald Garlit") {
+            return true;
+
+        } else {
+            return false;
+        }
     }
 }
+// Access to subsytem we are hiding behind facade
 var Background = function () {
     this.check = function (name) {
         // complex logic ...
-        var loadNameandDoSomethingElse = name;
-        // change for fail on a name equal something
-        return true;
+        var RunBackgroundCheck = name;
+        if (RunBackgroundCheck == "Ronald Garlit") {
+            return true;
+
+        } else {
+            return false;
+        }
+
     }
 }
-
-
-
 
 //==============================================
 // run_Decorator()
 //==============================================
 function run_Facade() {
 
+    // add to log helper var 
     log.add("-------------------------");
-    // add to log heler var 
-    log.add("Create the User Object:");
-    // add to log heler var 
+    log.add("Process applicaton for John Doe:")
+    // add to log helper var 
     log.add("-------------------------");
-    var mortgage = new Mortgage("Joan Templeton");
-    var result = mortgage.applyFor("$100,000");
+    var mortgage1 = new Mortgage("John Doe");
+    var result1 = mortgage1.applyFor("$100,000");
 
-    log.add(result);
+    // add results to log helper var
+    log.add(result1);
 
     log.add("-------------------------");
-    // add to log heler var 
-    log.add("Now decorate above User Object:");
-    // add to log heler var 
+    // add to log helper var 
+    log.add("Process applicaton for Ronald Garlit:");
+    // add to log helper var 
     log.add("-------------------------");
+    var mortgage2 = new Mortgage("Ronald Garlit");
+    var result2 = mortgage2.applyFor("$100,000");
 
+    // add results to log helper var
+    log.add(result2);
+    // add to log helper var 
+    log.add("-------------------------");
     // Display what wwe have in the log object
     log.show();
 }
@@ -149,6 +158,17 @@ function run_Facade() {
 // http://esbueno.noahstokes.com/post/77292606977/self-executing-anonymous-functions-or-how-to-write
 //==============================================
 
+// Create our namespace called "JsGangOfFour".
+//
+// This is based on the NameSpace Pattern and 
+// Module Pattern. This block of code should 
+// be at the top of separate files to better 
+// manage codebase.
+//
+// More importantly creating a structure to 
+// avoid name collisions globally under one varable
+// called JsGangOfFour.
+//==============================================
 var JsGangOfFour = {
     namespace: function (name) {
         var parts = name.split(".");
@@ -176,17 +196,91 @@ JsGangOfFour.namespace("Classic").Facade = (function () {
 
     // PRIVATE AREA
     //==============================================
-    // Create the User object we will
-    // later decorate with more properties
-    // under modern javascript patterns this is known as "Mixin"
-    // I still consider it the Decorator pattern or a better yet a modern extention of it.
-    // See the jucie details here: 
-    // http://www.talkinghightech.com/en/javascript-mixin-pattern/
-    // https://addyosmani.com/resources/essentialjsdesignpatterns/book/#decoratorpatternjavascript
-    // https://addyosmani.com/resources/essentialjsdesignpatterns/book/#mixinpatternjavascript
+
     //==============================================
-    // extend method to add on to and existing object
+    // Create our private Mortgage function
+    // this is thee facade that will access
+    // several subsystems
     //==============================================
+    var Mortgage = function (name) {
+        this.name = name;
+    };
+
+    Mortgage.prototype = {
+        applyFor: function (amount) {
+
+            // access multiple subsystems...
+
+            var result = "approved";
+            if (!new Bank().verify(this.name, amount)) {
+                result = "denied";
+            } else if (!new Credit().get(this.name)) {
+                result = "denied";
+            } else if (!new Background().check(this.name)) {
+                result = "denied";
+            }
+
+            return this.name + " has been " + result +
+                " for a " + amount + " mortgage";
+        }
+    };
+
+    //==============================================
+    // Access to subsytem we are hiding behind facade
+    // by creating a private Bank function
+    //==============================================
+    var Bank = function () {
+        this.verify = function (name, amount) {
+            // complex logic ...
+            var BankLoanAmountLimit = amount;
+            if (BankLoanAmountLimit == "$100,000") {
+                return true;
+
+            } else {
+                return false;
+            }
+        }
+    };
+    //==============================================
+    // Access to subsytem we are hiding behind facade
+    // by creating a private Credit function
+    //==============================================
+    var Credit = function () {
+        this.get = function (name) {
+            // complex logic ...
+            var RunCreditCheck = name;
+            if (RunCreditCheck == "Ronald Garlit") {
+                return true;
+
+            } else {
+                return false;
+            }
+        }
+    };
+    //==============================================
+    // Access to subsytem we are hiding behind facade
+    // by creating a private Background function
+    //==============================================
+    var Background = function () {
+        this.check = function (name) {
+            // complex logic ...
+            var RunBackgroundCheck = name;
+            if (RunBackgroundCheck == "Ronald Garlit") {
+                return true;
+
+            } else {
+                return false;
+            }
+
+        }
+    };
+    //==============================================
+    // Expose out mortgage function
+    // Make a public function
+    //==============================================
+    return {
+        Mortgage: Mortgage
+    };
 
 })();
 
@@ -196,32 +290,31 @@ JsGangOfFour.namespace("Classic").Facade = (function () {
 function run_OptimizedFacade() {
 
     var facade = JsGangOfFour.Classic.Facade;
-    // add to log heler var 
+
+    log.add("Begin processing applications...")
+    // add to log helper var 
     log.add("-------------------------");
-    // add to log heler var 
-    log.add("Create the User Object:");
-    // add to log heler var 
+    log.add("Processing application for Jane Smith:")
+
+    var mortgage3 = new facade.Mortgage("Jane Smith");
+    var result3 = mortgage3.applyFor("$100,000");
+
+    // add results to log helper var
+    log.add("---> " + result3);
+
+    // add to log helper var 
+    log.add("Processing application for Ronald Garlit:");
+
+    var mortgage4 = new facade.Mortgage("Ronald Garlit");
+    var result4 = mortgage4.applyFor("$100,000");
+
+    // add results to log helper var
+    log.add("---> " + result4);
+    // add to log helper var 
     log.add("-------------------------");
-
-    // Create user object we will decorate/extend
-    var user = new User("Kelly");
-    // add to log heler var 
-    log.add("User:");
-    // add to log heler var with user.say()
-    user.say();
-    // add to log heler var 
-    log.add("-------------------------");
-
-    // add to log heler var 
-    log.add("Now decorate (using extend(dest, source) method) above User Object:");
-
-    // add to log heler var with user.say()
-    user.say();
-    // add to log heler var 
-    log.add("-------------------------")
-    // add to log heler var 
-    log.add("Now decorate (using extendDeep(dest, source) method) adding another layer of previously modified User Object:");
-
     // Display what wwe have in the log object
+
+    log.add("Processing complete...")
     log.show();
+
 }
